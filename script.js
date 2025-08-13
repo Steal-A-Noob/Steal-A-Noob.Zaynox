@@ -1,12 +1,15 @@
 const searchBar = document.getElementById("searchBar");
-const imageContainer = document.querySelector(".image-container");
+const noobContainer = document.getElementById("noobContainer");
 
 searchBar.addEventListener("input", function() {
   const value = searchBar.value.toLowerCase();
-  if (value.includes("noob")) {
-    imageContainer.style.display = "block";
+  // Si l'utilisateur tape une partie de "noob", ça montre l'image
+  if ("noob".includes(value) && value !== "") {
+    noobContainer.style.display = "block";
+  } else if (value === "") {
+    noobContainer.style.display = "block"; // image visible même si rien écrit
   } else {
-    imageContainer.style.display = "none";
+    noobContainer.style.display = "none";
   }
 });
 
