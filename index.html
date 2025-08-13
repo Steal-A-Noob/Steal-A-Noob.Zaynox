@@ -7,35 +7,31 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>NoobFinder 🔥</h1>
-    <div class="search-container">
-      <input type="text" placeholder="Recherche... 🔍" id="searchBar">
-    </div>
-  </header>
+  <h1 id="title">NoobFinder 🔥</h1>
 
-  <main>
-    <div class="card-container">
-      <div class="card" data-name="noob" data-title="Noob">
-        <img src="noob.png" alt="Noob" class="card-image">
-        <p class="card-title">Noob</p>
-      </div>
-      <div class="card" data-name="noir fond" data-title="Noob Boxeur">
-        <img src="noir fond.png" alt="Noir Fond" class="card-image">
-        <p class="card-title">Noob Boxeur</p>
-      </div>
-    </div>
-  </main>
+  <div class="search-container">
+    <input type="text" placeholder="Recherche... 🔍" id="searchBar">
+  </div>
 
-  <!-- Popup -->
-  <div id="popup" class="popup">
+  <div class="cards-container">
+    <div class="card" data-title="Noob" data-name="noob">
+      <img src="noob.png" alt="Noob" class="card-image">
+      <p class="card-name">Noob</p>
+    </div>
+    <div class="card" data-title="Noob Boxeur" data-name="noob boxeur">
+      <img src="noir fond.png" alt="Noob Boxeur" class="card-image">
+      <p class="card-name">Noob Boxeur</p>
+    </div>
+  </div>
+
+  <div id="popup">
     <div class="popup-content">
-      <span id="popupClose" class="popup-close">&times;</span>
+      <span id="popupClose">&times;</span>
       <img id="popupImage" src="" alt="">
       <h2 id="popupTitle"></h2>
-      <p id="popupRarity">Rareté: <span id="rarityText"></span></p>
-      <p id="popupPrice">Prix: <span id="priceText"></span></p>
-      <p id="popupBonus">+1$/s</p>
+      <p>Rareté: <span id="rarityText"></span></p>
+      <p>Prix: <span id="priceText"></span></p>
+      <p><span id="popupBonus"></span></p>
     </div>
   </div>
 
