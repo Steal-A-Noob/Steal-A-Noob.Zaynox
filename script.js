@@ -1,53 +1,53 @@
 const searchBar = document.getElementById("searchBar");
-const cards = document.querySelectorAll(".card");
+const noobImage = document.getElementById("noobImage");
+const noirFondImage = document.getElementById("noirFondImage");
+
 const popup = document.getElementById("popup");
+const popupClose = document.getElementById("popupClose");
 const popupImage = document.getElementById("popupImage");
 const popupTitle = document.getElementById("popupTitle");
-const rarityText = document.getElementById("rarityText");
+const popupRarity = document.getElementById("popupRarity");
 const priceText = document.getElementById("priceText");
 const popupBonus = document.getElementById("popupBonus");
-const popupClose = document.getElementById("popupClose");
 
-// Infos cartes
-const cardData = {
-  "Noob": {
-    rarity: "Commum",
-    rarityColor: "#b0b0b0",
-    price: "$250",
+const imagesData = {
+  "noob": {
+    title: "Noob",
+    image: "noob.png",
+    rarity: "Rareté: Commum",
+    price: "Prix: $250",
     bonus: "+1$/s"
   },
-  "Noob Boxeur": {
-    rarity: "Rare",
-    rarityColor: "blue",
-    price: "$2k",
+  "noir fond": {
+    title: "Noob Boxeur",
+    image: "noir fond.png",
+    rarity: "Rareté: Rare",
+    price: "Prix: $2k",
     bonus: "+6$/s"
   }
 };
 
-// Filtrer les cartes
+function openPopup(data) {
+  popupImage.src = data.image;
+  popupTitle.textContent = data.title;
+  popupRarity.textContent = data.rarity;
+  priceText.textContent = data.price;
+  popupBonus.textContent = data.bonus;
+  popup.style.display = "block";
+}
+
+noobImage.addEventListener("click", () => openPopup(imagesData["noob"]));
+noirFondImage.addEventListener("click", () => openPopup(imagesData["noir fond"]));
+
+popupClose.addEventListener("click", () => {
+  popup.style.display = "none";
+});
+
 searchBar.addEventListener("input", () => {
   const value = searchBar.value.toLowerCase();
-  cards.forEach(card => {
-    const name = card.dataset.name.toLowerCase();
-    card.style.display = name.includes(value) ? "block" : "none";
-  });
+  if (value.includes("noob")) {
+    openPopup(imagesData["noob"]);
+  } else if (value.includes("boxeur") || value.includes("noir")) {
+    openPopup(imagesData["noir fond"]);
+  }
 });
-
-// Ouvrir popup
-cards.forEach(card => {
-  card.addEventListener("click", () => {
-    const title = card.dataset.title;
-    const data = cardData[title];
-    popupImage.src = card.querySelector(".card-image").src;
-    popupTitle.textContent = title;
-    rarityText.textContent = data.rarity;
-    rarityText.style.color = data.rarityColor;
-    priceText.textContent = data.price;
-    popupBonus.textContent = data.bonus;
-    popup.style.display = "flex";
-  });
-});
-
-// Fermer popup
-popupClose.addEventListener("click", () => popup.style.display = "none");
-window.addEventListener("click", (e) => { if(e.target == popup) popup.style.display = "none"; });
