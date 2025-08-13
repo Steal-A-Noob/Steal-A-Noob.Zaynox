@@ -1,42 +1,38 @@
 const searchBar = document.getElementById("searchBar");
-const noobContainer = document.getElementById("noobContainer");
+const noobImage = document.getElementById("noobImage");
 const modal = document.getElementById("modal");
-const closeModal = document.getElementById("closeModal");
+const closeBtn = document.querySelector(".close");
 
-// Recherche
+// Affiche/Cache l'image selon la recherche
 searchBar.addEventListener("input", function() {
   const value = searchBar.value.toLowerCase();
-  noobContainer.style.display = "block";
-
-  const suggestions = ["noob"];
-  const datalist = document.getElementById("suggestions");
-  datalist.innerHTML = "";
-  suggestions.forEach(item => {
-    if (item.toLowerCase().includes(value)) {
-      const option = document.createElement("option");
-      option.value = item;
-      datalist.appendChild(option);
-    }
-  });
-});
-
-searchBar.addEventListener("keypress", function(e) {
-  if (e.key === "Enter") {
-    alert("Tu as cherché : " + searchBar.value + " 😎");
+  if ("noob".includes(value)) {
+    noobImage.style.display = "inline-block";
+  } else {
+    noobImage.style.display = "none";
   }
 });
 
-// Modal
-noobContainer.addEventListener("click", function() {
-  modal.style.display = "flex";
+// Clique sur l'image = ouvre modal
+noobImage.addEventListener("click", function() {
+  modal.style.display = "block";
 });
 
-closeModal.addEventListener("click", function() {
+// Fermer le modal
+closeBtn.addEventListener("click", function() {
   modal.style.display = "none";
 });
 
+// Fermer si clic en dehors
 window.addEventListener("click", function(event) {
   if (event.target === modal) {
     modal.style.display = "none";
+  }
+});
+
+// Enter dans la barre
+searchBar.addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    alert("Tu as cherché : " + searchBar.value + " 😎");
   }
 });
