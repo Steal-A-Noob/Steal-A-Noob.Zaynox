@@ -1,21 +1,20 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #87ceeb, #1e3c72, #0d1b2a);
+  background: linear-gradient(to bottom, #7ec0ee, #1b263b, #0d1b2a);
   color: white;
   text-align: center;
-  overflow-x: hidden;
 }
 
 #mainTitle {
-  margin-top: 30px;
   font-size: 4rem;
-  text-shadow: 0 0 10px #fff, 0 0 20px #87ceeb, 0 0 30px #1e3c72;
+  margin-top: 20px;
+  text-shadow: 0 0 10px #fff;
   animation: float 2s ease-in-out infinite;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
+  0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
 }
 
@@ -26,30 +25,23 @@ body {
 input[type="text"] {
   padding: 10px 20px;
   font-size: 1.2rem;
-  border: none;
   border-radius: 20px;
+  border: none;
   width: 300px;
-  max-width: 80%;
-}
-
-input[type="text"]:focus {
-  outline: none;
-  box-shadow: 0 0 10px #415a77;
 }
 
 .images-container {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .image-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
+  display: inline-block;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s;
 }
 
 .image-card img {
@@ -59,9 +51,9 @@ input[type="text"]:focus {
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.image-card:hover img {
-  transform: scale(1.2);
-  box-shadow: 0 0 30px #87ceeb;
+.image-card img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #fff;
 }
 
 .image-title {
@@ -73,48 +65,38 @@ input[type="text"]:focus {
 .popup {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(5px);
-  background: rgba(0,0,0,0.7);
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-}
-
-.popup img {
-  width: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1b263b;
+  border: 3px solid #415a77;
+  padding: 20px;
   border-radius: 10px;
-  margin-bottom: 20px;
+  z-index: 100;
+  text-align: center;
+  color: white;
 }
 
 #popupClose {
   position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 2rem;
-  color: red;
+  top: 5px;
+  right: 10px;
   cursor: pointer;
+  font-size: 1.5rem;
+  color: red;
 }
 
-#popupTitle {
-  font-size: 2rem;
+#popup img {
+  width: 200px;
   margin-bottom: 10px;
 }
 
 #popupRarity {
-  color: #ccc; /* gris clair */
-  font-size: 1.2rem;
-  margin-bottom: 5px;
+  color: #ccc;
 }
 
 #priceText {
-  color: limegreen;
-  font-size: 1rem;
-  margin-bottom: 5px;
+  color: #0f0;
 }
 
 #popupBonus {
