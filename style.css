@@ -1,7 +1,6 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  /* Dégradé bleu clair -> bleu foncé -> bleu marine */
   background: linear-gradient(to bottom, #87cefa, #1e3a8a, #0d1b2a);
   color: white;
   text-align: center;
@@ -38,9 +37,20 @@ input[type="text"]:focus {
   box-shadow: 0 0 10px #415a77;
 }
 
+.characters-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px; /* espace entre les images */
+  margin-top: 20px;
+}
+
+.character-container {
+  text-align: center;
+}
+
 .character {
   width: 150px;
-  margin: 20px auto;
   border: 3px solid grey;
   border-radius: 10px;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -91,7 +101,7 @@ input[type="text"]:focus {
 }
 
 .rarity span {
-  color: #d3d3d3; /* gris clair */
+  color: #d3d3d3;
 }
 
 .price {
