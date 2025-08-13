@@ -7,32 +7,35 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>NoobFinder 🔥</h1>
-
-  <div class="search-container">
-    <input type="text" placeholder="Recherche... 🔍" id="searchBar">
-  </div>
-
-  <div class="characters-row">
-    <div class="character-container">
-      <img src="noob.png" alt="Noob" class="character" data-name="Noob" data-img="noob.png">
-      <div class="char-name">Noob</div>
+  <header>
+    <h1>NoobFinder 🔥</h1>
+    <div class="search-container">
+      <input type="text" placeholder="Recherche... 🔍" id="searchBar">
     </div>
+  </header>
 
-    <div class="character-container">
-      <img src="noir fond.png" alt="Noir Fond" class="character" data-name="Noob Boxeur" data-img="noir fond.png">
+  <main>
+    <div class="card-container">
+      <div class="card" data-name="noob">
+        <img src="noob.png" alt="Noob" class="card-image">
+        <p class="card-title">Noob</p>
+      </div>
+      <div class="card" data-name="noir fond">
+        <img src="noir fond.png" alt="Noir Fond" class="card-image">
+        <p class="card-title">Noob Boxeur</p>
+      </div>
     </div>
-  </div>
+  </main>
 
   <!-- Popup -->
-  <div class="popup" id="popup">
+  <div id="popup" class="popup">
     <div class="popup-content">
-      <span class="close" id="closeBtn">&times;</span>
-      <img src="" alt="" id="popupImage">
-      <h2 id="popupName"></h2>
-      <p class="rarity">Rareté : <span>Commun</span></p>
-      <p class="price">$250</p>
-      <p class="bonus">+1$/s</p>
+      <span id="popupClose" class="popup-close">&times;</span>
+      <img id="popupImage" src="" alt="">
+      <h2 id="popupTitle"></h2>
+      <p id="popupRarity">Rareté: <span id="rarityText"></span></p>
+      <p id="popupPrice">Prix: <span id="priceText"></span></p>
+      <p id="popupBonus">+1$/s</p>
     </div>
   </div>
 
