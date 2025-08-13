@@ -1,19 +1,28 @@
 const searchBar = document.getElementById("searchBar");
-const noobImage = document.getElementById("noobImage");
+const characters = [
+  {img: "noob.png", name: "Noob"},
+  {img: "fond noir.png", name: "Fond Noir"}
+];
+
 const popup = document.getElementById("popup");
+const popupImage = document.getElementById("popupImage");
+const popupName = document.getElementById("popupName");
 const closeBtn = document.getElementById("closeBtn");
 
-// Afficher le popup quand on clique sur l'image
-noobImage.addEventListener("click", () => {
-  popup.style.display = "flex";
+// Fonction popup
+characters.forEach(char => {
+  const element = document.querySelector(`img[src='${char.img}']`);
+  element.addEventListener("click", () => {
+    popup.style.display = "flex";
+    popupImage.src = char.img;
+    popupName.textContent = char.name;
+  });
 });
 
-// Fermer le popup
 closeBtn.addEventListener("click", () => {
   popup.style.display = "none";
 });
 
-// Fermer si clic en dehors
 window.addEventListener("click", (e) => {
   if(e.target === popup) popup.style.display = "none";
 });
@@ -21,11 +30,14 @@ window.addEventListener("click", (e) => {
 // Barre de recherche
 searchBar.addEventListener("input", function() {
   const value = searchBar.value.toLowerCase();
-  if (value.includes("noob") || value.includes("n")) { // même si pas complet
-    noobImage.style.display = "block";
-  } else {
-    noobImage.style.display = "none";
-  }
+  characters.forEach(char => {
+    const element = document.querySelector(`img[src='${char.img}']`);
+    if(char.name.toLowerCase().includes(value)) {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
+    }
+  });
 });
 
 searchBar.addEventListener("keypress", function(e) {
