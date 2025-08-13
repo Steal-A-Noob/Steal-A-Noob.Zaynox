@@ -3,6 +3,9 @@ const noobImage = document.getElementById("noobImage");
 const popup = document.getElementById("popup");
 const closePopup = document.getElementById("closePopup");
 
+// Au début, l'image est visible
+noobImage.style.display = "block";
+
 // Recherche avec affichage image si mot partiel
 searchBar.addEventListener("input", function() {
   const value = searchBar.value.toLowerCase();
