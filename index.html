@@ -7,14 +7,22 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>NoobFinder 🔥</h1>
-
   <div class="search-container">
     <input type="text" placeholder="Recherche... 🔍" id="searchBar">
   </div>
 
-  <div class="image-container" id="noobContainer">
-    <img src="noob.png" alt="Noob" id="noobImage">
+  <h1>NoobFinder 🔥</h1>
+
+  <img src="noob.png" alt="Noob" id="noobImage">
+
+  <!-- Fenêtre popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <span class="close-btn" id="closePopup">&times;</span>
+      <img src="noob.png" alt="Noob">
+      <h2>Noob</h2>
+      <p>Rareté : Commun</p>
+    </div>
   </div>
 
   <script src="script.js"></script>
