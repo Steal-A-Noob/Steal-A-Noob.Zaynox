@@ -51,8 +51,16 @@
       width: 300px;
       margin-top: 20px;
       display: none; /* cachée au départ */
+      border: 5px solid #888888; /* cadre gris */
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* animation hover */
+    }
+
+    /* effet hover */
+    #noob.png:hover {
+      transform: scale(1.2); /* grandit de 20% */
+      box-shadow: 0 0 30px rgba(0,0,0,0.7);
     }
   </style>
 </head>
@@ -86,4 +94,3 @@
   </script>
 </body>
 </html>
-
