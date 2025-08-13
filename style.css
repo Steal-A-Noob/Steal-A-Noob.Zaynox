@@ -3,7 +3,6 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77);
   font-family: Arial, sans-serif;
@@ -12,12 +11,30 @@ body {
   position: relative;
 }
 
+/* Titre centré avec effet flottant + glow */
+h1 {
+  margin-top: 40px;
+  font-size: 3rem;
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 150, 255, 0.7);
+  animation: floatTitle 3s ease-in-out infinite, glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes floatTitle {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes glowPulse {
+  0% { text-shadow: 0 0 10px rgba(0, 150, 255, 0.7); }
+  50% { text-shadow: 0 0 20px rgba(0, 200, 255, 1); }
+  100% { text-shadow: 0 0 10px rgba(0, 150, 255, 0.7); }
+}
+
+/* Barre de recherche centrée */
 .search-container {
-  position: absolute;
-  top: 20px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  margin-top: 15px;
 }
 
 input[type="text"] {
@@ -27,6 +44,7 @@ input[type="text"] {
   border-radius: 20px;
   width: 300px;
   max-width: 80%;
+  transition: box-shadow 0.3s ease;
 }
 
 input[type="text"]:focus {
@@ -34,30 +52,7 @@ input[type="text"]:focus {
   box-shadow: 0 0 10px #415a77;
 }
 
-/* Titre centré avec effet flottant + glow */
-h1 {
-  position: absolute;
-  top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 3rem;
-  color: white;
-  text-shadow: 0 0 10px rgba(0, 150, 255, 0.7);
-  animation: floatTitle 3s ease-in-out infinite, glowPulse 2s ease-in-out infinite;
-}
-
-@keyframes floatTitle {
-  0% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-8px); }
-  100% { transform: translateX(-50%) translateY(0); }
-}
-
-@keyframes glowPulse {
-  0% { text-shadow: 0 0 10px rgba(0, 150, 255, 0.7); }
-  50% { text-shadow: 0 0 20px rgba(0, 200, 255, 1); }
-  100% { text-shadow: 0 0 10px rgba(0, 150, 255, 0.7); }
-}
-
+/* Image noob */
 #noobImage {
   width: 300px;
   margin-top: 20px;
@@ -72,7 +67,7 @@ h1 {
   box-shadow: 0 0 20px rgba(0,0,0,0.8);
 }
 
-/* Cadre popup */
+/* Cadre popup avec animation */
 .popup {
   display: none;
   position: fixed;
@@ -94,6 +89,9 @@ h1 {
   min-width: 250px;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
   position: relative;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: fadeInPopup 0.3s forwards;
 }
 
 .popup-content img {
@@ -107,4 +105,11 @@ h1 {
   right: 10px;
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+@keyframes fadeInPopup {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
