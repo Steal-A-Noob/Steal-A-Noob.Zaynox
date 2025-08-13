@@ -17,6 +17,12 @@ h1 {
   font-size: 4rem;
   text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
   margin: 20px 0;
+  animation: floatTitle 2s ease-in-out infinite;
+}
+
+@keyframes floatTitle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 .search-container {
@@ -47,7 +53,7 @@ input[type="text"]:focus {
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: block; /* visible dès le début */
+  display: block;
 }
 
 .image-container:hover {
