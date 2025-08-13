@@ -3,31 +3,33 @@ const noobImage = document.getElementById("noobImage");
 const popup = document.getElementById("popup");
 const closeBtn = document.getElementById("closeBtn");
 
-// Afficher/masquer selon la recherche
-searchBar.addEventListener("input", function() {
-  const value = searchBar.value.toLowerCase();
-  if (value.includes("noob")) {
-    noobImage.style.display = "block";
-    document.querySelector(".char-name").style.display = "block";
-  } else {
-    noobImage.style.display = "none";
-    document.querySelector(".char-name").style.display = "none";
-  }
-});
-
-// Ouvrir le popup au clic
-noobImage.addEventListener("click", function() {
+// Afficher le popup quand on clique sur l'image
+noobImage.addEventListener("click", () => {
   popup.style.display = "flex";
 });
 
 // Fermer le popup
-closeBtn.addEventListener("click", function() {
+closeBtn.addEventListener("click", () => {
   popup.style.display = "none";
 });
 
 // Fermer si clic en dehors
-popup.addEventListener("click", function(e) {
-  if (e.target === popup) {
-    popup.style.display = "none";
+window.addEventListener("click", (e) => {
+  if(e.target === popup) popup.style.display = "none";
+});
+
+// Barre de recherche
+searchBar.addEventListener("input", function() {
+  const value = searchBar.value.toLowerCase();
+  if (value.includes("noob") || value.includes("n")) { // même si pas complet
+    noobImage.style.display = "block";
+  } else {
+    noobImage.style.display = "none";
+  }
+});
+
+searchBar.addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    alert("Tu as cherché : " + searchBar.value + " 😎");
   }
 });
