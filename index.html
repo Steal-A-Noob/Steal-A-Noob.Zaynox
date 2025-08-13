@@ -50,16 +50,17 @@
     }
 
     #noobImage {
-      width: 300px;
+      width: 200px; /* Plus petit */
       margin-top: 20px;
       border: 5px solid gray;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
       transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
     }
 
     #noobImage:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
       box-shadow: 0 0 30px rgba(255,255,255,0.7);
     }
 
@@ -95,7 +96,7 @@
       top: 10px; right: 15px;
       font-size: 1.5rem;
       cursor: pointer;
-      color: red; /* Croix en rouge */
+      color: red;
     }
 
     .rarity {
@@ -105,7 +106,7 @@
 
     .price {
       font-size: 1rem;
-      color: #00ff00; /* Vert fluo */
+      color: #00ff00;
       margin: 0;
     }
 
@@ -141,29 +142,25 @@
     const popup = document.getElementById("popup");
     const closePopup = document.getElementById("closePopup");
 
-    // Recherche qui marche même si pas tout tapé
     searchBar.addEventListener("input", function() {
       const value = searchBar.value.toLowerCase();
       if ("noob".includes(value) && value !== "") {
         noobImage.style.display = "block";
       } else if (value === "") {
-        noobImage.style.display = "block"; // visible par défaut
+        noobImage.style.display = "block";
       } else {
         noobImage.style.display = "none";
       }
     });
 
-    // Ouverture du popup au clic sur l'image
     noobImage.addEventListener("click", function() {
       popup.style.display = "flex";
     });
 
-    // Fermeture du popup
     closePopup.addEventListener("click", function() {
       popup.style.display = "none";
     });
 
-    // Fermer en cliquant à l'extérieur
     popup.addEventListener("click", function(e) {
       if (e.target === popup) {
         popup.style.display = "none";
