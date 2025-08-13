@@ -7,24 +7,25 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Image de fond en haut -->
-  <img src="fond noir.png" alt="Fond" class="top-image">
-
   <h1>NoobFinder 🔥</h1>
 
   <div class="search-container">
     <input type="text" placeholder="Recherche... 🔍" id="searchBar">
   </div>
 
+  <!-- Images -->
   <img src="noob.png" alt="Noob" id="noobImage" class="character">
   <div class="char-name">Noob</div>
+
+  <img src="fond noir.png" alt="Fond Noir" id="fondNoir" class="character">
+  <div class="char-name">Fond Noir</div>
 
   <!-- Popup -->
   <div class="popup" id="popup">
     <div class="popup-content">
       <span class="close" id="closeBtn">&times;</span>
-      <img src="noob.png" alt="Noob">
-      <h2>Noob</h2>
+      <img src="" alt="" id="popupImage">
+      <h2 id="popupName"></h2>
       <p class="rarity">Rareté : <span>Commun</span></p>
       <p class="price">$250</p>
       <p class="bonus">+1$/s</p>
