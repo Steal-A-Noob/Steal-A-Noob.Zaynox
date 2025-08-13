@@ -2,7 +2,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  /* Dégradé bleu similaire au site que tu veux */
   background: linear-gradient(to bottom, #001f3f, #003366, #3399ff);
   color: white;
   text-align: center;
@@ -11,11 +10,12 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  position: relative;
 }
 
 h1 {
   font-size: 4rem;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
   margin: 20px 0;
 }
 
@@ -43,16 +43,16 @@ input[type="text"]:focus {
 
 .image-container {
   margin-top: 20px;
-  display: none;
-  border: 5px solid #888; /* cadre gris */
+  border: 5px solid #888;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block; /* visible dès le début */
 }
 
 .image-container:hover {
   transform: scale(1.2);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 30px rgba(0,0,0,0.7);
 }
 
 #noobImage {
