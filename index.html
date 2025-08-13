@@ -4,93 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NoobFinder</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77);
-      font-family: Arial, sans-serif;
-      color: white;
-      text-align: center;
-      position: relative;
-    }
-
-    h1 {
-      font-size: 4rem;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-      margin: 20px 0;
-    }
-
-    .search-container {
-      position: absolute;
-      top: 20px;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-
-    input[type="text"] {
-      padding: 10px 20px;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 20px;
-      width: 300px;
-      max-width: 80%;
-    }
-
-    input[type="text"]:focus {
-      outline: none;
-      box-shadow: 0 0 10px #415a77;
-    }
-
-    #noob.png {
-      width: 300px;
-      margin-top: 20px;
-      display: none; /* cachée au départ */
-      border: 5px solid #888888; /* cadre gris */
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease; /* animation hover */
-    }
-
-    /* effet hover */
-    #noob.png:hover {
-      transform: scale(1.2); /* grandit de 20% */
-      box-shadow: 0 0 30px rgba(0,0,0,0.7);
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="search-container">
-    <input type="text" placeholder="Recherche... 🔍" id="searchBar">
+    <input type="text" id="searchBar" placeholder="Recherche... 🔍">
   </div>
 
   <h1>NoobFinder 🔥</h1>
 
-  <img src="noob.png" alt="Noob" id="noobImage">
+  <div class="image-container">
+    <img src="noob.png" alt="Noob" id="noobImage">
+  </div>
 
-  <script>
-    const searchBar = document.getElementById("searchBar");
-    const noobImage = document.getElementById("noobImage");
-
-    searchBar.addEventListener("input", function() {
-      const value = searchBar.value.toLowerCase();
-      if (value.includes("noob")) {
-        noobImage.style.display = "block";
-      } else {
-        noobImage.style.display = "none";
-      }
-    });
-
-    searchBar.addEventListener("keypress", function(e) {
-      if (e.key === "Enter") {
-        alert("Tu as cherché : " + searchBar.value + " 😎");
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
