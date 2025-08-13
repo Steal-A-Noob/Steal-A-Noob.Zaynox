@@ -1,35 +1,39 @@
 const searchBar = document.getElementById("searchBar");
-const images = document.querySelectorAll(".image-card");
 const popup = document.getElementById("popup");
-const popupClose = document.getElementById("popupClose");
 const popupImage = document.getElementById("popupImage");
 const popupTitle = document.getElementById("popupTitle");
 const popupRarity = document.getElementById("popupRarity");
 const priceText = document.getElementById("priceText");
 const popupBonus = document.getElementById("popupBonus");
+const popupClose = document.getElementById("popupClose");
 
-// Afficher popup quand on clique sur une image
-images.forEach(card => {
+const imageCards = document.querySelectorAll(".image-card");
+
+imageCards.forEach(card => {
   card.addEventListener("click", () => {
-    popup.style.display = "flex";
-    popupImage.src = card.dataset.img;
-    popupTitle.textContent = card.dataset.title;
-    popupRarity.innerHTML = `Rareté: <span style="color: ${card.dataset.rarity === "Rare" ? "blue" : "#ccc"}">${card.dataset.rarity}</span>`;
-    priceText.innerHTML = `Prix: <span style="color:limegreen">${card.dataset.price}</span>`;
-    popupBonus.innerHTML = `<span style="color:yellow">${card.dataset.bonus}</span>`;
+    const title = card.getAttribute("data-title");
+    const rarity = card.getAttribute("data-rarity");
+    const price = card.getAttribute("data-price");
+    const bonus = card.getAttribute("data-bonus");
+    const img = card.getAttribute("data-img");
+
+    popup.style.display = "block";
+    popupImage.src = img;
+    popupTitle.textContent = title;
+    popupRarity.textContent = `Rareté: ${rarity}`;
+    priceText.textContent = `Prix: ${price}`;
+    popupBonus.textContent = bonus;
   });
 });
 
-// Fermer popup
 popupClose.addEventListener("click", () => {
   popup.style.display = "none";
 });
 
-// Barre de recherche
-searchBar.addEventListener("input", () => {
+searchBar.addEventListener("input", function() {
   const value = searchBar.value.toLowerCase();
-  images.forEach(card => {
-    const title = card.dataset.title.toLowerCase();
-    card.style.display = title.includes(value) ? "flex" : "none";
+  imageCards.forEach(card => {
+    const title = card.getAttribute("data-title").toLowerCase();
+    card.style.display = title.includes(value) ? "inline-block" : "none";
   });
 });
