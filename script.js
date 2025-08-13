@@ -13,11 +13,7 @@ searchBar.addEventListener("input", () => {
   const value = searchBar.value.toLowerCase();
   cards.forEach(card => {
     const name = card.dataset.name.toLowerCase();
-    if (name.includes(value)) {
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
+    card.style.display = name.includes(value) ? "block" : "none";
   });
 });
 
@@ -28,9 +24,19 @@ cards.forEach(card => {
     const title = card.dataset.title;
     popupImage.src = img;
     popupTitle.textContent = title;
-    rarityText.textContent = "Commum";
-    priceText.textContent = "$250";
-    popupBonus.textContent = "+1$/s";
+
+    if(title === "Noob Boxeur"){
+      rarityText.textContent = "rare";
+      rarityText.style.color = "blue";
+      priceText.textContent = "$2k";
+      popupBonus.textContent = "+6$/s";
+    } else {
+      rarityText.textContent = "Commum";
+      rarityText.style.color = "#b0b0b0";
+      priceText.textContent = "$250";
+      popupBonus.textContent = "+1$/s";
+    }
+
     popup.style.display = "flex";
   });
 });
