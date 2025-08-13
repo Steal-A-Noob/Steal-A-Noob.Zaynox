@@ -1,37 +1,32 @@
 const searchBar = document.getElementById("searchBar");
 const noobImage = document.getElementById("noobImage");
 const popup = document.getElementById("popup");
-const closePopup = document.getElementById("closePopup");
+const closeBtn = document.getElementById("closeBtn");
 
-// Affiche l'image même si partiel
+// Afficher/masquer selon la recherche
 searchBar.addEventListener("input", function() {
   const value = searchBar.value.toLowerCase();
   if (value.includes("noob")) {
     noobImage.style.display = "block";
+    document.querySelector(".char-name").style.display = "block";
   } else {
     noobImage.style.display = "none";
+    document.querySelector(".char-name").style.display = "none";
   }
 });
 
-// Alerte sur Entrée
-searchBar.addEventListener("keypress", function(e) {
-  if (e.key === "Enter") {
-    alert("Tu as cherché : " + searchBar.value + " 😎");
-  }
-});
-
-// Popup quand on clique sur l'image
-noobImage.addEventListener("click", () => {
+// Ouvrir le popup au clic
+noobImage.addEventListener("click", function() {
   popup.style.display = "flex";
 });
 
-// Fermer popup
-closePopup.addEventListener("click", () => {
+// Fermer le popup
+closeBtn.addEventListener("click", function() {
   popup.style.display = "none";
 });
 
-// Fermer popup si clic dehors
-popup.addEventListener("click", (e) => {
+// Fermer si clic en dehors
+popup.addEventListener("click", function(e) {
   if (e.target === popup) {
     popup.style.display = "none";
   }
