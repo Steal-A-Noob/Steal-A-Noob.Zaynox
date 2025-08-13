@@ -14,9 +14,9 @@ images.forEach(card => {
     popup.style.display = "flex";
     popupImage.src = card.dataset.img;
     popupTitle.textContent = card.dataset.title;
-    popupRarity.textContent = "Rareté: " + card.dataset.rarity;
-    priceText.innerHTML = "Prix: <span style='color:limegreen'>" + card.dataset.price + "</span>";
-    popupBonus.innerHTML = card.dataset.bonus;
+    popupRarity.innerHTML = `Rareté: <span style="color: ${card.dataset.rarity === "Rare" ? "blue" : "#ccc"}">${card.dataset.rarity}</span>`;
+    priceText.innerHTML = `Prix: <span style="color:limegreen">${card.dataset.price}</span>`;
+    popupBonus.innerHTML = `<span style="color:yellow">${card.dataset.bonus}</span>`;
   });
 });
 
@@ -30,10 +30,6 @@ searchBar.addEventListener("input", () => {
   const value = searchBar.value.toLowerCase();
   images.forEach(card => {
     const title = card.dataset.title.toLowerCase();
-    if(title.includes(value)) {
-      card.style.display = "flex";
-    } else {
-      card.style.display = "none";
-    }
+    card.style.display = title.includes(value) ? "flex" : "none";
   });
 });
