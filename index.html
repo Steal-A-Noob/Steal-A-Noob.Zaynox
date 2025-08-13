@@ -18,14 +18,19 @@
     }
 
     h1 {
-      font-size: 3rem;
-      text-shadow: 0 0 15px rgba(0, 150, 255, 0.8), 0 0 30px rgba(0, 150, 255, 0.5);
-      margin-top: 20px;
-      margin-bottom: 10px;
+      font-size: 4rem;
+      text-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
+      margin-top: 40px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
     .search-container {
-      margin-bottom: 20px;
+      margin-top: 10px;
     }
 
     input[type="text"] {
@@ -42,29 +47,32 @@
       box-shadow: 0 0 10px #415a77;
     }
 
-    .noob-img {
-      width: 150px;
-      margin-top: 10px;
+    .image-card {
+      margin-top: 30px;
       border: 3px solid gray;
       border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      transition: transform 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 200px;
+    }
+
+    .image-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255,255,255,0.5);
       cursor: pointer;
     }
 
-    .noob-img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 30px rgba(255,255,255,0.8);
+    .image-card img {
+      width: 100%;
+      display: block;
     }
 
     /* Popup */
     .popup {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: rgba(0,0,0,0.7);
       justify-content: center;
       align-items: center;
@@ -74,16 +82,25 @@
       background: #1b263b;
       padding: 20px;
       border-radius: 10px;
+      width: 300px;
       text-align: center;
       position: relative;
-      width: 300px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.8);
-      animation: fadeIn 0.3s ease-in-out;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
     }
 
-    .popup-content h2 {
-      margin-top: 0;
-      font-size: 2rem;
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      color: red;
+      font-weight: bold;
+    }
+
+    .popup-title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
     }
 
     .rarity span {
@@ -92,45 +109,33 @@
 
     .price {
       font-size: 1rem;
-      color: #00ff00;
+      color: #00ff00; /* vert fluo */
       margin: 5px 0;
     }
 
     .bonus {
       font-size: 0.9rem;
       color: yellow;
-    }
-
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: red;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: scale(0.8);}
-      to {opacity: 1; transform: scale(1);}
+      margin-top: 3px;
     }
   </style>
 </head>
 <body>
-
   <h1>NoobFinder 🔥</h1>
 
   <div class="search-container">
     <input type="text" placeholder="Recherche... 🔍" id="searchBar">
   </div>
 
-  <img src="noob.png" alt="Noob" class="noob-img" id="noobImage">
+  <div class="image-card" id="noobCard">
+    <img src="noob.png" alt="Noob">
+  </div>
 
   <!-- Popup -->
   <div class="popup" id="popup">
     <div class="popup-content">
-      <span class="close" id="closePopup">&times;</span>
-      <h2>Noob</h2>
+      <span class="close" id="closePopup">×</span>
+      <p class="popup-title">Noob</p>
       <p class="rarity">Rareté : <span>Commun</span></p>
       <p class="price">$250</p>
       <p class="bonus">+1$/s</p>
@@ -139,37 +144,36 @@
 
   <script>
     const searchBar = document.getElementById("searchBar");
-    const noobImage = document.getElementById("noobImage");
+    const noobCard = document.getElementById("noobCard");
     const popup = document.getElementById("popup");
     const closePopup = document.getElementById("closePopup");
 
-    // Affichage image selon recherche
+    // Affiche image si mot trouvé
     searchBar.addEventListener("input", function() {
       const value = searchBar.value.toLowerCase();
       if (value.includes("noob")) {
-        noobImage.style.display = "block";
+        noobCard.style.display = "block";
       } else {
-        noobImage.style.display = "none";
+        noobCard.style.display = "none";
       }
     });
 
-    // Clic image → popup
-    noobImage.addEventListener("click", function() {
+    // Ouvrir popup
+    noobCard.addEventListener("click", () => {
       popup.style.display = "flex";
     });
 
     // Fermer popup
-    closePopup.addEventListener("click", function() {
+    closePopup.addEventListener("click", () => {
       popup.style.display = "none";
     });
 
-    // Fermer popup clic extérieur
-    window.addEventListener("click", function(e) {
+    // Fermer popup si clic en dehors
+    popup.addEventListener("click", (e) => {
       if (e.target === popup) {
         popup.style.display = "none";
       }
     });
   </script>
-
 </body>
 </html>
