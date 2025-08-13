@@ -1,24 +1,43 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77);
-  color: white;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77);
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  position: relative;
 }
 
 h1 {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 3rem;
-  margin: 20px 0;
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 150, 255, 0.7);
+  animation: floatTitle 3s ease-in-out infinite, glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes floatTitle {
+  0% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-8px); }
+  100% { transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes glowPulse {
+  0% { text-shadow: 0 0 10px rgba(0, 150, 255, 0.7); }
+  50% { text-shadow: 0 0 20px rgba(0, 200, 255, 1); }
+  100% { text-shadow: 0 0 10px rgba(0, 150, 255, 0.7); }
 }
 
 .search-container {
   position: absolute;
-  top: 20px;
+  top: 100px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -39,54 +58,20 @@ input[type="text"]:focus {
 }
 
 .image-container {
-  margin-top: 20px;
-}
-
-#noobImage {
-  width: 200px;
-  border: 4px solid gray;
+  margin-top: 150px;
+  border: 5px solid #888;
   border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-#noobImage:hover {
-  transform: scale(1.2);
-  border-color: white;
-}
-
-/* Modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 10;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.7);
-}
-
-.modal-content {
-  background-color: #1b263b;
-  margin: 15% auto;
-  padding: 20px;
-  border: 2px solid #415a77;
-  border-radius: 10px;
+.image-container img {
   width: 300px;
-  color: white;
-  text-align: center;
+  border-radius: 10px;
+  display: block;
 }
 
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover {
-  color: white;
+.image-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
 }
