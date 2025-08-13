@@ -21,9 +21,9 @@
 
     h1 {
       font-size: 4rem;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
       margin: 20px 0 10px 0;
       animation: float 3s ease-in-out infinite;
+      text-shadow: 0 0 5px #00aaff, 0 0 15px #00aaff, 0 0 30px #00aaff; /* effet lueur */
     }
 
     @keyframes float {
@@ -99,6 +99,12 @@
       color: red;
     }
 
+    .name {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
     .rarity {
       font-size: 1.2rem;
       margin: 5px 0;
@@ -130,6 +136,7 @@
     <div class="popup-content">
       <span class="close-btn" id="closePopup">&times;</span>
       <img src="noob.png" alt="Noob">
+      <p class="name">Noob</p>
       <p class="rarity">Rareté : Commun</p>
       <p class="price">$250</p>
       <p class="income">+1$/s</p>
