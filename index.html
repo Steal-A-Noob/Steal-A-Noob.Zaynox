@@ -17,6 +17,7 @@
       font-family: Arial, sans-serif;
       color: white;
       text-align: center;
+      position: relative;
     }
 
     h1 {
@@ -46,6 +47,14 @@
       outline: none;
       box-shadow: 0 0 10px #415a77;
     }
+
+    #noobImage {
+      width: 300px;
+      margin-top: 20px;
+      display: none; /* cachée au départ */
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 <body>
@@ -55,8 +64,20 @@
 
   <h1>NoobFinder 🔥</h1>
 
+  <img src="noob.png" alt="Noob" id="noobImage">
+
   <script>
     const searchBar = document.getElementById("searchBar");
+    const noobImage = document.getElementById("noobImage");
+
+    searchBar.addEventListener("input", function() {
+      const value = searchBar.value.toLowerCase();
+      if (value.includes("noob")) {
+        noobImage.style.display = "block";
+      } else {
+        noobImage.style.display = "none";
+      }
+    });
 
     searchBar.addEventListener("keypress", function(e) {
       if (e.key === "Enter") {
