@@ -1,7 +1,6 @@
 const searchBar = document.getElementById("searchBar");
 const characters = [
-  {img: "noob.png", name: "Noob"},
-  {img: "fond noir.png", name: "Fond Noir"}
+  {img: "noob.png", name: "Noob"}
 ];
 
 const popup = document.getElementById("popup");
@@ -9,7 +8,7 @@ const popupImage = document.getElementById("popupImage");
 const popupName = document.getElementById("popupName");
 const closeBtn = document.getElementById("closeBtn");
 
-// Fonction popup
+// Popup pour Noob seulement
 characters.forEach(char => {
   const element = document.querySelector(`img[src='${char.img}']`);
   element.addEventListener("click", () => {
@@ -27,7 +26,7 @@ window.addEventListener("click", (e) => {
   if(e.target === popup) popup.style.display = "none";
 });
 
-// Barre de recherche
+// Barre de recherche pour Noob
 searchBar.addEventListener("input", function() {
   const value = searchBar.value.toLowerCase();
   characters.forEach(char => {
