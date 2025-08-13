@@ -1,7 +1,5 @@
 const searchBar = document.getElementById("searchBar");
-const noobImage = document.getElementById("noobImage");
-const noirFondImage = document.getElementById("noirFondImage");
-
+const images = document.querySelectorAll(".image-card");
 const popup = document.getElementById("popup");
 const popupClose = document.getElementById("popupClose");
 const popupImage = document.getElementById("popupImage");
@@ -10,44 +8,32 @@ const popupRarity = document.getElementById("popupRarity");
 const priceText = document.getElementById("priceText");
 const popupBonus = document.getElementById("popupBonus");
 
-const imagesData = {
-  "noob": {
-    title: "Noob",
-    image: "noob.png",
-    rarity: "Rareté: Commum",
-    price: "Prix: $250",
-    bonus: "+1$/s"
-  },
-  "noir fond": {
-    title: "Noob Boxeur",
-    image: "noir fond.png",
-    rarity: "Rareté: Rare",
-    price: "Prix: $2k",
-    bonus: "+6$/s"
-  }
-};
+// Afficher popup quand on clique sur une image
+images.forEach(card => {
+  card.addEventListener("click", () => {
+    popup.style.display = "flex";
+    popupImage.src = card.dataset.img;
+    popupTitle.textContent = card.dataset.title;
+    popupRarity.textContent = "Rareté: " + card.dataset.rarity;
+    priceText.innerHTML = "Prix: <span style='color:limegreen'>" + card.dataset.price + "</span>";
+    popupBonus.innerHTML = card.dataset.bonus;
+  });
+});
 
-function openPopup(data) {
-  popupImage.src = data.image;
-  popupTitle.textContent = data.title;
-  popupRarity.textContent = data.rarity;
-  priceText.textContent = data.price;
-  popupBonus.textContent = data.bonus;
-  popup.style.display = "block";
-}
-
-noobImage.addEventListener("click", () => openPopup(imagesData["noob"]));
-noirFondImage.addEventListener("click", () => openPopup(imagesData["noir fond"]));
-
+// Fermer popup
 popupClose.addEventListener("click", () => {
   popup.style.display = "none";
 });
 
+// Barre de recherche
 searchBar.addEventListener("input", () => {
   const value = searchBar.value.toLowerCase();
-  if (value.includes("noob")) {
-    openPopup(imagesData["noob"]);
-  } else if (value.includes("boxeur") || value.includes("noir")) {
-    openPopup(imagesData["noir fond"]);
-  }
+  images.forEach(card => {
+    const title = card.dataset.title.toLowerCase();
+    if(title.includes(value)) {
+      card.style.display = "flex";
+    } else {
+      card.style.display = "none";
+    }
+  });
 });
