@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NoobFinder</title>
   <style>
-    /* Dégradé du fond : bleu foncé → bleu marine → bleu clair */
+    /* Fond dégradé bleu foncé → bleu marine → bleu clair */
     body {
       margin: 0;
       height: 100vh;
       display: flex;
-      justify-content: center; /* centre horizontalement */
-      align-items: center;     /* centre verticalement */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77);
       font-family: Arial, sans-serif;
       color: white;
@@ -22,9 +23,44 @@
       font-size: 4rem;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     }
+
+    .options {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #1b263b;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #415a77;
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body>
   <h1>NoobFinder 🔥</h1>
+
+  <div class="options">
+    <button onclick="choixOption('Option 1')">Option 1</button>
+    <button onclick="choixOption('Option 2')">Option 2</button>
+    <button onclick="choixOption('Option 3')">Option 3</button>
+  </div>
+
+  <script>
+    function choixOption(option) {
+      alert("Tu as choisi : " + option + " 😎");
+    }
+  </script>
 </body>
 </html>
