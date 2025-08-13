@@ -7,32 +7,31 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 id="title">NoobFinder 🔥</h1>
+  <h1 id="mainTitle">NoobFinder 🔥</h1>
 
   <div class="search-container">
     <input type="text" placeholder="Recherche... 🔍" id="searchBar">
   </div>
 
-  <div class="cards-container">
-    <div class="card" data-title="Noob" data-name="noob">
-      <img src="noob.png" alt="Noob" class="card-image">
-      <p class="card-name">Noob</p>
+  <div class="images-container">
+    <div class="image-card">
+      <img src="noob.png" alt="Noob" id="noobImage">
+      <p class="image-title">Noob</p>
     </div>
-    <div class="card" data-title="Noob Boxeur" data-name="noob boxeur">
-      <img src="noir fond.png" alt="Noob Boxeur" class="card-image">
-      <p class="card-name">Noob Boxeur</p>
+    <div class="image-card">
+      <img src="noir fond.png" alt="Noir Fond" id="noirFondImage">
+      <p class="image-title">Noob Boxeur</p>
     </div>
   </div>
 
-  <div id="popup">
-    <div class="popup-content">
-      <span id="popupClose">&times;</span>
-      <img id="popupImage" src="" alt="">
-      <h2 id="popupTitle"></h2>
-      <p>Rareté: <span id="rarityText"></span></p>
-      <p>Prix: <span id="priceText"></span></p>
-      <p><span id="popupBonus"></span></p>
-    </div>
+  <!-- Popup -->
+  <div id="popup" class="popup">
+    <span id="popupClose">✖</span>
+    <img id="popupImage" src="">
+    <h2 id="popupTitle"></h2>
+    <p id="popupRarity"></p>
+    <p id="priceText"></p>
+    <p id="popupBonus"></p>
   </div>
 
   <script src="script.js"></script>
