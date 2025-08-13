@@ -1,46 +1,38 @@
 const searchBar = document.getElementById("searchBar");
-const characters = [
-  {img: "noob.png", name: "Noob"}
-];
-
+const characters = document.querySelectorAll(".character");
 const popup = document.getElementById("popup");
 const popupImage = document.getElementById("popupImage");
 const popupName = document.getElementById("popupName");
 const closeBtn = document.getElementById("closeBtn");
 
-// Popup pour Noob seulement
+// Ouvrir popup pour chaque image
 characters.forEach(char => {
-  const element = document.querySelector(`img[src='${char.img}']`);
-  element.addEventListener("click", () => {
+  char.addEventListener("click", () => {
+    const name = char.getAttribute("data-name");
+    const img = char.getAttribute("data-img");
     popup.style.display = "flex";
-    popupImage.src = char.img;
-    popupName.textContent = char.name;
+    popupImage.src = img;
+    popupName.textContent = name;
   });
 });
 
+// Fermer popup
 closeBtn.addEventListener("click", () => {
   popup.style.display = "none";
 });
-
 window.addEventListener("click", (e) => {
   if(e.target === popup) popup.style.display = "none";
 });
 
-// Barre de recherche pour Noob
+// Barre de recherche
 searchBar.addEventListener("input", function() {
   const value = searchBar.value.toLowerCase();
   characters.forEach(char => {
-    const element = document.querySelector(`img[src='${char.img}']`);
-    if(char.name.toLowerCase().includes(value)) {
-      element.style.display = "block";
+    const name = char.getAttribute("data-name").toLowerCase();
+    if(name.includes(value)) {
+      char.parentElement.style.display = "block";
     } else {
-      element.style.display = "none";
+      char.parentElement.style.display = "none";
     }
   });
-});
-
-searchBar.addEventListener("keypress", function(e) {
-  if (e.key === "Enter") {
-    alert("Tu as cherché : " + searchBar.value + " 😎");
-  }
 });
