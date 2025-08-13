@@ -7,30 +7,28 @@
   <style>
     body {
       margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77);
       font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77);
       color: white;
       text-align: center;
     }
 
-    h1 {
-      font-size: 4rem;
-      text-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
-      margin-top: 40px;
-      animation: float 3s ease-in-out infinite;
+    /* Effet flottant */
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    h1 {
+      font-size: 3rem;
+      text-shadow: 0 0 10px rgba(255,255,255,0.8);
+      animation: float 3s ease-in-out infinite;
+      margin-top: 20px;
     }
 
     .search-container {
-      margin-top: 10px;
+      margin: 20px 0;
     }
 
     input[type="text"] {
@@ -42,38 +40,33 @@
       max-width: 80%;
     }
 
-    input[type="text"]:focus {
-      outline: none;
-      box-shadow: 0 0 10px #415a77;
-    }
-
-    .image-card {
-      margin-top: 30px;
-      border: 3px solid gray;
-      border-radius: 10px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    img {
       width: 200px;
+      margin-top: 20px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .image-card:hover {
+    img:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255,255,255,0.5);
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
       cursor: pointer;
     }
 
-    .image-card img {
-      width: 100%;
-      display: block;
+    .char-name {
+      font-size: 2rem;
+      margin-top: 10px;
+      font-weight: bold;
     }
 
     /* Popup */
     .popup {
       display: none;
       position: fixed;
-      top: 0; left: 0;
+      z-index: 100;
+      left: 0; top: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
+      background-color: rgba(0,0,0,0.7);
       justify-content: center;
       align-items: center;
     }
@@ -81,69 +74,57 @@
     .popup-content {
       background: #1b263b;
       padding: 20px;
-      border-radius: 10px;
-      width: 300px;
+      border-radius: 15px;
       text-align: center;
+      max-width: 300px;
       position: relative;
-      box-shadow: 0 0 20px rgba(255,255,255,0.3);
     }
 
     .popup-content img {
-      width: 150px;
-      margin-bottom: 10px;
+      width: 100%;
       border-radius: 10px;
-      border: 2px solid gray;
+      margin-bottom: 10px;
     }
 
     .close {
       position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 20px;
-      cursor: pointer;
+      top: 10px; right: 15px;
       color: red;
-      font-weight: bold;
-    }
-
-    .popup-title {
       font-size: 1.5rem;
-      margin-bottom: 10px;
+      cursor: pointer;
     }
 
     .rarity span {
-      color: #b0b0b0; /* gris clair un peu foncé */
+      color: #b0b0b0;
     }
 
     .price {
+      color: #00ff00;
       font-size: 1rem;
-      color: #00ff00; /* vert fluo */
-      margin: 5px 0;
     }
 
     .bonus {
-      font-size: 0.9rem;
       color: yellow;
-      margin-top: 3px;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
   <h1>NoobFinder 🔥</h1>
-
+  
   <div class="search-container">
     <input type="text" placeholder="Recherche... 🔍" id="searchBar">
   </div>
 
-  <div class="image-card" id="noobCard">
-    <img src="noob.png" alt="Noob">
-  </div>
+  <img src="noob.png" alt="Noob" id="noobImage">
+  <div class="char-name">Noob</div>
 
   <!-- Popup -->
   <div class="popup" id="popup">
     <div class="popup-content">
-      <span class="close" id="closePopup">×</span>
+      <span class="close" id="closeBtn">&times;</span>
       <img src="noob.png" alt="Noob">
-      <p class="popup-title">Noob</p>
+      <h2>Noob</h2>
       <p class="rarity">Rareté : <span>Commun</span></p>
       <p class="price">$250</p>
       <p class="bonus">+1$/s</p>
@@ -152,32 +133,34 @@
 
   <script>
     const searchBar = document.getElementById("searchBar");
-    const noobCard = document.getElementById("noobCard");
+    const noobImage = document.getElementById("noobImage");
     const popup = document.getElementById("popup");
-    const closePopup = document.getElementById("closePopup");
+    const closeBtn = document.getElementById("closeBtn");
 
-    // Affiche image si mot trouvé
+    // Afficher/masquer selon la recherche
     searchBar.addEventListener("input", function() {
       const value = searchBar.value.toLowerCase();
       if (value.includes("noob")) {
-        noobCard.style.display = "block";
+        noobImage.style.display = "block";
+        document.querySelector(".char-name").style.display = "block";
       } else {
-        noobCard.style.display = "none";
+        noobImage.style.display = "none";
+        document.querySelector(".char-name").style.display = "none";
       }
     });
 
-    // Ouvrir popup
-    noobCard.addEventListener("click", () => {
+    // Ouvrir le popup au clic
+    noobImage.addEventListener("click", function() {
       popup.style.display = "flex";
     });
 
-    // Fermer popup
-    closePopup.addEventListener("click", () => {
+    // Fermer le popup
+    closeBtn.addEventListener("click", function() {
       popup.style.display = "none";
     });
 
-    // Fermer popup si clic en dehors
-    popup.addEventListener("click", (e) => {
+    // Fermer si clic en dehors
+    popup.addEventListener("click", function(e) {
       if (e.target === popup) {
         popup.style.display = "none";
       }
