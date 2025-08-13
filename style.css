@@ -54,6 +54,7 @@ input[type="text"]:focus {
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: block;
+  cursor: pointer;
 }
 
 .image-container:hover {
@@ -64,4 +65,45 @@ input[type="text"]:focus {
 #noobImage {
   width: 300px;
   border-radius: 10px;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #001f3f;
+  margin: auto;
+  padding: 20px;
+  border: 2px solid #888;
+  width: 300px;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.close {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #ff3333;
 }
