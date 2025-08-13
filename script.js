@@ -1,38 +1,47 @@
 const searchBar = document.getElementById("searchBar");
-const characters = document.querySelectorAll(".character");
+const cards = document.querySelectorAll(".card");
 const popup = document.getElementById("popup");
 const popupImage = document.getElementById("popupImage");
-const popupName = document.getElementById("popupName");
-const closeBtn = document.getElementById("closeBtn");
+const popupTitle = document.getElementById("popupTitle");
+const rarityText = document.getElementById("rarityText");
+const priceText = document.getElementById("priceText");
+const popupBonus = document.getElementById("popupBonus");
+const popupClose = document.getElementById("popupClose");
 
-// Ouvrir popup pour chaque image
-characters.forEach(char => {
-  char.addEventListener("click", () => {
-    const name = char.getAttribute("data-name");
-    const img = char.getAttribute("data-img");
-    popup.style.display = "flex";
+// Filtrer les cartes
+searchBar.addEventListener("input", () => {
+  const value = searchBar.value.toLowerCase();
+  cards.forEach(card => {
+    const name = card.dataset.name.toLowerCase();
+    if (name.includes(value)) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});
+
+// Ouvrir popup
+cards.forEach(card => {
+  card.addEventListener("click", () => {
+    const img = card.querySelector(".card-image").src;
+    const title = card.querySelector(".card-title").textContent;
     popupImage.src = img;
-    popupName.textContent = name;
+    popupTitle.textContent = title;
+    rarityText.textContent = "Commum";
+    priceText.textContent = "$250";
+    popupBonus.textContent = "+1$/s";
+    popup.style.display = "flex";
   });
 });
 
 // Fermer popup
-closeBtn.addEventListener("click", () => {
+popupClose.addEventListener("click", () => {
   popup.style.display = "none";
 });
-window.addEventListener("click", (e) => {
-  if(e.target === popup) popup.style.display = "none";
-});
 
-// Barre de recherche
-searchBar.addEventListener("input", function() {
-  const value = searchBar.value.toLowerCase();
-  characters.forEach(char => {
-    const name = char.getAttribute("data-name").toLowerCase();
-    if(name.includes(value)) {
-      char.parentElement.style.display = "block";
-    } else {
-      char.parentElement.style.display = "none";
-    }
-  });
+window.addEventListener("click", (e) => {
+  if (e.target == popup) {
+    popup.style.display = "none";
+  }
 });
