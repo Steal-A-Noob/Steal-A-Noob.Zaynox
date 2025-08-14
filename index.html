@@ -1,44 +1,91 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NoobFinder</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NoobFinder 🔥</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+  <!-- Fond particules -->
+  <div id="particles-js"></div>
+
+  <!-- Titre -->
   <h1 id="mainTitle">NoobFinder 🔥</h1>
 
+  <!-- Barre de recherche -->
   <div class="search-container">
-    <input type="text" placeholder="Recherche... 🔍" id="searchBar">
+    <input type="text" id="searchBar" placeholder="Recherche... 🔍" />
   </div>
 
+  <!-- Cartes d’images -->
   <div class="images-container">
+    <!-- Noob -->
     <div class="image-card" data-title="Noob" data-rarity="Commun" data-price="$250" data-bonus="+1$/s" data-img="noob.png">
-      <img src="noob.png" alt="Noob">
+      <img src="noob.png" alt="Noob"/>
       <div class="image-title">Noob</div>
     </div>
 
+    <!-- Noob Boxeur -->
     <div class="image-card" data-title="Noob Boxeur" data-rarity="Rare" data-price="$2k" data-bonus="+6$/s" data-img="noir fond.png">
-      <img src="noir fond.png" alt="Noob Boxeur">
+      <img src="noir fond.png" alt="Noob Boxeur"/>
       <div class="image-title">Noob Boxeur</div>
     </div>
 
+    <!-- Noob Ninja -->
     <div class="image-card" data-title="Noob Ninja" data-rarity="Rare" data-price="$10k" data-bonus="+20$/s" data-img="noir fond.png">
-      <img src="noir fond.png" alt="Noob Ninja">
+      <img src="noir fond.png" alt="Noob Ninja"/>
       <div class="image-title">Noob Ninja</div>
+    </div>
+
+    <!-- Agent Noob -->
+    <div class="image-card" data-title="Agent Noob" data-rarity="Commun" data-price="$250" data-bonus="+1$/s" data-img="noir fond.png">
+      <img src="noir fond.png" alt="Agent Noob"/>
+      <div class="image-title">Agent Noob</div>
+    </div>
+
+    <!-- Surf Noob -->
+    <div class="image-card" data-title="Surf Noob" data-rarity="Commun" data-price="$550" data-bonus="+2$/s" data-img="noir fond.png">
+      <img src="noir fond.png" alt="Surf Noob"/>
+      <div class="image-title">Surf Noob</div>
+    </div>
+
+    <!-- Hacker Noob -->
+    <div class="image-card" data-title="Hacker Noob" data-rarity="Légendaire" data-price="$30k" data-bonus="+20$/s" data-img="noir fond.png">
+      <img src="noir fond.png" alt="Hacker Noob"/>
+      <div class="image-title">Hacker Noob</div>
+    </div>
+
+    <!-- Magic Noob -->
+    <div class="image-card" data-title="Magic Noob" data-rarity="UnCommun" data-price="$250" data-bonus="+1$/s" data-img="noir fond.png">
+      <img src="noir fond.png" alt="Magic Noob"/>
+      <div class="image-title">Magic Noob</div>
+    </div>
+
+    <!-- God Noob -->
+    <div class="image-card" data-title="God Noob" data-rarity="Mythique" data-price="$30k" data-bonus="+20$/s" data-img="noir fond.png">
+      <img src="noir fond.png" alt="God Noob"/>
+      <div class="image-title">God Noob</div>
     </div>
   </div>
 
-  <div id="popup" class="popup">
-    <span id="popupClose">&times;</span>
-    <img id="popupImage" src="" alt="">
-    <h2 id="popupTitle"></h2>
-    <p id="popupRarity"></p>
-    <p id="popupPrice"></p>
-    <p id="popupBonus"></p>
+  <!-- Modal / Popup -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button id="modalClose" class="modal-close" aria-label="Fermer">×</button>
+      <img id="modalImage" src="" alt="" />
+      <h2 id="modalTitle"></h2>
+      <p id="modalRarity"></p>
+      <p>Prix: <span id="modalPrice" class="price-value"></span></p>
+      <p><span id="modalBonus" class="bonus-value"></span></p>
+    </div>
   </div>
 
+  <!-- Particles lib + config -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="particles-config.js"></script>
+  <!-- Script principal -->
   <script src="script.js"></script>
 </body>
 </html>
