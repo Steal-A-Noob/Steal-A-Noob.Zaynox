@@ -11,20 +11,19 @@
   <!-- Particules -->
   <div id="particles-js"></div>
 
-  <h1 id="mainTitle">NoobFinder 🔥</h1>
-
-  <div class="search-container">
-    <input type="text" placeholder="Recherche... 🔍" id="searchBar">
-  </div>
-
-  <div class="sort-buttons">
-    <button id="sortRarity">Trier par rareté</button>
-    <button id="sortPriceAsc">Prix croissant</button>
-    <button id="sortPriceDesc">Prix décroissant</button>
-  </div>
+  <header>
+    <h1 id="mainTitle">NoobFinder 🔥</h1>
+    <div class="search-container">
+      <input type="text" placeholder="Recherche... 🔍" id="searchBar">
+    </div>
+    <div class="sort-buttons">
+      <button id="sortRarity">Trier par rareté</button>
+      <button id="sortPriceAsc">Prix croissant</button>
+      <button id="sortPriceDesc">Prix décroissant</button>
+    </div>
+  </header>
 
   <div class="images-container">
-    <!-- Toutes les cartes Noob -->
     <div class="image-card glow-Commun" data-title="Noob" data-rarity="Commun" data-price="250" data-bonus="1$/s" data-img="noob.png">
       <img src="noob.png" alt="Noob">
       <div class="image-title">Noob</div>
@@ -68,9 +67,11 @@
 
   <!-- Popup vertical -->
   <div id="popup" class="popup">
-    <span id="popupClose">&times;</span>
     <div class="popup-content">
-      <img id="popupImage" src="" alt="">
+      <div class="popup-image-container">
+        <span id="popupClose">&times;</span>
+        <img id="popupImage" src="" alt="">
+      </div>
       <div class="popup-text">
         <h2 id="popupTitle"></h2>
         <p id="popupRarity"></p>
