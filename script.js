@@ -37,11 +37,11 @@ imageCards.forEach(card => {
     }
     popupRarity.innerHTML = `<span style="color:${rarityColor}">Rareté: ${rarity}</span>`;
 
-    // Prix couleur or
+    // Prix couleur vert foncé
     priceText.innerHTML = `<span style="color:#006400">Prix: ${price} $</span>`;
 
-// Bonus en jaune (sans texte "Bonus:")
-popupBonus.innerHTML = `<span style="color:yellow">${bonus}</span>`;o
+    // Bonus uniquement en jaune, sans le texte "Bonus:"
+    popupBonus.innerHTML = `<span style="color:yellow">${bonus}</span>`;
 
     popup.style.display = "flex";
   });
@@ -107,5 +107,3 @@ document.getElementById("sortPriceDesc").addEventListener("click", () => {
   const container = document.querySelector(".images-container");
   sorted.forEach(card => container.appendChild(card));
 });
-
-
