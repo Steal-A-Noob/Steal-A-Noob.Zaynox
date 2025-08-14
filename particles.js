@@ -1,4 +1,3 @@
-// Simple effet de particules
 particlesJS("particles-js", {
   particles: {
     number: { value: 80 },
