@@ -9,13 +9,8 @@ body {
 #mainTitle {
   font-size: 4rem;
   margin-top: 20px;
-  text-shadow: 0 0 20px #fff, 0 0 40px #00f, 0 0 60px #0ff;
+  text-shadow: 0 0 20px #fff, 0 0 40px #0ff;
   animation: float 2s ease-in-out infinite;
-  transition: text-shadow 0.3s;
-}
-
-#mainTitle:hover {
-  text-shadow: 0 0 20px #fff, 0 0 50px #0ff, 0 0 80px #0ff;
 }
 
 @keyframes float {
@@ -23,15 +18,23 @@ body {
   50% { transform: translateY(-10px); }
 }
 
-.search-container { margin: 20px 0; }
-input[type="text"] { padding: 10px 20px; font-size: 1.2rem; border-radius: 20px; border: none; width: 300px; }
+.search-container {
+  margin: 20px 0;
+}
+
+input[type="text"] {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border-radius: 20px;
+  border: none;
+  width: 300px;
+}
 
 .images-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
-  position: relative;
 }
 
 .image-card {
@@ -39,18 +42,22 @@ input[type="text"] { padding: 10px 20px; font-size: 1.2rem; border-radius: 20px;
   display: inline-block;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
+  background: #1b263b;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.image-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
 }
 
 .image-card img {
   width: 150px;
-  border: 3px solid gray;
   border-radius: 10px;
-  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.image-card img:hover { transform: scale(1.1); }
-
-/* Glow dynamique avec pseudo-particules */
 .image-card::before {
   content: "";
   position: absolute;
@@ -60,23 +67,14 @@ input[type="text"] { padding: 10px 20px; font-size: 1.2rem; border-radius: 20px;
   height: 170px;
   border-radius: 15px;
   z-index: -1;
-  opacity: 0;
   pointer-events: none;
-  animation: glowParticles 2s infinite alternate;
 }
 
-/* Couleur selon rareté */
-.image-card[data-rarity="Commun"]::before { box-shadow: 0 0 10px #ccc, 0 0 20px #eee; opacity: 0.5; }
-.image-card[data-rarity="Rare"]::before { box-shadow: 0 0 15px #00f, 0 0 25px #0ff; opacity: 0.6; }
-.image-card[data-rarity="UnCommun"]::before { box-shadow: 0 0 15px #0ff, 0 0 25px #0ff; opacity: 0.6; }
-.image-card[data-rarity="Légendaire"]::before { box-shadow: 0 0 15px gold, 0 0 25px yellow; opacity: 0.7; }
-.image-card[data-rarity="Mythique"]::before { box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff69b4; opacity: 0.8; }
-
-@keyframes glowParticles {
-  0% { transform: scale(0.95) rotate(0deg); opacity: 0.5; }
-  50% { transform: scale(1.05) rotate(10deg); opacity: 0.8; }
-  100% { transform: scale(0.95) rotate(-10deg); opacity: 0.5; }
-}
+.image-card[data-rarity="Commun"]::before { box-shadow: 0 0 15px #ccc, 0 0 25px #eee; }
+.image-card[data-rarity="Rare"]::before { box-shadow: 0 0 15px #00f, 0 0 25px #0ff; }
+.image-card[data-rarity="UnCommun"]::before { box-shadow: 0 0 15px #0ff, 0 0 25px #0ff; }
+.image-card[data-rarity="Légendaire"]::before { box-shadow: 0 0 15px gold, 0 0 25px yellow; }
+.image-card[data-rarity="Mythique"]::before { box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff69b4; }
 
 .image-title { margin-top: 10px; font-size: 1.2rem; }
 
@@ -86,19 +84,17 @@ input[type="text"] { padding: 10px 20px; font-size: 1.2rem; border-radius: 20px;
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background: #1b263b;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(to bottom right, #0d1b2a, #1b263b);
   border: 3px solid #415a77;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 15px;
   z-index: 100;
   text-align: center;
   color: white;
+  max-width: 300px;
   transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 0;
 }
-
-.popup.show { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 
 #popupClose {
   position: absolute;
@@ -109,9 +105,7 @@ input[type="text"] { padding: 10px 20px; font-size: 1.2rem; border-radius: 20px;
   color: red;
 }
 
-#popup img { width: 200px; margin-bottom: 10px; }
-
-#popupRarity { font-weight: bold; }
-#priceText { color: #0f0; font-weight: bold; }
-#popupBonus { color: yellow; font-size: 0.9rem; }
-#popupUpgrades { color: #ff0; font-size: 0.9rem; margin-top: 5px; }
+#popup img { width: 200px; border-radius: 10px; margin-bottom: 10px; }
+#popupRarity { font-weight: bold; font-size: 1.2rem; }
+#priceText { color: #0f0; font-weight: bold; font-size: 1.1rem; }
+#popupBonus, #popupUp
