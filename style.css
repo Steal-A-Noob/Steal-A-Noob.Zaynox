@@ -1,4 +1,3 @@
-/* Body & Fond */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -82,7 +81,6 @@ input[type="text"] {
   transform: scale(1.1);
 }
 
-/* Glow selon rareté */
 .glow-Commun img { box-shadow: 0 0 15px white; }
 .glow-Rare img { box-shadow: 0 0 15px #00bfff; }
 .glow-UnCommun img { box-shadow: 0 0 15px #ffa500; }
