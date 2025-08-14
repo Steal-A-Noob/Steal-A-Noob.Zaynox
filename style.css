@@ -1,166 +1,128 @@
-/* --------------------
-   Général
--------------------- */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #1e1e1e;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+// --------------------
+// Variables du popup
+// --------------------
+const popup = document.getElementById("popup");
+const popupImage = document.getElementById("popupImage");
+const popupTitle = document.getElementById("popupTitle");
+const popupRarity = document.getElementById("popupRarity");
+const priceText = document.getElementById("priceText");
+const popupBonus = document.getElementById("popupBonus");
+const popupClose = document.getElementById("popupClose");
 
-/* --------------------
-   Titre flottant
--------------------- */
-h1 {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 3em;
-  color: #FFD700;
-  text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
-  animation: float 2s ease-in-out infinite;
-}
+const imageCards = document.querySelectorAll(".image-card");
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-}
+// --------------------
+// Lueur autour des cartes selon rareté
+// --------------------
+imageCards.forEach(card => {
+  const rarity = card.getAttribute("data-rarity").toLowerCase();
+  let glowColor;
 
-/* --------------------
-   Container des images
--------------------- */
-.images-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 30px 0;
-  gap: 20px;
-}
+  switch (rarity) {
+    case "commun": glowColor = "#FFFFFF"; break;
+    case "uncommun": glowColor = "#006400"; break; // vert foncé
+    case "rare": glowColor = "#0000FF"; break; // bleu
+    case "légendaire": glowColor = "#FFA500"; break; // orange
+    case "mythique": glowColor = "#FF00FF"; break; // rose
+    default: glowColor = "#FFFFFF";
+  }
 
-/* --------------------
-   Cartes d'images
--------------------- */
-.image-card {
-  background-color: #2e2e2e;
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-  padding: 5px;
-  width: 200px;
-  text-align: center;
-}
+  card.style.boxShadow = `0 0 15px ${glowColor}`;
+});
 
-.image-card img {
-  width: 100%;
-  border-radius: 10px;
-}
+// --------------------
+// Affichage du popup
+// --------------------
+imageCards.forEach(card => {
+  card.addEventListener("click", () => {
+    const imgSrc = card.querySelector("img").src;
+    const title = card.getAttribute("data-title");
+    const rarity = card.getAttribute("data-rarity");
+    const price = card.getAttribute("data-price");
+    const bonus = card.getAttribute("data-bonus");
 
-.image-card:hover {
-  transform: scale(1.05);
-}
+    popupImage.src = imgSrc;
+    popupTitle.textContent = title;
 
-/* --------------------
-   Popup
--------------------- */
-#popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.85);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
+    // Couleur rareté
+    let rarityColor;
+    switch (rarity.toLowerCase()) {
+      case "commun": rarityColor = "#FFFFFF"; break;
+      case "uncommun": rarityColor = "#006400"; break;
+      case "rare": rarityColor = "#0000FF"; break;
+      case "légendaire": rarityColor = "#FFA500"; break;
+      case "mythique": rarityColor = "#FF00FF"; break;
+      default: rarityColor = "#FFFFFF";
+    }
+    popupRarity.innerHTML = `<span style="color:${rarityColor}">Rareté: ${rarity}</span>`;
 
-.popup-content {
-  background-color: #2e2e2e;
-  border-radius: 15px;
-  padding: 20px;
-  width: 400px;
-  max-width: 90%;
-  text-align: center;
-  position: relative;
-}
+    // Prix couleur or
+    priceText.innerHTML = `<span style="color:#FFD700">Prix: ${price} $</span>`;
 
-#popupImage {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
+    // Bonus sans le mot "Bonus"
+    popupBonus.innerHTML = `<span style="color:yellow">${bonus}</span>`;
 
-#popupTitle {
-  font-size: 1.8em;
-  margin-bottom: 10px;
-  color: #FFD700;
-  text-shadow: 0 0 5px #FFD700;
-}
+    popup.style.display = "flex";
+  });
+});
 
-#popupRarity, #priceText, #popupBonus {
-  margin: 5px 0;
-  font-size: 1.1em;
-}
+// --------------------
+// Fermeture popup
+// --------------------
+popupClose.addEventListener("click", () => {
+  popup.style.display = "none";
+});
 
-/* Bouton de fermeture */
-#popupClose {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.5em;
-  color: red;
-  cursor: pointer;
-}
+// --------------------
+// Barre de recherche
+// --------------------
+document.getElementById("searchBar").addEventListener("input", function () {
+  const searchValue = this.value.toLowerCase();
+  imageCards.forEach(card => {
+    const title = card.getAttribute("data-title").toLowerCase();
+    if (title.includes(searchValue)) {
+      card.style.display = "inline-block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});
 
-/* --------------------
-   Barre de recherche
--------------------- */
-#searchBar {
-  display: block;
-  margin: 0 auto;
-  padding: 8px;
-  border-radius: 5px;
-  border: none;
-  width: 250px;
-}
+// --------------------
+// Tri par rareté
+// --------------------
+document.getElementById("sortRarity").addEventListener("click", () => {
+  const order = ["mythique", "légendaire", "rare", "commun", "uncommun"];
+  const sorted = Array.from(imageCards).sort((a, b) => {
+    const rarityA = a.getAttribute("data-rarity").toLowerCase();
+    const rarityB = b.getAttribute("data-rarity").toLowerCase();
+    return order.indexOf(rarityA) - order.indexOf(rarityB);
+  });
 
-/* --------------------
-   Boutons de tri
--------------------- */
-.sort-buttons {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  gap: 10px;
-}
+  const container = document.querySelector(".images-container");
+  sorted.forEach(card => container.appendChild(card));
+});
 
-.sort-buttons button {
-  padding: 8px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #444;
-  color: #fff;
-  transition: background 0.3s;
-}
+// --------------------
+// Tri par prix croissant
+// --------------------
+document.getElementById("sortPriceAsc").addEventListener("click", () => {
+  const sorted = Array.from(imageCards).sort((a, b) => {
+    return parseInt(a.getAttribute("data-price")) - parseInt(b.getAttribute("data-price"));
+  });
 
-.sort-buttons button:hover {
-  background-color: #666;
-}
+  const container = document.querySelector(".images-container");
+  sorted.forEach(card => container.appendChild(card));
+});
 
-/* --------------------
-   Footer bleu
--------------------- */
-.footer {
-  background-color: #1E90FF;
-  color: #fff;
-  text-align: center;
-  padding: 15px 0;
-  font-size: 1em;
-  margin-top: auto;
-  font-weight: bold;
-}
+// --------------------
+// Tri par prix décroissant
+// --------------------
+document.getElementById("sortPriceDesc").addEventListener("click", () => {
+  const sorted = Array.from(imageCards).sort((a, b) => {
+    return parseInt(b.getAttribute("data-price")) - parseInt(a.getAttribute("data-price"));
+  });
+
+  const container = document.querySelector(".images-container");
+  sorted.forEach(card => container.appendChild(card));
+});
