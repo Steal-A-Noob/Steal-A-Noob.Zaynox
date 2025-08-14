@@ -12,14 +12,14 @@ const popupBonus = document.getElementById('popupBonus');
 images.forEach(card => {
   card.addEventListener('click', () => {
     // On récupère les infos de la carte
-    const imgSrc = card.getAttribute('data-img'); // image principale
+    const imgSrc = card.querySelector('img').src; // image du Noob
     const title = card.getAttribute('data-title');
     const rarity = card.getAttribute('data-rarity');
     const price = card.getAttribute('data-price');
     const bonus = card.getAttribute('data-bonus');
 
     // On met à jour le popup
-    popupImage.src = imgSrc; // <--- image affichée en haut
+    popupImage.src = imgSrc; // <-- image affichée en haut du popup
     popupTitle.textContent = title;
     popupRarity.textContent = `Rareté : ${rarity}`;
     priceText.innerHTML = `Prix: <span style="color: green;">$${price}</span>`;
