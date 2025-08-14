@@ -3,91 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NoobFinder 🔥</title>
+  <title>Steal a Noob - Galerie</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Particules -->
-  <div id="particles-js"></div>
-
-  <!-- Titre -->
-  <h1 id="mainTitle">NoobFinder 🔥</h1>
+  <!-- Titre flottant -->
+  <h1>Steal a Noob</h1>
 
   <!-- Barre de recherche -->
-  <div class="search-container">
-    <input type="text" placeholder="Recherche... 🔍" id="searchBar">
-  </div>
+  <input type="text" id="searchBar" placeholder="Rechercher...">
 
-  <!-- Boutons tri -->
+  <!-- Boutons de tri -->
   <div class="sort-buttons">
     <button id="sortRarity">Trier par rareté</button>
     <button id="sortPriceAsc">Prix croissant</button>
     <button id="sortPriceDesc">Prix décroissant</button>
   </div>
 
-  <!-- Cartes Noob -->
+  <!-- Container des images -->
   <div class="images-container">
-    <div class="image-card glow-Commun" data-title="Noob" data-rarity="Commun" data-price="250" data-bonus="+1$/s">
-      <img src="noob.png" alt="Noob">
-      <div class="image-title">Noob</div>
+    <div class="image-card" data-title="Épée Mythique" data-rarity="Mythique" data-price="500" data-bonus="+50 Force">
+      <img src="images/epee_mythique.png" alt="Épée Mythique">
     </div>
-
-    <div class="image-card glow-Rare" data-title="Noob Boxeur" data-rarity="Rare" data-price="2000" data-bonus="+6$/s">
-      <img src="Boxeur.png" alt="Noob Boxeur">
-      <div class="image-title">Noob Boxeur</div>
+    <div class="image-card" data-title="Bouclier Légendaire" data-rarity="Légendaire" data-price="300" data-bonus="+30 Défense">
+      <img src="images/bouclier_legendaire.png" alt="Bouclier Légendaire">
     </div>
-
-    <div class="image-card glow-Rare" data-title="Noob Ninja" data-rarity="Rare" data-price="10000" data-bonus="+20$/s">
-      <img src="Ninja.PNG" alt="Noob Ninja">
-      <div class="image-title">Noob Ninja</div>
+    <div class="image-card" data-title="Potion Rare" data-rarity="Rare" data-price="150" data-bonus="+20 Santé">
+      <img src="images/potion_rare.png" alt="Potion Rare">
     </div>
-
-    <div class="image-card glow-Commun" data-title="Agent Noob" data-rarity="Commun" data-price="250" data-bonus="+1$/s">
-      <img src="Agent.PNG" alt="Agent Noob">
-      <div class="image-title">Agent Noob</div>
+    <div class="image-card" data-title="Casque Commun" data-rarity="Commun" data-price="50" data-bonus="+5 Défense">
+      <img src="images/casque_commun.png" alt="Casque Commun">
     </div>
-
-    <div class="image-card glow-Commun" data-title="Surf Noob" data-rarity="Commun" data-price="550" data-bonus="+2$/s">
-      <img src="Surf.PNG" alt="Surf Noob">
-      <div class="image-title">Surf Noob</div>
-    </div>
-
-    <div class="image-card glow-Légendaire" data-title="Hacker Noob" data-rarity="Légendaire" data-price="250000" data-bonus="+20$/s">
-      <img src="hackeur.png" alt="Hacker Noob">
-      <div class="image-title">Hacker Noob</div>
-    </div>
-
-    <div class="image-card glow-UnCommun" data-title="Magic Noob" data-rarity="UnCommun" data-price="250" data-bonus="+1$/s">
-      <img src="magic noob.png" alt="Magic Noob">
-      <div class="image-title">Magic Noob</div>
-    </div>
-
-    <div class="image-card glow-Mythique" data-title="God Noob" data-rarity="Mythique" data-price="30000" data-bonus="+20$/s">
-      <img src="noir fond.png" alt="God Noob">
-      <div class="image-title">God Noob</div>
+    <div class="image-card" data-title="Gants Uncommun" data-rarity="Uncommun" data-price="75" data-bonus="+10 Agilité">
+      <img src="images/gants_uncommun.png" alt="Gants Uncommun">
     </div>
   </div>
 
   <!-- Popup -->
-  <div id="popup" class="popup">
-    <span id="popupClose">&times;</span>
-    <img id="popupImage" src="" alt="">
-    <h2 id="popupTitle"></h2>
-    <p id="popupRarity"></p>
-    <p id="priceText"></p>
-    <p id="popupBonus"></p>
+  <div id="popup">
+    <div class="popup-content">
+      <span id="popupClose">&times;</span>
+      <img id="popupImage" src="" alt="Image Popup">
+      <h2 id="popupTitle"></h2>
+      <p id="popupRarity"></p>
+      <p id="priceText"></p>
+      <p id="popupBonus"></p>
+    </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="footer-box">
-    <p>Développé par <b>Zaynox</b> pour <b>Steal a Noob</b> de <b>DarSya's Creations</b></p>
-  </footer>
+  <!-- Footer bleu -->
+  <div class="footer">
+    Développé par Zaynox pour Steal a Noob de DarSya's Creations
+  </div>
 
-  <!-- Scripts -->
-  <script src="particles.min.js"></script>
-  <script src="particles-config.js"></script>
+  <!-- Script JS -->
   <script src="script.js"></script>
-
 </body>
 </html>
