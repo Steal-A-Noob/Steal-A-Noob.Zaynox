@@ -1,90 +1,64 @@
-/* Background animé avec particules */
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1b2838);
-  background-size: 400% 400%;
-  animation: gradientMove 15s ease infinite;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #7ec0ee, #1b263b, #0d1b2a);
   color: white;
   text-align: center;
-  overflow-x: hidden;
 }
 
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Titre flottant avec glow */
 #mainTitle {
   font-size: 4rem;
-  margin: 20px 0;
-  text-shadow: 0 0 15px #00d4ff, 0 0 30px #00d4ff;
-  animation: floatTitle 3s ease-in-out infinite, glowPulse 2s ease-in-out infinite;
+  margin-top: 20px;
+  text-shadow: 0 0 15px #fff;
+  animation: float 2s ease-in-out infinite;
 }
 
-@keyframes floatTitle {
+@keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+  50% { transform: translateY(-10px); }
 }
 
-@keyframes glowPulse {
-  0%, 100% { text-shadow: 0 0 15px #00d4ff, 0 0 30px #00d4ff; }
-  50% { text-shadow: 0 0 25px #00ffff, 0 0 40px #00ffff; }
-}
-
-/* Barre de recherche */
 .search-container {
   margin: 20px 0;
 }
+
 input[type="text"] {
-  padding: 12px 20px;
+  padding: 10px 20px;
   font-size: 1.2rem;
-  border-radius: 30px;
+  border-radius: 20px;
   border: none;
-  width: 320px;
-  outline: none;
-  background: rgba(255,255,255,0.15);
-  color: white;
-  backdrop-filter: blur(10px);
-  transition: 0.3s;
-}
-input[type="text"]:focus {
-  background: rgba(255,255,255,0.25);
+  width: 300px;
 }
 
-/* Grille */
 .images-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 25px;
-  padding: 20px;
+  gap: 20px;
 }
 
-/* Cartes stylées */
 .image-card {
-  background: rgba(255,255,255,0.08);
-  padding: 15px;
-  border-radius: 15px;
-  backdrop-filter: blur(8px);
-  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  display: inline-block;
   cursor: pointer;
-  box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
-}
-.image-card img {
-  width: 160px;
-  border-radius: 12px;
   transition: transform 0.3s;
 }
-.image-card:hover {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 0 25px rgba(0,255,255,0.5);
+
+.image-card img {
+  width: 150px;
+  border: 3px solid gray;
+  border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
+
+.image-card img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #fff;
+}
+
 .image-title {
   margin-top: 10px;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 /* Popup */
@@ -93,37 +67,48 @@ input[type="text"]:focus {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  background: rgba(20, 30, 40, 0.95);
-  padding: 25px;
-  border-radius: 15px;
+  transform: translate(-50%, -50%);
+  background: #1b263b;
+  border: 3px solid #415a77;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 100;
   text-align: center;
   color: white;
-  box-shadow: 0 0 25px rgba(0,255,255,0.5);
-  animation: fadeIn 0.3s ease-out forwards;
 }
-@keyframes fadeIn {
-  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-}
+
 #popupClose {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 5px;
+  right: 10px;
   cursor: pointer;
   font-size: 1.5rem;
   color: red;
 }
+
 #popup img {
-  width: 220px;
-  margin-bottom: 15px;
-  border-radius: 12px;
+  width: 200px;
+  margin-bottom: 10px;
 }
 
-/* Rareté pulse */
-#popupRarity span {
-  animation: rarityPulse 1.5s infinite;
+#popupRarity {
+  font-weight: bold;
+  margin: 5px 0;
 }
-@keyframes rarityPulse {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.4); }
+
+/* Couleurs selon rareté */
+[data-rarity="Commun"] #popupRarity { color: lightgray; }
+[data-rarity="UnCommun"] #popupRarity { color: orange; }
+[data-rarity="Rare"] #popupRarity { color: #00bfff; }
+[data-rarity="Légendaire"] #popupRarity { color: gold; }
+[data-rarity="Mythique"] #popupRarity { color: #ff00ff; }
+
+#priceText {
+  color: #0f0;
+  font-weight: bold;
+}
+
+#popupBonus {
+  color: yellow;
+  font-size: 0.9rem;
 }
