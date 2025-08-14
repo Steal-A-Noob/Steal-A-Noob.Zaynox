@@ -1,81 +1,43 @@
-/* particles.js - fond animé pour NoobFinder 🔥 */
+// particles.js
 
-particlesJS("particles-js", {
-  "particles": {
-    "number": {
-      "value": 60, // nombre de particules
-      "density": {
-        "enable": true,
-        "value_area": 800
-      }
-    },
-    "color": {
-      "value": "#ffffff" // couleur des particules (blanc)
-    },
-    "shape": {
-      "type": "circle", // forme des particules
-      "stroke": {
-        "width": 0,
-        "color": "#000000"
-      }
-    },
-    "opacity": {
-      "value": 0.7, // transparence
-      "random": true,
-      "anim": {
-        "enable": true,
-        "speed": 1,
-        "opacity_min": 0.2,
-        "sync": false
-      }
-    },
-    "size": {
-      "value": 4, // taille des particules
-      "random": true,
-      "anim": {
-        "enable": true,
-        "speed": 3,
-        "size_min": 0.5,
-        "sync": false
-      }
-    },
-    "line_linked": {
-      "enable": false // pas de lignes entre particules
-    },
-    "move": {
-      "enable": true,
-      "speed": 2,
-      "direction": "none",
-      "random": true,
-      "straight": false,
-      "out_mode": "out",
-      "bounce": false
-    }
-  },
-  "interactivity": {
-    "detect_on": "canvas",
-    "events": {
-      "onhover": {
-        "enable": true,
-        "mode": "grab" // effet quand on survole
-      },
-      "onclick": {
-        "enable": true,
-        "mode": "push" // ajoute des particules au clic
-      },
-      "resize": true
-    },
-    "modes": {
-      "grab": {
-        "distance": 120,
-        "line_linked": {
-          "opacity": 0.4
-        }
-      },
-      "push": {
-        "particles_nb": 4
-      }
-    }
-  },
-  "retina_detect": true
-});
+const particlesJS = () => {
+  const canvas = document.createElement('canvas');
+  canvas.id = 'particlesCanvas';
+  document.getElementById('particles-js').appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = [];
+  for(let i=0; i<100; i++){
+    particles.push({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      radius: Math.random()*2 + 1,
+      speedX: (Math.random()-0.5)*1,
+      speedY: (Math.random()-0.5)*1
+    });
+  }
+
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+      p.x += p.speedX;
+      p.y += p.speedY;
+
+      if(p.x < 0) p.x = canvas.width;
+      if(p.x > canvas.width) p.x = 0;
+      if(p.y < 0) p.y = canvas.height;
+      if(p.y > canvas.height) p.y = 0;
+    });
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+};
+
+particlesJS();
