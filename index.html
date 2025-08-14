@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Canvas des particules -->
-  <canvas id="particles"></canvas>
 
   <h1 id="mainTitle">NoobFinder 🔥</h1>
 
@@ -17,25 +15,26 @@
   </div>
 
   <div class="sort-buttons">
-    <button id="sortRarity">Trier par Rareté</button>
-    <button id="sortPriceAsc">Prix ↑</button>
-    <button id="sortPriceDesc">Prix ↓</button>
+    <button id="sortRarity">Trier par rareté</button>
+    <button id="sortPriceAsc">Prix croissant</button>
+    <button id="sortPriceDesc">Prix décroissant</button>
   </div>
 
-  <div class="images-container">
-    <!-- Les noobs ici comme avant -->
-  </div>
+  <div class="images-container"></div>
 
+  <!-- Popup -->
   <div id="popup" class="popup">
     <span id="popupClose">&times;</span>
     <img id="popupImage" src="" alt="">
     <h2 id="popupTitle"></h2>
     <p id="popupRarity"></p>
-    <p><span id="priceLabel">Prix:</span> <span id="priceText"></span></p>
+    <p id="priceText"></p>
     <p id="popupBonus"></p>
   </div>
 
-  <script src="particles.js"></script>
+  <!-- Scripts -->
+  <script src="particles.js"></script> <!-- si fond animé -->
   <script src="script.js"></script>
+
 </body>
 </html>
