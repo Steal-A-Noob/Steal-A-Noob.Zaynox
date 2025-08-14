@@ -18,20 +18,13 @@ imageCards.forEach(card => {
     const bonus = card.getAttribute("data-bonus");
     const img = card.getAttribute("data-img");
 
-    popup.style.display = "block";
-    popup.classList.add("show");
     popupImage.src = img;
     popupTitle.textContent = title;
+    priceText.textContent = `Prix: ${price}`;
+    popupBonus.textContent = bonus;
 
-    // Rareté couleurs
     if (rarity.toLowerCase() === "rare") {
       popupRarity.innerHTML = `Rareté: <span class="rarity-rare">${rarity}</span>`;
     } else if (rarity.toLowerCase() === "mythique") {
       popupRarity.innerHTML = `Rareté: <span class="rarity-mythique">${rarity}</span>`;
-    } else if (rarity.toLowerCase() === "uncommun") {
-      popupRarity.innerHTML = `Rareté: <span class="rarity-uncommun">${rarity}</span>`;
-    } else {
-      popupRarity.innerHTML = `Rareté: ${rarity}`;
-    }
-
    
