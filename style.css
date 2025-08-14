@@ -4,32 +4,35 @@ body {
   background: linear-gradient(to bottom, #7ec0ee, #1b263b, #0d1b2a);
   color: white;
   text-align: center;
-  overflow: hidden;
-  position: relative;
 }
 
 #mainTitle {
   font-size: 4rem;
   margin-top: 20px;
-  text-shadow: 0 0 15px #fff, 0 0 30px #0ff;
+  text-shadow: 0 0 20px #fff, 0 0 40px #00f, 0 0 60px #0ff;
   animation: float 2s ease-in-out infinite;
+  transition: text-shadow 0.3s;
+}
+
+#mainTitle:hover {
+  text-shadow: 0 0 20px #fff, 0 0 50px #0ff, 0 0 80px #0ff;
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
+  50% { transform: translateY(-10px); }
 }
 
 .search-container {
   margin: 20px 0;
 }
 
-input[type="text"], select {
+input[type="text"] {
   padding: 10px 20px;
   font-size: 1.2rem;
   border-radius: 20px;
   border: none;
-  margin: 5px;
+  width: 300px;
 }
 
 .images-container {
@@ -37,8 +40,6 @@ input[type="text"], select {
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
-  position: relative;
-  z-index: 2;
 }
 
 .image-card {
@@ -46,26 +47,28 @@ input[type="text"], select {
   display: inline-block;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
-  border-radius: 10px;
 }
 
 .image-card img {
-  width: 120px;
+  width: 150px;
   border: 3px solid gray;
   border-radius: 10px;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.image-card img:hover {
-  transform: scale(1.1);
-}
+/* Glow according to rarity */
+.image-card[data-rarity="Commun"] img:hover { box-shadow: 0 0 20px #ccc; }
+.image-card[data-rarity="Rare"] img:hover { box-shadow: 0 0 20px #00f; }
+.image-card[data-rarity="UnCommun"] img:hover { box-shadow: 0 0 20px #0ff; }
+.image-card[data-rarity="Légendaire"] img:hover { box-shadow: 0 0 20px gold; }
+.image-card[data-rarity="Mythique"] img:hover { box-shadow: 0 0 25px #ff00ff; }
 
-/* Glow par rareté */
-.glow-Commun { box-shadow: 0 0 10px #ccc; }
-.glow-UnCommun { box-shadow: 0 0 15px #ff9; }
-.glow-Rare { box-shadow: 0 0 20px #0ff; }
-.glow-Légendaire { box-shadow: 0 0 25px #ff0; }
-.glow-Mythique { box-shadow: 0 0 30px #ff1493; }
+.image-card img:hover { transform: scale(1.1); }
+
+.image-title {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
 
 /* Popup */
 .popup {
@@ -73,7 +76,7 @@ input[type="text"], select {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0);
   background: #1b263b;
   border: 3px solid #415a77;
   padding: 20px;
@@ -81,6 +84,13 @@ input[type="text"], select {
   z-index: 100;
   text-align: center;
   color: white;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.popup.show {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
 }
 
 #popupClose {
@@ -97,17 +107,16 @@ input[type="text"], select {
   margin-bottom: 10px;
 }
 
-#popupRarity { color: #ccc; }
-#priceText { color: #0f0; }
-#popupBonus { color: yellow; font-size: 0.9rem; }
+#popupRarity {
+  font-weight: bold;
+}
 
-/* Canvas particules */
-#particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+#priceText {
+  color: #0f0;
+  font-weight: bold;
+}
+
+#popupBonus {
+  color: yellow;
+  font-size: 0.9rem;
 }
