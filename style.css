@@ -1,105 +1,83 @@
 body {
   margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #4facfe, #0052d4, #00203f);
   font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #7ec0ee, #1b263b, #0d1b2a);
   color: white;
   text-align: center;
 }
 
-#mainTitle {
-  font-size: 4rem;
-  margin-top: 20px;
-  text-shadow: 0 0 10px #fff;
-  animation: float 2s ease-in-out infinite;
+.title {
+  margin: 20px 0;
+  font-size: 3rem;
+  text-shadow: 0 0 15px rgba(255,255,255,0.7);
+  animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
-.search-container {
-  margin: 20px 0;
-}
-
-input[type="text"] {
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  border-radius: 20px;
-  border: none;
-  width: 300px;
-}
-
-.images-container {
+.gallery {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 20px;
 }
 
-.image-card {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.image-card img {
-  width: 150px;
-  border: 3px solid gray;
+.card {
+  background: rgba(255,255,255,0.05);
   border-radius: 10px;
-  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 10px;
+  transition: transform 0.2s;
+  cursor: pointer;
 }
 
-.image-card img:hover {
+.card img {
+  width: 150px;
+  border-radius: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover img {
   transform: scale(1.1);
-  box-shadow: 0 0 20px #fff;
+  box-shadow: 0 0 20px rgba(255,255,255,0.5);
 }
 
-.image-title {
-  margin-top: 10px;
-  font-size: 1.2rem;
-}
-
-/* Popup */
 .popup {
   display: none;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #1b263b;
-  border: 3px solid #415a77;
+  background: rgba(0,0,0,0.9);
   padding: 20px;
   border-radius: 10px;
-  z-index: 100;
+  z-index: 1000;
+  width: 300px;
   text-align: center;
-  color: white;
 }
 
-#popupClose {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 1.5rem;
+.popup img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.close {
   color: red;
+  font-size: 2rem;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
 }
 
-#popup img {
-  width: 200px;
-  margin-bottom: 10px;
+.price {
+  color: green;
+  font-size: 1.2rem;
 }
 
-#popupRarity {
-  color: #ccc;
-}
-
-#priceText {
-  color: #0f0;
-}
-
-#popupBonus {
+.bonus {
   color: yellow;
   font-size: 0.9rem;
 }
