@@ -21,7 +21,7 @@ images.forEach(img => {
         const rarity = img.dataset.rarity;
         const price = img.dataset.price;
         const bonus = img.dataset.bonus;
-        const imgSrc = img.querySelector('img').src;
+        const imgSrc = img.dataset.img; // <- On prend le data-img pour être sûr
 
         popupImage.src = imgSrc; // image en haut
         popupTitle.textContent = title;
