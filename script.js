@@ -23,7 +23,7 @@ imageCards.forEach(card => {
 
     // Couleur rareté
     let rarityColor = "#ccc";
-    if (rarity.toLowerCase() === "rare") rarityColor = "blue";
+    if (rarity.toLowerCase() === "rare") rarityColor = "#00bfff"; // bleu ciel
     if (rarity.toLowerCase() === "légendaire") rarityColor = "gold";
 
     popupRarity.innerHTML = `Rareté: <span style="color:${rarityColor}">${rarity}</span>`;
