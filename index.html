@@ -3,54 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NoobFinder 🚀</title>
+  <title>NoobFinder Ultimate 🚀</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 id="mainTitle">NoobFinder 🔥</h1>
+  <h1 id="mainTitle">NoobFinder Ultimate 🔥</h1>
 
-  <div class="search-container">
+  <div class="controls">
     <input type="text" placeholder="Recherche... 🔍" id="searchBar">
+    
+    <select id="rarityFilter">
+      <option value="all">Toutes les raretés</option>
+      <option value="Commun">Commun</option>
+      <option value="Rare">Rare</option>
+      <option value="Uncommun">Uncommun</option>
+      <option value="Mythique">Mythique</option>
+    </select>
+
+    <select id="sortFilter">
+      <option value="none">Trier par...</option>
+      <option value="priceAsc">Prix croissant</option>
+      <option value="priceDesc">Prix décroissant</option>
+      <option value="bonusAsc">Bonus croissant</option>
+      <option value="bonusDesc">Bonus décroissant</option>
+    </select>
+
     <button id="resetBtn">Réinitialiser</button>
   </div>
 
   <div class="images-container">
-    <div class="image-card" data-title="Noob" data-rarity="Commun" data-price="$250" data-bonus="+1$/s" data-img="noob.png">
+    <!-- Les mêmes cartes que la version précédente -->
+    <div class="image-card" data-title="Noob" data-rarity="Commun" data-price="250" data-bonus="1" data-img="noob.png">
       <img src="noob.png" alt="Noob">
       <div class="image-title">Noob</div>
     </div>
 
-    <div class="image-card" data-title="Noob Boxeur" data-rarity="Rare" data-price="$2k" data-bonus="+6$/s" data-img="noir fond.png">
+    <div class="image-card" data-title="Noob Boxeur" data-rarity="Rare" data-price="2000" data-bonus="6" data-img="noir fond.png">
       <img src="noir fond.png" alt="Noob Boxeur">
       <div class="image-title">Noob Boxeur</div>
     </div>
 
-    <div class="image-card" data-title="Noob Ninja" data-rarity="Rare" data-price="$10k" data-bonus="+20$/s" data-img="noir fond.png">
+    <div class="image-card" data-title="Noob Ninja" data-rarity="Rare" data-price="10000" data-bonus="20" data-img="noir fond.png">
       <img src="noir fond.png" alt="Noob Ninja">
       <div class="image-title">Noob Ninja</div>
     </div>
 
-    <div class="image-card" data-title="Agent Noob" data-rarity="Commun" data-price="$250" data-bonus="+1$/s" data-img="noir fond.png">
+    <div class="image-card" data-title="Agent Noob" data-rarity="Commun" data-price="250" data-bonus="1" data-img="noir fond.png">
       <img src="noir fond.png" alt="Agent Noob">
       <div class="image-title">Agent Noob</div>
     </div>
 
-    <div class="image-card" data-title="Surf Noob" data-rarity="Commun" data-price="$550" data-bonus="+2$/s" data-img="noir fond.png">
+    <div class="image-card" data-title="Surf Noob" data-rarity="Commun" data-price="550" data-bonus="2" data-img="noir fond.png">
       <img src="noir fond.png" alt="Surf Noob">
       <div class="image-title">Surf Noob</div>
     </div>
 
-    <div class="image-card" data-title="Hacker Noob" data-rarity="Légendaire" data-price="$30k" data-bonus="+20$/s" data-img="noir fond.png">
+    <div class="image-card" data-title="Hacker Noob" data-rarity="Légendaire" data-price="30000" data-bonus="20" data-img="noir fond.png">
       <img src="noir fond.png" alt="Hacker Noob">
       <div class="image-title">Hacker Noob</div>
     </div>
 
-    <div class="image-card" data-title="Magic Noob" data-rarity="Uncommun" data-price="$250" data-bonus="+1$/s" data-img="noir fond.png">
+    <div class="image-card" data-title="Magic Noob" data-rarity="Uncommun" data-price="250" data-bonus="1" data-img="noir fond.png">
       <img src="noir fond.png" alt="Magic Noob">
       <div class="image-title">Magic Noob</div>
     </div>
 
-    <div class="image-card" data-title="God Noob" data-rarity="Mythique" data-price="$30k" data-bonus="+20$/s" data-img="noir fond.png">
+    <div class="image-card" data-title="God Noob" data-rarity="Mythique" data-price="30000" data-bonus="20" data-img="noir fond.png">
       <img src="noir fond.png" alt="God Noob">
       <div class="image-title">God Noob</div>
     </div>
