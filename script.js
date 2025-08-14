@@ -57,7 +57,7 @@ imageCards.forEach(card => {
 
     // Prix + Bonus juste en dessous du titre
     popupPriceBonus.innerHTML = `
-      <div style="color:#006400; font-weight:bold">Prix: ${price} $</div>
+      <div style="color:#90EE90; font-weight:bold">Prix: ${price} $</div>
       <div style="color:yellow; font-weight:bold">${bonus}</div>
     `;
 
@@ -118,3 +118,4 @@ document.getElementById("sortPriceDesc").addEventListener("click", () => {
   const container = document.querySelector(".images-container");
   sorted.forEach(card => container.appendChild(card));
 });
+
