@@ -21,7 +21,6 @@ imageCards.forEach(card => {
     popupImage.src = img;
     popupTitle.textContent = title;
 
-    // Couleur de la rareté
     let rarityColor = "#ccc";
     if (rarity.toLowerCase() === "commun") rarityColor = "#aaa";
     if (rarity.toLowerCase() === "rare") rarityColor = "skyblue";
@@ -30,11 +29,7 @@ imageCards.forEach(card => {
     if (rarity.toLowerCase() === "mythique") rarityColor = "hotpink";
 
     popupRarity.innerHTML = `Rareté: <span style="color:${rarityColor}">${rarity}</span>`;
-
-    // Prix vert mais texte "Prix:" blanc
     priceText.innerHTML = `Prix: <span style="color:lime">${price}</span>`;
-
-    // Bonus en jaune uniquement
     popupBonus.innerHTML = `<span style="color:yellow">${bonus}</span>`;
   });
 });
