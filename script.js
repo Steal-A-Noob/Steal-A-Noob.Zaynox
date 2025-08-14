@@ -1,12 +1,13 @@
+const searchBar = document.getElementById("searchBar");
 const popup = document.getElementById("popup");
 const popupImage = document.getElementById("popupImage");
 const popupTitle = document.getElementById("popupTitle");
 const popupRarity = document.getElementById("popupRarity");
 const priceText = document.getElementById("priceText");
 const popupBonus = document.getElementById("popupBonus");
-const closeBtn = document.querySelector(".close");
+const popupClose = document.getElementById("popupClose");
 
-const imageCards = document.querySelectorAll(".card");
+const imageCards = document.querySelectorAll(".image-card");
 
 imageCards.forEach(card => {
   card.addEventListener("click", () => {
@@ -19,23 +20,20 @@ imageCards.forEach(card => {
     popup.style.display = "block";
     popupImage.src = img;
     popupTitle.textContent = title;
-
-    // Couleur rareté
-    let rarityColor = "#ccc";
-    if (rarity.toLowerCase() === "rare") rarityColor = "blue";
-
-    popupRarity.innerHTML = `Rareté: <span style="color:${rarityColor}">${rarity}</span>`;
-    priceText.textContent = price;
+    popupRarity.textContent = `Rareté: ${rarity}`;
+    priceText.textContent = `Prix: ${price}`;
     popupBonus.textContent = bonus;
   });
 });
 
-closeBtn.addEventListener("click", () => {
+popupClose.addEventListener("click", () => {
   popup.style.display = "none";
 });
 
-window.addEventListener("click", (e) => {
-  if (e.target === popup) {
-    popup.style.display = "none";
-  }
+searchBar.addEventListener("input", function() {
+  const value = searchBar.value.toLowerCase();
+  imageCards.forEach(card => {
+    const title = card.getAttribute("data-title").toLowerCase();
+    card.style.display = title.includes(value) ? "inline-block" : "none";
+  });
 });
