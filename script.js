@@ -1,128 +1,72 @@
-// --------------------
-// Variables du popup
-// --------------------
-const popup = document.getElementById("popup");
-const popupImage = document.getElementById("popupImage");
-const popupTitle = document.getElementById("popupTitle");
-const popupRarity = document.getElementById("popupRarity");
-const priceText = document.getElementById("priceText");
-const popupBonus = document.getElementById("popupBonus");
-const popupClose = document.getElementById("popupClose");
+// --- Popup ---
+const popup = document.getElementById('popup');
+const popupImage = document.getElementById('popupImage');
+const popupTitle = document.getElementById('popupTitle');
+const popupRarity = document.getElementById('popupRarity');
+const priceText = document.getElementById('priceText');
+const popupBonus = document.getElementById('popupBonus');
+const popupClose = document.getElementById('popupClose');
 
-const imageCards = document.querySelectorAll(".image-card");
+const cards = document.querySelectorAll('.image-card');
 
-// --------------------
-// Lueur autour des cartes selon rareté
-// --------------------
-imageCards.forEach(card => {
-  const rarity = card.getAttribute("data-rarity").toLowerCase();
-  let glowColor;
-
-  switch (rarity) {
-    case "commun": glowColor = "#FFFFFF"; break;
-    case "uncommun": glowColor = "#006400"; break; // vert foncé
-    case "rare": glowColor = "#0000FF"; break; // bleu
-    case "légendaire": glowColor = "#FFA500"; break; // orange
-    case "mythique": glowColor = "#FF00FF"; break; // rose
-    default: glowColor = "#FFFFFF";
-  }
-
-  card.style.boxShadow = `0 0 15px ${glowColor}`;
-});
-
-// --------------------
-// Affichage du popup
-// --------------------
-imageCards.forEach(card => {
-  card.addEventListener("click", () => {
-    const imgSrc = card.querySelector("img").src;
-    const title = card.getAttribute("data-title");
-    const rarity = card.getAttribute("data-rarity");
-    const price = card.getAttribute("data-price");
-    const bonus = card.getAttribute("data-bonus");
-
-    popupImage.src = imgSrc;
-    popupTitle.textContent = title;
-
-    // Couleur rareté
-    let rarityColor;
-    switch (rarity.toLowerCase()) {
-      case "commun": rarityColor = "#FFFFFF"; break;
-      case "uncommun": rarityColor = "#006400"; break;
-      case "rare": rarityColor = "#0000FF"; break;
-      case "légendaire": rarityColor = "#FFA500"; break;
-      case "mythique": rarityColor = "#FF00FF"; break;
-      default: rarityColor = "#FFFFFF";
-    }
-    popupRarity.innerHTML = `<span style="color:${rarityColor}">Rareté: ${rarity}</span>`;
-
-    // Prix couleur or
-    priceText.innerHTML = `<span style="color:#FFD700">Prix: ${price} $</span>`;
-
-    // Bonus sans le mot "Bonus"
-    popupBonus.innerHTML = `<span style="color:yellow">${bonus}</span>`;
-
-    popup.style.display = "flex";
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    popup.style.display = 'block';
+    popupImage.src = card.dataset.img;
+    popupTitle.textContent = card.dataset.title;
+    popupRarity.textContent = `Rareté : ${card.dataset.rarity}`;
+    priceText.textContent = `Prix : $${card.dataset.price}`;
+    popupBonus.textContent = `Bonus : ${card.dataset.bonus}`;
   });
 });
 
-// --------------------
-// Fermeture popup
-// --------------------
-popupClose.addEventListener("click", () => {
-  popup.style.display = "none";
+popupClose.addEventListener('click', () => {
+  popup.style.display = 'none';
 });
 
-// --------------------
-// Barre de recherche
-// --------------------
-document.getElementById("searchBar").addEventListener("input", function () {
-  const searchValue = this.value.toLowerCase();
-  imageCards.forEach(card => {
-    const title = card.getAttribute("data-title").toLowerCase();
-    if (title.includes(searchValue)) {
-      card.style.display = "inline-block";
-    } else {
-      card.style.display = "none";
-    }
-  });
+window.addEventListener('click', (e) => {
+  if (e.target === popup) popup.style.display = 'none';
 });
 
-// --------------------
-// Tri par rareté
-// --------------------
-document.getElementById("sortRarity").addEventListener("click", () => {
-  const order = ["mythique", "légendaire", "rare", "commun", "uncommun"];
-  const sorted = Array.from(imageCards).sort((a, b) => {
-    const rarityA = a.getAttribute("data-rarity").toLowerCase();
-    const rarityB = b.getAttribute("data-rarity").toLowerCase();
-    return order.indexOf(rarityA) - order.indexOf(rarityB);
-  });
+// --- Tri ---
+const sortRarityBtn = document.getElementById('sortRarity');
+const sortPriceAscBtn = document.getElementById('sortPriceAsc');
+const sortPriceDescBtn = document.getElementById('sortPriceDesc');
+const container = document.querySelector('.images-container');
 
-  const container = document.querySelector(".images-container");
-  sorted.forEach(card => container.appendChild(card));
+const rarityOrder = {
+  'Commun': 1,
+  'UnCommun': 2,
+  'Rare': 3,
+  'Légendaire': 4,
+  'Mythique': 5
+};
+
+function sortCards(compareFn) {
+  const cardsArray = Array.from(cards);
+  cardsArray.sort(compareFn);
+  cardsArray.forEach(card => container.appendChild(card));
+}
+
+sortRarityBtn.addEventListener('click', () => {
+  sortCards((a, b) => rarityOrder[b.dataset.rarity] - rarityOrder[a.dataset.rarity]);
 });
 
-// --------------------
-// Tri par prix croissant
-// --------------------
-document.getElementById("sortPriceAsc").addEventListener("click", () => {
-  const sorted = Array.from(imageCards).sort((a, b) => {
-    return parseInt(a.getAttribute("data-price")) - parseInt(b.getAttribute("data-price"));
-  });
-
-  const container = document.querySelector(".images-container");
-  sorted.forEach(card => container.appendChild(card));
+sortPriceAscBtn.addEventListener('click', () => {
+  sortCards((a, b) => parseInt(a.dataset.price.replace(/ /g,'')) - parseInt(b.dataset.price.replace(/ /g,'')));
 });
 
-// --------------------
-// Tri par prix décroissant
-// --------------------
-document.getElementById("sortPriceDesc").addEventListener("click", () => {
-  const sorted = Array.from(imageCards).sort((a, b) => {
-    return parseInt(b.getAttribute("data-price")) - parseInt(a.getAttribute("data-price"));
-  });
+sortPriceDescBtn.addEventListener('click', () => {
+  sortCards((a, b) => parseInt(b.dataset.price.replace(/ /g,'')) - parseInt(a.dataset.price.replace(/ /g,'')));
+});
 
-  const container = document.querySelector(".images-container");
-  sorted.forEach(card => container.appendChild(card));
+// --- Recherche ---
+const searchBar = document.getElementById('searchBar');
+
+searchBar.addEventListener('input', () => {
+  const query = searchBar.value.toLowerCase();
+  cards.forEach(card => {
+    const title = card.dataset.title.toLowerCase();
+    card.style.display = title.includes(query) ? 'block' : 'none';
+  });
 });
