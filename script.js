@@ -1,4 +1,4 @@
-Répare sa en entier // --------------------
+// --------------------
 // Variables du popup
 // --------------------
 const popup = document.getElementById("popup");
