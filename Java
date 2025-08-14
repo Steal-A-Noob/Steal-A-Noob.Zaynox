@@ -1,0 +1,9 @@
+// Gérer tous les overlays
+document.querySelectorAll(".btnOverlay").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const overlay = btn.closest(".overlay");
+    overlay.style.display = "none"; // masque l'overlay
+    document.getElementById("mainContent").classList.remove("blurred");
+    document.getElementById("mainContent").classList.add("unblurred");
+  });
+});
