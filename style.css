@@ -1,34 +1,21 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(180deg, #7ec0ee, #1b263b, #0d1b2a);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  background: linear-gradient(to bottom, #7ec0ee, #1b263b, #0d1b2a);
   color: white;
   text-align: center;
-}
-
-@keyframes gradientBG {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
 }
 
 #mainTitle {
   font-size: 4rem;
   margin-top: 20px;
-  text-shadow: 0 0 20px #fff;
-  animation: float 2s ease-in-out infinite, glow 2s ease-in-out infinite;
+  text-shadow: 0 0 10px #fff;
+  animation: float 2s ease-in-out infinite;
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
-}
-
-@keyframes glow {
-  0%, 100% { text-shadow: 0 0 20px #fff; }
-  50% { text-shadow: 0 0 30px #00f; }
 }
 
 .search-container {
@@ -66,19 +53,13 @@ input[type="text"] {
 
 .image-card img:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 25px #fff;
+  box-shadow: 0 0 20px #fff;
 }
 
 .image-title {
   margin-top: 10px;
   font-size: 1.2rem;
 }
-
-/* Glow selon rareté */
-.image-card[data-rarity="Rare"] img { box-shadow: 0 0 15px #00f; }
-.image-card[data-rarity="Légendaire"] img { box-shadow: 0 0 20px #ffa500; }
-.image-card[data-rarity="UnCommun"] img { box-shadow: 0 0 15px #0ff; }
-.image-card[data-rarity="Mythique"] img { box-shadow: 0 0 25px #ff00ff; }
 
 /* Popup */
 .popup {
@@ -94,13 +75,7 @@ input[type="text"] {
   z-index: 100;
   text-align: center;
   color: white;
-  min-width: 250px;
-  animation: popupFade 0.3s ease;
-}
-
-@keyframes popupFade {
-  from {opacity: 0; transform: translate(-50%, -60%);}
-  to {opacity: 1; transform: translate(-50%, -50%);}
+  max-width: 300px;
 }
 
 #popupClose {
@@ -117,6 +92,15 @@ input[type="text"] {
   margin-bottom: 10px;
 }
 
-#popupRarity { color: #ccc; }
-#priceText { color: #0f0; }
-#popupBonus { color: yellow; font-size: 0.9rem; }
+#popupRarity {
+  color: #ccc;
+}
+
+#priceText {
+  color: #0f0;
+}
+
+#popupBonus {
+  color: yellow;
+  font-size: 0.9rem;
+}
