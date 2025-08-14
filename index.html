@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NoobFinder 🔥</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Particles.js CDN -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
 
@@ -104,7 +107,28 @@
     Développé par Zaynox pour Steal a Noob de DarSya's Creations
   </div>
 
-  <script src="particles.js"></script>
+  <!-- Script Particles.js -->
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": "#ff4500" },
+        "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" } },
+        "opacity": { "value": 0.7, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.3, "sync": false } },
+        "size": { "value": 4, "random": true, "anim": { "enable": true, "speed": 5, "size_min": 0.5, "sync": false } },
+        "line_linked": { "enable": true, "distance": 150, "color": "#ff6347", "opacity": 0.4, "width": 1 },
+        "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+        "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 4 } }
+      },
+      "retina_detect": true
+    });
+  </script>
+
+  <!-- Ton script principal -->
   <script src="script.js"></script>
 
 </body>
