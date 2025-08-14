@@ -40,8 +40,8 @@ imageCards.forEach(card => {
     // Prix couleur or
     priceText.innerHTML = `<span style="color:#006400">Prix: ${price} $</span>`;
 
-    // Bonus en jaune
-    popupBonus.innerHTML = `<span style="color:yellow">Bonus: ${bonus}</span>`;
+// Bonus en jaune (sans texte "Bonus:")
+popupBonus.innerHTML = `<span style="color:yellow">${bonus}</span>`;o
 
     popup.style.display = "flex";
   });
@@ -107,4 +107,5 @@ document.getElementById("sortPriceDesc").addEventListener("click", () => {
   const container = document.querySelector(".images-container");
   sorted.forEach(card => container.appendChild(card));
 });
+
 
