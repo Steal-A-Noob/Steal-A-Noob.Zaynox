@@ -9,13 +9,18 @@ body {
 #mainTitle {
   font-size: 4rem;
   margin-top: 20px;
-  text-shadow: 0 0 15px #fff;
-  animation: float 2s ease-in-out infinite;
+  text-shadow: 0 0 15px #fff, 0 0 30px #0ff;
+  animation: float 3s ease-in-out infinite, glow 2s infinite alternate;
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes glow {
+  0% { text-shadow: 0 0 10px #fff, 0 0 20px #0ff; }
+  100% { text-shadow: 0 0 20px #fff, 0 0 40px #0ff; }
 }
 
 .search-container {
@@ -30,18 +35,30 @@ input[type="text"] {
   width: 300px;
 }
 
+#resetBtn {
+  padding: 10px 15px;
+  font-size: 1rem;
+  margin-left: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #0f62fe;
+  color: white;
+}
+
 .images-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
+  margin-bottom: 50px;
 }
 
 .image-card {
   position: relative;
   display: inline-block;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .image-card img {
@@ -52,8 +69,8 @@ input[type="text"] {
 }
 
 .image-card img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px #fff;
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0 25px #0ff;
 }
 
 .image-title {
@@ -67,7 +84,7 @@ input[type="text"] {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0);
   background: #1b263b;
   border: 3px solid #415a77;
   padding: 20px;
@@ -75,6 +92,11 @@ input[type="text"] {
   z-index: 100;
   text-align: center;
   color: white;
+  transition: transform 0.3s ease;
+}
+
+.popup.show {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 #popupClose {
@@ -92,23 +114,26 @@ input[type="text"] {
 }
 
 #popupRarity {
-  font-weight: bold;
-  margin: 5px 0;
+  color: #ccc;
 }
 
-/* Couleurs selon rareté */
-[data-rarity="Commun"] #popupRarity { color: lightgray; }
-[data-rarity="UnCommun"] #popupRarity { color: orange; }
-[data-rarity="Rare"] #popupRarity { color: #00bfff; }
-[data-rarity="Légendaire"] #popupRarity { color: gold; }
-[data-rarity="Mythique"] #popupRarity { color: #ff00ff; }
-
-#priceText {
+.price-green {
   color: #0f0;
-  font-weight: bold;
 }
 
-#popupBonus {
+.bonus-yellow {
   color: yellow;
   font-size: 0.9rem;
+}
+
+.rarity-rare {
+  color: #0ff;
+}
+
+.rarity-mythique {
+  color: #ff00ff;
+}
+
+.rarity-uncommun {
+  color: orange;
 }
