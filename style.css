@@ -1,92 +1,103 @@
-/* Reset et général */
+/* Général */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #111;
-  color: #fff;
-  text-align: center;
+  color: white;
 }
 
-/* Titre principal */
+/* Titre flottant */
 #mainTitle {
+  text-align: center;
   margin-top: 20px;
-  font-size: 3rem;
-  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
-  animation: float 2s ease-in-out infinite;
+  font-size: 3em;
+  color: #FFD700;
+  text-shadow: 0 0 10px #FFD700, 0 0 20px #FF4500, 0 0 30px #FF69B4;
+  animation: float 3s ease-in-out infinite;
 }
 
-/* Animation flottante */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
 /* Barre recherche */
 .search-container {
+  text-align: center;
   margin: 20px 0;
 }
 
 #searchBar {
   padding: 10px;
-  width: 200px;
-  border-radius: 10px;
+  font-size: 1em;
+  width: 250px;
+  border-radius: 5px;
   border: none;
 }
 
 /* Boutons tri */
 .sort-buttons {
+  text-align: center;
   margin-bottom: 20px;
 }
 
 .sort-buttons button {
-  padding: 8px 12px;
+  padding: 10px 20px;
   margin: 0 5px;
-  border-radius: 10px;
-  border: none;
   cursor: pointer;
-  background-color: #222;
-  color: #fff;
-  transition: 0.3s;
+  border: none;
+  border-radius: 5px;
+  background-color: #1E90FF;
+  color: white;
+  font-weight: bold;
+  transition: background 0.3s;
 }
 
 .sort-buttons button:hover {
-  background-color: #0ff;
-  color: #000;
+  background-color: #00BFFF;
 }
 
-/* Container images */
+/* Cartes d’images */
 .images-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
+  margin-bottom: 100px;
 }
 
-/* Cartes */
 .image-card {
   background-color: #222;
+  padding: 10px;
   border-radius: 10px;
-  padding: 5px;
-  width: 120px;
+  text-align: center;
+  width: 150px;
   cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.image-card img {
-  width: 100%;
-  border-radius: 10px;
+  transition: transform 0.3s;
 }
 
 .image-card:hover {
   transform: scale(1.1);
 }
 
-/* Glow selon rareté */
+.image-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.image-title {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Glow par rareté */
 .glow-Commun { box-shadow: 0 0 10px #fff; }
-.glow-UnCommun { box-shadow: 0 0 10px #0f0; }
-.glow-Rare { box-shadow: 0 0 10px #00f; }
-.glow-Légendaire { box-shadow: 0 0 10px #ffa500; }
-.glow-Mythique { box-shadow: 0 0 10px #f0f; }
+.glow-UnCommun { box-shadow: 0 0 10px #00FF00; }
+.glow-Rare { box-shadow: 0 0 10px #0000FF; }
+.glow-Légendaire { box-shadow: 0 0 10px #FFA500; }
+.glow-Mythique { box-shadow: 0 0 10px #FF00FF; }
 
 /* Popup */
 .popup {
@@ -96,23 +107,42 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.9);
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  z-index: 100;
+  z-index: 1000;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .popup img {
-  width: 150px;
+  max-width: 300px;
+  max-height: 300px;
   margin-bottom: 15px;
+  border-radius: 10px;
 }
 
 #popupClose {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 2rem;
+  top: 20px;
+  right: 20px;
+  font-size: 2em;
   color: red;
   cursor: pointer;
+}
+
+/* Footer bleu */
+.footer {
+  background-color: #1E90FF;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+  z-index: 1000;
 }
