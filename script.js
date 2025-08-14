@@ -1,72 +1,52 @@
-const searchBar = document.getElementById('searchBar');
-const imagesContainer = document.querySelector('.images-container');
+const cards = document.querySelectorAll('.image-card');
 const popup = document.getElementById('popup');
 const popupImage = document.getElementById('popupImage');
 const popupTitle = document.getElementById('popupTitle');
 const popupRarity = document.getElementById('popupRarity');
-const priceText = document.getElementById('priceText');
+const popupPrice = document.getElementById('popupPrice');
 const popupBonus = document.getElementById('popupBonus');
 const popupClose = document.getElementById('popupClose');
 
-const imageCards = Array.from(document.querySelectorAll('.image-card'));
-
-// Affichage du popup
-imageCards.forEach(card => {
+cards.forEach(card => {
   card.addEventListener('click', () => {
+    popup.style.display = 'block';
     popupImage.src = card.dataset.img;
     popupTitle.textContent = card.dataset.title;
-    popupRarity.innerHTML = `Rareté: <span style="color:${getRarityColor(card.dataset.rarity)}">${card.dataset.rarity}</span>`;
-    priceText.innerHTML = `Prix: <span class="priceValue">$${card.dataset.price}</span>`;
+    popupRarity.textContent = `Rareté: ${card.dataset.rarity}`;
+    popupPrice.textContent = `$${card.dataset.price}`;
     popupBonus.textContent = `+${card.dataset.bonus}`;
-    popup.style.display = 'flex';
   });
 });
 
-popupClose.addEventListener('click', () => {
-  popup.style.display = 'none';
-});
-
-// Fermeture popup si clic en dehors
-popup.addEventListener('click', e => {
-  if(e.target === popup) popup.style.display = 'none';
-});
+popupClose.addEventListener('click', () => popup.style.display = 'none');
+window.addEventListener('click', e => { if(e.target === popup) popup.style.display = 'none'; });
 
 // Recherche
+const searchBar = document.getElementById('searchBar');
 searchBar.addEventListener('input', () => {
-  const value = searchBar.value.toLowerCase();
-  imageCards.forEach(card => {
-    const title = card.dataset.title.toLowerCase();
-    card.style.display = title.includes(value) ? 'block' : 'none';
+  const search = searchBar.value.toLowerCase();
+  cards.forEach(card => {
+    card.style.display = card.dataset.title.toLowerCase().includes(search) ? 'block' : 'none';
   });
 });
 
-// Tri par rareté
+// Tri
+const rarityOrder = ['Commun', 'UnCommun', 'Rare', 'Légendaire', 'Mythique'];
+
 document.getElementById('sortRarity').addEventListener('click', () => {
-  const order = ['Commun', 'UnCommun', 'Rare', 'Légendaire', 'Mythique'];
-  const sorted = imageCards.sort((a,b) => order.indexOf(a.dataset.rarity) - order.indexOf(b.dataset.rarity));
-  sorted.forEach(card => imagesContainer.appendChild(card));
+  const container = document.querySelector('.images-container');
+  [...cards].sort((a,b) => rarityOrder.indexOf(a.dataset.rarity) - rarityOrder.indexOf(b.dataset.rarity))
+           .forEach(card => container.appendChild(card));
 });
 
-// Tri prix asc
 document.getElementById('sortPriceAsc').addEventListener('click', () => {
-  const sorted = imageCards.sort((a,b) => Number(a.dataset.price) - Number(b.dataset.price));
-  sorted.forEach(card => imagesContainer.appendChild(card));
+  const container = document.querySelector('.images-container');
+  [...cards].sort((a,b) => parseInt(a.dataset.price) - parseInt(b.dataset.price))
+           .forEach(card => container.appendChild(card));
 });
 
-// Tri prix desc
 document.getElementById('sortPriceDesc').addEventListener('click', () => {
-  const sorted = imageCards.sort((a,b) => Number(b.dataset.price) - Number(a.dataset.price));
-  sorted.forEach(card => imagesContainer.appendChild(card));
+  const container = document.querySelector('.images-container');
+  [...cards].sort((a,b) => parseInt(b.dataset.price) - parseInt(a.dataset.price))
+           .forEach(card => container.appendChild(card));
 });
-
-// Couleur rareté
-function getRarityColor(rarity) {
-  switch(rarity){
-    case 'Commun': return '#00ffff';
-    case 'UnCommun': return '#8a2be2';
-    case 'Rare': return '#00ffff';
-    case 'Légendaire': return '#ffd700';
-    case 'Mythique': return '#ff1493';
-    default: return 'white';
-  }
-}
