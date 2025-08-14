@@ -7,32 +7,55 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 class="title">NoobFinder 🔥</h1>
+  <h1 id="mainTitle">NoobFinder 🔥</h1>
 
-  <div class="gallery">
-    <div class="card" data-title="Noob" data-rarity="Commun" data-price="$250" data-bonus="+1$/s" data-img="noob.png">
+  <div class="search-container">
+    <input type="text" placeholder="Recherche... 🔍" id="searchBar">
+  </div>
+
+  <div class="images-container">
+    <!-- Noob -->
+    <div class="image-card" 
+         data-title="Noob" 
+         data-rarity="Commun" 
+         data-price="$250" 
+         data-bonus="+1$/s"
+         data-img="noob.png">
       <img src="noob.png" alt="Noob">
-      <p>Noob</p>
+      <div class="image-title">Noob</div>
     </div>
 
-    <div class="card" data-title="Noob Boxeur" data-rarity="Rare" data-price="$2k" data-bonus="+6$/s" data-img="noob_boxeur.png">
-      <img src="noob_boxeur.png" alt="Noob Boxeur">
-      <p>Noob Boxeur</p>
+    <!-- Noob Boxeur -->
+    <div class="image-card" 
+         data-title="Noob Boxeur" 
+         data-rarity="Rare" 
+         data-price="$2k" 
+         data-bonus="+6$/s"
+         data-img="noir fond.png">
+      <img src="noir fond.png" alt="Noob Boxeur">
+      <div class="image-title">Noob Boxeur</div>
     </div>
 
-    <div class="card" data-title="Noob Ninja" data-rarity="Rare" data-price="$5k" data-bonus="+10$/s" data-img="noob_ninja.png">
-      <img src="noob_ninja.png" alt="Noob Ninja">
-      <p>Noob Ninja</p>
+    <!-- Troisième image -->
+    <div class="image-card" 
+         data-title="Noob Ninja" 
+         data-rarity="Légendaire" 
+         data-price="$10k" 
+         data-bonus="+20$/s"
+         data-img="noir fond.png">
+      <img src="noir fond.png" alt="Noob Ninja">
+      <div class="image-title">Noob Ninja</div>
     </div>
   </div>
 
+  <!-- Popup -->
   <div id="popup" class="popup">
-    <span class="close">&times;</span>
+    <span id="popupClose">&times;</span>
     <img id="popupImage" src="" alt="">
     <h2 id="popupTitle"></h2>
     <p id="popupRarity"></p>
-    <p id="priceText" class="price"></p>
-    <p id="popupBonus" class="bonus"></p>
+    <p id="priceText"></p>
+    <p id="popupBonus"></p>
   </div>
 
   <script src="script.js"></script>
