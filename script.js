@@ -3,7 +3,7 @@ const popup = document.getElementById("popup");
 const popupImage = document.getElementById("popupImage");
 const popupTitle = document.getElementById("popupTitle");
 const popupRarity = document.getElementById("popupRarity");
-const popupPrice = document.getElementById("popupPrice");
+const priceText = document.getElementById("priceText");
 const popupBonus = document.getElementById("popupBonus");
 const popupClose = document.getElementById("popupClose");
 
@@ -21,21 +21,21 @@ imageCards.forEach(card => {
     popupImage.src = img;
     popupTitle.textContent = title;
 
-    // Couleur rareté
+    // Couleur de la rareté
     let rarityColor = "#ccc";
-    if (rarity.toLowerCase() === "rare") rarityColor = "deepskyblue";
-    else if (rarity.toLowerCase() === "commun") rarityColor = "lightgray";
-    else if (rarity.toLowerCase() === "légendaire") rarityColor = "orange";
-    else if (rarity.toLowerCase() === "mythique") rarityColor = "deeppink";
-    else if (rarity.toLowerCase() === "uncommun") rarityColor = "lime";
+    if (rarity.toLowerCase() === "commun") rarityColor = "#aaa";
+    if (rarity.toLowerCase() === "rare") rarityColor = "skyblue";
+    if (rarity.toLowerCase() === "uncommun") rarityColor = "#00ff7f";
+    if (rarity.toLowerCase() === "légendaire") rarityColor = "orange";
+    if (rarity.toLowerCase() === "mythique") rarityColor = "hotpink";
 
     popupRarity.innerHTML = `Rareté: <span style="color:${rarityColor}">${rarity}</span>`;
 
-    // Prix en vert sauf le mot
-    popupPrice.innerHTML = `Prix: <span class="price-value">${price}</span>`;
+    // Prix vert mais texte "Prix:" blanc
+    priceText.innerHTML = `Prix: <span style="color:lime">${price}</span>`;
 
-    // Bonus uniquement valeur en jaune
-    popupBonus.innerHTML = `<span class="bonus-value">${bonus}</span>`;
+    // Bonus en jaune uniquement
+    popupBonus.innerHTML = `<span style="color:yellow">${bonus}</span>`;
   });
 });
 
