@@ -9,7 +9,7 @@ body {
 #mainTitle {
   font-size: 4rem;
   margin-top: 20px;
-  text-shadow: 0 0 10px #fff;
+  text-shadow: 0 0 20px #fff;
   animation: float 2s ease-in-out infinite;
 }
 
@@ -22,12 +22,12 @@ body {
   margin: 20px 0;
 }
 
-input[type="text"] {
+input[type="text"], select {
   padding: 10px 20px;
   font-size: 1.2rem;
   border-radius: 20px;
   border: none;
-  width: 300px;
+  margin: 0 10px;
 }
 
 .images-container {
@@ -45,7 +45,7 @@ input[type="text"] {
 }
 
 .image-card img {
-  width: 150px;
+  width: 120px;
   border: 3px solid gray;
   border-radius: 10px;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -75,7 +75,6 @@ input[type="text"] {
   z-index: 100;
   text-align: center;
   color: white;
-  max-width: 300px;
 }
 
 #popupClose {
@@ -92,15 +91,11 @@ input[type="text"] {
   margin-bottom: 10px;
 }
 
-#popupRarity {
-  color: #ccc;
-}
+#popupRarity.Commun { color: #ccc; }
+#popupRarity.UnCommun { color: #9acd32; }
+#popupRarity.Rare { color: #00bfff; }
+#popupRarity.Légendaire { color: #ff8c00; }
+#popupRarity.Mythique { color: #ff1493; }
 
-#priceText {
-  color: #0f0;
-}
-
-#popupBonus {
-  color: yellow;
-  font-size: 0.9rem;
-}
+#priceText { color: #0f0; font-size: 1rem; }
+#popupBonus { color: yellow; font-size: 0.9rem; }
