@@ -1,67 +1,36 @@
-// script.js - popup et tri des cartes
+// script.js
 
-document.addEventListener("DOMContentLoaded", () => {
-  const images = document.querySelectorAll(".image-card");
-  const popup = document.getElementById("popup");
-  const popupClose = document.getElementById("popupClose");
-  const popupImage = document.getElementById("popupImage");
-  const popupTitle = document.getElementById("popupTitle");
-  const popupRarity = document.getElementById("popupRarity");
-  const priceText = document.getElementById("priceText");
-  const popupBonus = document.getElementById("popupBonus");
+const images = document.querySelectorAll('.image-card');
+const popup = document.getElementById('popup');
+const popupClose = document.getElementById('popupClose');
+const popupImage = document.getElementById('popupImage');
+const popupTitle = document.getElementById('popupTitle');
+const popupRarity = document.getElementById('popupRarity');
+const priceText = document.getElementById('priceText');
+const popupBonus = document.getElementById('popupBonus');
 
-  images.forEach(img => {
-    img.addEventListener("click", () => {
-      // Remplit le popup avec les data-* de l'image
-      popupImage.src = img.dataset.img;
-      popupTitle.textContent = img.dataset.title;
+images.forEach(card => {
+  card.addEventListener('click', () => {
+    // On récupère les infos de la carte
+    const imgSrc = card.getAttribute('data-img'); // image principale
+    const title = card.getAttribute('data-title');
+    const rarity = card.getAttribute('data-rarity');
+    const price = card.getAttribute('data-price');
+    const bonus = card.getAttribute('data-bonus');
 
-      // Rarete en couleur
-      let rarityColor = "white";
-      switch(img.dataset.rarity.toLowerCase()) {
-        case "commun": rarityColor = "#ffffff"; break;
-        case "rare": rarityColor = "#00ffff"; break;
-        case "uncommun": rarityColor = "#ff8c00"; break;
-        case "légendaire": rarityColor = "#ffa500"; break;
-        case "mythique": rarityColor = "#ff00ff"; break;
-      }
+    // On met à jour le popup
+    popupImage.src = imgSrc; // <--- image affichée en haut
+    popupTitle.textContent = title;
+    popupRarity.textContent = `Rareté : ${rarity}`;
+    priceText.innerHTML = `Prix: <span style="color: green;">$${price}</span>`;
+    popupBonus.innerHTML = `Bonus: <span style="color: yellow;">${bonus}</span>`;
 
-      popupRarity.innerHTML = `Rareté: <span style="color:${rarityColor}">${img.dataset.rarity}</span>`;
-      priceText.innerHTML = `Prix: <span style="color:green">$${img.dataset.price}</span>`;
-      popupBonus.innerHTML = `<span style="color:yellow">+${img.dataset.bonus}</span>`;
-
-      popup.style.display = "flex"; // vertical
-      popup.style.flexDirection = "column";
-    });
+    // On affiche le popup
+    popup.style.display = 'flex';
   });
+});
 
-  popupClose.addEventListener("click", () => {
-    popup.style.display = "none";
-  });
-
-  // Tri (exemple rapide)
-  const sortRarity = document.getElementById("sortRarity");
-  const sortPriceAsc = document.getElementById("sortPriceAsc");
-  const sortPriceDesc = document.getElementById("sortPriceDesc");
-  const container = document.querySelector(".images-container");
-
-  const rarityOrder = ["commun", "uncommun", "rare", "légendaire", "mythique"];
-
-  sortRarity.addEventListener("click", () => {
-    const sorted = Array.from(images).sort((a,b) => {
-      return rarityOrder.indexOf(a.dataset.rarity.toLowerCase()) - 
-             rarityOrder.indexOf(b.dataset.rarity.toLowerCase());
-    });
-    sorted.forEach(el => container.appendChild(el));
-  });
-
-  sortPriceAsc.addEventListener("click", () => {
-    const sorted = Array.from(images).sort((a,b) => a.dataset.price - b.dataset.price);
-    sorted.forEach(el => container.appendChild(el));
-  });
-
-  sortPriceDesc.addEventListener("click", () => {
-    const sorted = Array.from(images).sort((a,b) => b.dataset.price - a.dataset.price);
-    sorted.forEach(el => container.appendChild(el));
-  });
+// Fermer le popup
+popupClose.addEventListener('click', () => {
+  popup.style.display = 'none';
 });
