@@ -1,12 +1,12 @@
-/* Overlay */
-#overlay {
+/* Overlay générique pour tout nouvel appart */
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6); /* semi-transparent noir */
-  backdrop-filter: blur(10px); /* flou derrière */
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,7 +19,7 @@
   max-width: 600px;
 }
 
-#btnOverlay {
+.btnOverlay {
   margin-top: 20px;
   padding: 10px 25px;
   font-size: 18px;
@@ -30,13 +30,13 @@
   color: white;
 }
 
-/* Flou sur le contenu principal au début */
+/* Flou initial sur contenu principal */
 .blurred {
   filter: blur(8px);
   transition: filter 0.5s ease;
 }
 
-/* Quand on enlève le flou */
+/* Contenu déflouté */
 .unblurred {
   filter: blur(0);
 }
