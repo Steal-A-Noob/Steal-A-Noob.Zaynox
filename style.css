@@ -1,3 +1,4 @@
+/* Body et titre */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -14,33 +15,24 @@ body {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
+  0%,100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
 }
 
-.search-container {
+/* Contrôles */
+.controls {
   margin: 20px 0;
 }
 
-input[type="text"] {
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  border-radius: 20px;
-  border: none;
-  width: 300px;
-}
-
-#resetBtn {
-  padding: 10px 20px;
+input, select, button {
+  padding: 10px;
   font-size: 1rem;
-  margin-left: 10px;
   border-radius: 20px;
   border: none;
-  cursor: pointer;
-  background-color: #415a77;
-  color: white;
+  margin: 5px;
 }
 
+/* Cartes */
 .images-container {
   display: flex;
   justify-content: center;
@@ -84,7 +76,7 @@ input[type="text"] {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.8);
   background: #1b263b;
   border: 3px solid #415a77;
   padding: 20px;
@@ -99,6 +91,7 @@ input[type="text"] {
 .popup.show {
   display: block;
   opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 #popupClose {
@@ -114,11 +107,19 @@ input[type="text"] {
   width: 200px;
   margin-bottom: 10px;
   border-radius: 10px;
+  animation: glow 1.5s infinite;
 }
 
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 10px #fff; }
+  50% { box-shadow: 0 0 30px yellow; }
+}
+
+/* Raretés */
 #popupRarity span.rarity-rare { color: #00bfff; text-shadow: 0 0 10px #00bfff; }
 #popupRarity span.rarity-uncommun { color: #ffa500; text-shadow: 0 0 10px #ffa500; }
-#popupRarity span.rarity-mythique { color: #ff00ff; text-shadow: 0 0 10px #ff00ff; }
+#popupRarity span.rarity-mythique { color: #ff00ff; text-shadow: 0 0 15px #ff00ff; }
 
+/* Prix et bonus */
 #priceText { color: #0f0; font-weight: bold; }
 #popupBonus { color: yellow; font-size: 0.9rem; font-weight: bold; }
