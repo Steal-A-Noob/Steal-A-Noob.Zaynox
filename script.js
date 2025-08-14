@@ -5,8 +5,7 @@ const popup = document.getElementById("popup");
 const popupImage = document.getElementById("popupImage");
 const popupTitle = document.getElementById("popupTitle");
 const popupRarity = document.getElementById("popupRarity");
-const priceText = document.getElementById("priceText");
-const popupBonus = document.getElementById("popupBonus");
+const popupPriceBonus = document.getElementById("popupPriceBonus"); // Nouveau container pour prix + bonus
 const popupClose = document.getElementById("popupClose");
 
 const imageCards = document.querySelectorAll(".image-card");
@@ -20,10 +19,10 @@ imageCards.forEach(card => {
 
   switch (rarity) {
     case "commun": glowColor = "#FFFFFF"; break;
-    case "uncommun": glowColor = "#006400"; break; // vert foncé
-    case "rare": glowColor = "#0000FF"; break; // bleu
-    case "légendaire": glowColor = "#FFA500"; break; // orange
-    case "mythique": glowColor = "#FF00FF"; break; // rose
+    case "uncommun": glowColor = "#006400"; break;
+    case "rare": glowColor = "#0000FF"; break;
+    case "légendaire": glowColor = "#FFA500"; break;
+    case "mythique": glowColor = "#FF00FF"; break;
     default: glowColor = "#FFFFFF";
   }
 
@@ -56,11 +55,11 @@ imageCards.forEach(card => {
     }
     popupRarity.innerHTML = `<span style="color:${rarityColor}">Rareté: ${rarity}</span>`;
 
-    // Prix couleur or
-    priceText.innerHTML = `<span style="color:#006400">Prix: ${price} $</span>`;
-
-    // Bonus sans le mot "Bonus"
-    popupBonus.innerHTML = `<span style="color:yellow">${bonus}</span>`;
+    // Prix + Bonus juste en dessous du titre
+    popupPriceBonus.innerHTML = `
+      <div style="color:#006400; font-weight:bold">Prix: ${price} $</div>
+      <div style="color:yellow; font-weight:bold">${bonus}</div>
+    `;
 
     popup.style.display = "flex";
   });
@@ -80,11 +79,7 @@ document.getElementById("searchBar").addEventListener("input", function () {
   const searchValue = this.value.toLowerCase();
   imageCards.forEach(card => {
     const title = card.getAttribute("data-title").toLowerCase();
-    if (title.includes(searchValue)) {
-      card.style.display = "inline-block";
-    } else {
-      card.style.display = "none";
-    }
+    card.style.display = title.includes(searchValue) ? "inline-block" : "none";
   });
 });
 
@@ -94,9 +89,8 @@ document.getElementById("searchBar").addEventListener("input", function () {
 document.getElementById("sortRarity").addEventListener("click", () => {
   const order = ["mythique", "légendaire", "rare", "commun", "uncommun"];
   const sorted = Array.from(imageCards).sort((a, b) => {
-    const rarityA = a.getAttribute("data-rarity").toLowerCase();
-    const rarityB = b.getAttribute("data-rarity").toLowerCase();
-    return order.indexOf(rarityA) - order.indexOf(rarityB);
+    return order.indexOf(a.getAttribute("data-rarity").toLowerCase()) -
+           order.indexOf(b.getAttribute("data-rarity").toLowerCase());
   });
 
   const container = document.querySelector(".images-container");
@@ -107,10 +101,9 @@ document.getElementById("sortRarity").addEventListener("click", () => {
 // Tri par prix croissant
 // --------------------
 document.getElementById("sortPriceAsc").addEventListener("click", () => {
-  const sorted = Array.from(imageCards).sort((a, b) => {
-    return parseInt(a.getAttribute("data-price")) - parseInt(b.getAttribute("data-price"));
-  });
-
+  const sorted = Array.from(imageCards).sort((a, b) => 
+    parseInt(a.getAttribute("data-price")) - parseInt(b.getAttribute("data-price"))
+  );
   const container = document.querySelector(".images-container");
   sorted.forEach(card => container.appendChild(card));
 });
@@ -119,11 +112,9 @@ document.getElementById("sortPriceAsc").addEventListener("click", () => {
 // Tri par prix décroissant
 // --------------------
 document.getElementById("sortPriceDesc").addEventListener("click", () => {
-  const sorted = Array.from(imageCards).sort((a, b) => {
-    return parseInt(b.getAttribute("data-price")) - parseInt(a.getAttribute("data-price"));
-  });
-
+  const sorted = Array.from(imageCards).sort((a, b) => 
+    parseInt(b.getAttribute("data-price")) - parseInt(a.getAttribute("data-price"))
+  );
   const container = document.querySelector(".images-container");
   sorted.forEach(card => container.appendChild(card));
 });
-
