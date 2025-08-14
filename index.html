@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NoobFinder 🔥</title>
+  <title>NoobFinder</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,9 +21,7 @@
     </select>
   </div>
 
-  <div id="imagesContainer" class="images-container">
-    <!-- Les images seront générées automatiquement par script.js -->
-  </div>
+  <div class="images-container" id="imagesContainer"></div>
 
   <!-- Popup -->
   <div id="popup" class="popup">
@@ -35,6 +33,10 @@
     <p id="popupBonus"></p>
   </div>
 
+  <!-- Particles -->
+  <canvas id="particles"></canvas>
+
   <script src="script.js"></script>
+  <script src="particles.js"></script>
 </body>
 </html>
