@@ -16,11 +16,11 @@ const popupTitle = document.getElementById("popupTitle");
 const popupRarity = document.getElementById("popupRarity");
 const priceText = document.getElementById("priceText");
 const popupBonus = document.getElementById("popupBonus");
+const popupEffect = document.getElementById("popupEffect");
 const popupClose = document.getElementById("popupClose");
 const searchBar = document.getElementById("searchBar");
 const rarityFilter = document.getElementById("rarityFilter");
 
-// Génération des cartes
 function generateCards() {
   imagesContainer.innerHTML = "";
   const searchValue = searchBar.value.toLowerCase();
@@ -49,6 +49,7 @@ function generateCards() {
         popupRarity.className = item.rarity;
         priceText.textContent = `Prix: ${item.price}`;
         popupBonus.textContent = item.bonus;
+        popupEffect.textContent = item.bonus;
       });
 
       imagesContainer.appendChild(card);
