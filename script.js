@@ -1,4 +1,5 @@
 const searchBar = document.getElementById("searchBar");
+const resetBtn = document.getElementById("resetBtn");
 const popup = document.getElementById("popup");
 const popupImage = document.getElementById("popupImage");
 const popupTitle = document.getElementById("popupTitle");
@@ -18,16 +19,19 @@ imageCards.forEach(card => {
     const img = card.getAttribute("data-img");
 
     popup.style.display = "block";
+    popup.classList.add("show");
     popupImage.src = img;
     popupTitle.textContent = title;
-    popupRarity.textContent = `Rareté: ${rarity}`;
-    priceText.textContent = `Prix: ${price}`;
-    popupBonus.textContent = bonus;
 
-    // Couleur rareté popup selon la carte
-    switch(rarity) {
-      case "Commun": popupRarity.style.color = "lightgray"; break;
-      case "UnCommun": popupRarity.style.color = "orange"; break;
-      case "Rare": popupRarity.style.color = "#00bfff"; break;
-      case "Légendaire": popupRarity.style.color = "gold"; break;
-      case "Mythique": popupRarity.style.color
+    // Rareté couleurs
+    if (rarity.toLowerCase() === "rare") {
+      popupRarity.innerHTML = `Rareté: <span class="rarity-rare">${rarity}</span>`;
+    } else if (rarity.toLowerCase() === "mythique") {
+      popupRarity.innerHTML = `Rareté: <span class="rarity-mythique">${rarity}</span>`;
+    } else if (rarity.toLowerCase() === "uncommun") {
+      popupRarity.innerHTML = `Rareté: <span class="rarity-uncommun">${rarity}</span>`;
+    } else {
+      popupRarity.innerHTML = `Rareté: ${rarity}`;
+    }
+
+   
