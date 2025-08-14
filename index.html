@@ -5,142 +5,132 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NoobFinder 🔥</title>
   <link rel="stylesheet" href="style.css">
-
-  <!-- Particles.js CDN -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
-
-  <!-- Particules -->
   <div id="particles-js"></div>
-
-  <!-- Titre flottant avec lueur -->
   <h1 id="mainTitle">NoobFinder 🔥</h1>
 
-  <!-- Barre de recherche -->
   <div class="search-container">
     <input type="text" placeholder="Recherche... 🔍" id="searchBar">
   </div>
 
-  <!-- Boutons de tri -->
   <div class="sort-buttons">
     <button id="sortRarity">Trier par rareté</button>
     <button id="sortPriceAsc">Prix croissant</button>
     <button id="sortPriceDesc">Prix décroissant</button>
   </div>
 
-  <!-- Conteneur des images -->
   <div class="images-container">
-
+    <!-- Cartes -->
     <div class="image-card glow-Commun" data-title="Noob" data-rarity="Commun" data-price="100" data-bonus="1$/s" data-img="noir_fond.png">
       <img src="noob.png" alt="Noob">
       <div class="image-title">Noob</div>
-      <div class="image-price">Prix : 100</div>
+      <div class="image-price">100 💰</div>
     </div>
 
     <div class="image-card glow-Rare" data-title="Noob Boxeur" data-rarity="Rare" data-price="100000" data-bonus="6$/s" data-img="noir_fond.png">
       <img src="Boxeur.png" alt="Noob Boxeur">
       <div class="image-title">Noob Boxeur</div>
-      <div class="image-price">Prix : 100000</div>
+      <div class="image-price">100000 💰</div>
     </div>
 
     <div class="image-card glow-Rare" data-title="Noob Ninja" data-rarity="Rare" data-price="12000" data-bonus="95$/s" data-img="Ninja.PNG">
       <img src="Ninja.PNG" alt="Noob Ninja">
       <div class="image-title">Noob Ninja</div>
-      <div class="image-price">Prix : 12000</div>
+      <div class="image-price">12000 💰</div>
     </div>
 
-    <div class="image-card glow-Commun" data-title="Agent Noob" data-rarity="Commun" data-price="250" data-bonus="1$/s" data-img="noir_fond.png">
+    <div class="image-card glow-Commun" data-title="Agent Noob" data-rarity="Commun" data-price="250" data-bonus="1$/s" data-img="Agent.PNG">
       <img src="Agent.PNG" alt="Agent Noob">
       <div class="image-title">Agent Noob</div>
-      <div class="image-price">Prix : 250</div>
+      <div class="image-price">250 💰</div>
     </div>
 
-    <div class="image-card glow-Commun" data-title="Surf Noob" data-rarity="Commun" data-price="200" data-bonus="2$/s" data-img="noir_fond.png">
+    <div class="image-card glow-Commun" data-title="Surf Noob" data-rarity="Commun" data-price="200" data-bonus="2$/s" data-img="Surf.PNG">
       <img src="Surf.PNG" alt="Surf Noob">
       <div class="image-title">Surf Noob</div>
-      <div class="image-price">Prix : 200</div>
+      <div class="image-price">200 💰</div>
     </div>
 
-    <div class="image-card glow-Legendaire" data-title="Hacker Noob" data-rarity="Legendaire" data-price="250000" data-bonus="1500$/s" data-img="noir_fond.png">
+    <div class="image-card glow-Legendaire" data-title="Hacker Noob" data-rarity="Legendaire" data-price="250000" data-bonus="1500$/s" data-img="hackeur.png">
       <img src="hackeur.png" alt="Hacker Noob">
       <div class="image-title">Hacker Noob</div>
-      <div class="image-price">Prix : 250000</div>
+      <div class="image-price">250000 💰</div>
     </div>
 
     <div class="image-card glow-Uncommun" data-title="Magic Noob" data-rarity="UnCommun" data-price="1600" data-bonus="14$/s" data-img="magic_noob.png">
-      <img src="magic noob.png" alt="Magic Noob">
+      <img src="magic_noob.png" alt="Magic Noob">
       <div class="image-title">Magic Noob</div>
-      <div class="image-price">Prix : 1600</div>
+      <div class="image-price">1600 💰</div>
     </div>
 
     <div class="image-card glow-Mythique" data-title="God Noob" data-rarity="Mythique" data-price="2500000" data-bonus="13000$/s" data-img="God.PNG">
       <img src="God.PNG" alt="God Noob">
       <div class="image-title">God Noob</div>
-      <div class="image-price">Prix : 2500000</div>
+      <div class="image-price">2500000 💰</div>
     </div>
 
     <div class="image-card glow-Uncommun" data-title="Swat Noob" data-rarity="UnCommun" data-price="3200" data-bonus="28$/s" data-img="swat.png">
       <img src="Swat.PNG" alt="Swat Noob">
       <div class="image-title">Swat Noob</div>
-      <div class="image-price">Prix : 3200</div>
+      <div class="image-price">3200 💰</div>
     </div>
 
     <div class="image-card glow-Commun" data-title="Poor Noob" data-rarity="Commun" data-price="400" data-bonus="4$/s" data-img="poor.png">
       <img src="Poor.PNG" alt="Poor Noob">
       <div class="image-title">Poor Noob</div>
-      <div class="image-price">Prix : 400</div>
+      <div class="image-price">400 💰</div>
     </div>
 
     <div class="image-card glow-Rare" data-title="Rich Noob" data-rarity="Rare" data-price="50000" data-bonus="350$/s" data-img="rich.png">
       <img src="Rich.PNG" alt="Rich Noob">
       <div class="image-title">Rich Noob</div>
-      <div class="image-price">Prix : 50000</div>
+      <div class="image-price">50000 💰</div>
     </div>
 
     <div class="image-card glow-Legendaire" data-title="King Noob" data-rarity="Legendaire" data-price="500000" data-bonus="3000$/s" data-img="King.png">
       <img src="King.PNG" alt="King Noob">
       <div class="image-title">King Noob</div>
-      <div class="image-price">Prix : 500000</div>
+      <div class="image-price">500000 💰</div>
     </div>
 
     <div class="image-card glow-Uncommun" data-title="Buildeur Noob" data-rarity="UnCommun" data-price="6000" data-bonus="50$/s" data-img="buildeur.png">
       <img src="Buildeur.PNG" alt="Buildeur Noob">
       <div class="image-title">Buildeur Noob</div>
-      <div class="image-price">Prix : 6000</div>
+      <div class="image-price">6000 💰</div>
     </div>
 
     <div class="image-card glow-Rare" data-title="Sleeping Noob" data-rarity="Rare" data-price="24000" data-bonus="190$/s" data-img="sleeping.png">
       <img src="Sleeping.PNG" alt="Sleeping Noob">
       <div class="image-title">Sleeping Noob</div>
-      <div class="image-price">Prix : 24000</div>
+      <div class="image-price">24000 💰</div>
     </div>
 
     <div class="image-card glow-Legendaire" data-title="Demon Noob" data-rarity="Legendaire" data-price="1000000" data-bonus="6000$/s" data-img="Demon.png">
       <img src="Demon.PNG" alt="Demon Noob">
       <div class="image-title">Demon Noob</div>
-      <div class="image-price">Prix : 1000000</div>
+      <div class="image-price">1000000 💰</div>
     </div>
 
     <div class="image-card glow-Legendaire" data-title="Sayan Noob" data-rarity="Mythique" data-price="5000000" data-bonus="26000$/s" data-img="Sayan.PNG">
       <img src="Sayan.PNG" alt="Sayan Noob">
       <div class="image-title">Sayan Noob</div>
-      <div class="image-price">Prix : 5000000</div>
+      <div class="image-price">5000000 💰</div>
     </div>
 
     <div class="image-card glow-Legendaire" data-title="Teacher Noob" data-rarity="UnCommun" data-price="800" data-bonus="7$/s" data-img="Teacher.PNG">
       <img src="Teacher.PNG" alt="Teacher Noob">
       <div class="image-title">Teacher Noob</div>
-      <div class="image-price">Prix : 800</div>
+      <div class="image-price">800 💰</div>
     </div>
 
     <div class="image-card glow-Legendaire" data-title="Solider Noob" data-rarity="Secret" data-price="12000000" data-bonus="60000$/s" data-img="Solider.PNG">
       <img src="Solider.PNG" alt="Solider Noob">
       <div class="image-title">Solider Noob</div>
-      <div class="image-price">Prix : 12000000</div>
+      <div class="image-price">12000000 💰</div>
     </div>
-
-  </div> <!-- Fin images-container -->
+  </div>
 
   <!-- Popup vertical -->
   <div id="popup" class="popup">
@@ -152,34 +142,10 @@
     <p id="popupBonus"></p>
   </div>
 
-  <!-- Footer cadre bleu -->
   <div class="footer">
     Développé par Zaynox pour Steal a Noob de DarSya's Creations
   </div>
 
-  <!-- Script Particles.js -->
-  <script>
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#ff4500" },
-        "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" } },
-        "opacity": { "value": 0.7, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.3, "sync": false } },
-        "size": { "value": 4, "random": true, "anim": { "enable": true, "speed": 5, "size_min": 0.5, "sync": false } },
-        "line_linked": { "enable": true, "distance": 150, "color": "#ff6347", "opacity": 0.4, "width": 1 },
-        "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
-      },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-        "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 4 } }
-      },
-      "retina_detect": true
-    });
-  </script>
-
-  <!-- Script principal -->
   <script src="script.js"></script>
-
 </body>
 </html>
