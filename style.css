@@ -22,12 +22,12 @@ body {
   margin: 20px 0;
 }
 
-input[type="text"] {
+input[type="text"], select {
   padding: 10px 20px;
   font-size: 1.2rem;
   border-radius: 20px;
   border: none;
-  width: 300px;
+  margin: 5px;
 }
 
 .images-container {
@@ -41,7 +41,8 @@ input[type="text"] {
   position: relative;
   display: inline-block;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 10px;
 }
 
 .image-card img {
@@ -51,10 +52,16 @@ input[type="text"] {
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.image-card img:hover {
+.image-card:hover img {
   transform: scale(1.1);
-  box-shadow: 0 0 20px #fff;
 }
+
+/* Lueurs selon rareté */
+.Commun { box-shadow: 0 0 10px gray; }
+.UnCommun { box-shadow: 0 0 15px orange; }
+.Rare { box-shadow: 0 0 20px #00bfff; }
+.Légendaire { box-shadow: 0 0 25px gold; }
+.Mythique { box-shadow: 0 0 30px deeppink; }
 
 .image-title {
   margin-top: 10px;
@@ -71,11 +78,16 @@ input[type="text"] {
   background: #1b263b;
   border: 3px solid #415a77;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 15px;
   z-index: 100;
   text-align: center;
   color: white;
-  max-width: 300px;
+  animation: popupFade 0.3s ease;
+}
+
+@keyframes popupFade {
+  0% { opacity: 0; transform: translate(-50%, -60%); }
+  100% { opacity: 1; transform: translate(-50%, -50%); }
 }
 
 #popupClose {
@@ -90,17 +102,14 @@ input[type="text"] {
 #popup img {
   width: 200px;
   margin-bottom: 10px;
+  border-radius: 10px;
 }
 
-#popupRarity {
-  color: #ccc;
-}
+#popupRarity.Commun { color: gray; }
+#popupRarity.UnCommun { color: orange; }
+#popupRarity.Rare { color: #00bfff; }
+#popupRarity.Légendaire { color: gold; }
+#popupRarity.Mythique { color: deeppink; }
 
-#priceText {
-  color: #0f0;
-}
-
-#popupBonus {
-  color: yellow;
-  font-size: 0.9rem;
-}
+#priceText { color: #0f0; }
+#popupBonus { color: yellow; font-size: 0.9rem; }
