@@ -1,102 +1,73 @@
-/* style.css */
-
 body {
-  margin: 0;
   font-family: Arial, sans-serif;
-  background: #121212;
+  background-color: #111;
   color: #fff;
-}
-
-#mainTitle {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.search-container {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-#searchBar {
-  padding: 10px;
-  width: 250px;
-  border-radius: 5px;
-  border: none;
-}
-
-.sort-buttons {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.sort-buttons button {
-  padding: 8px 15px;
-  margin: 0 5px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  margin: 0;
+  padding: 0;
 }
 
 .images-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
+  padding: 20px;
 }
 
 .image-card {
-  background: #1e1e1e;
+  background-color: #222;
   border-radius: 10px;
-  width: 120px;
-  text-align: center;
   padding: 10px;
   cursor: pointer;
+  text-align: center;
   transition: transform 0.2s;
 }
 
 .image-card:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .image-card img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 5px;
+  width: 120px;
+  height: 120px;
 }
 
-.glow-Commun { box-shadow: 0 0 10px blue; }
-.glow-Rare { box-shadow: 0 0 10px purple; }
-.glow-UnCommun { box-shadow: 0 0 10px orange; }
-.glow-Légendaire { box-shadow: 0 0 10px gold; }
-.glow-Mythique { box-shadow: 0 0 10px red; }
-
-#popup {
+.popup {
   display: none;
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,0.8);
-  z-index: 9999;
 }
 
-#popup img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  margin-bottom: 10px;
+.popup-content {
+  display: flex;
+  background-color: #222;
   border-radius: 10px;
+  padding: 20px;
+  max-width: 600px;
+  gap: 20px;
 }
 
-#popup h2, #popup p {
-  text-align: center;
+.popup-content img {
+  width: 200px;
+  height: 200px;
+}
+
+.popup-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #popupClose {
   position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 30px;
+  top: 20px;
+  right: 40px;
+  font-size: 40px;
   cursor: pointer;
 }
