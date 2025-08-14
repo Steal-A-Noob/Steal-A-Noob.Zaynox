@@ -9,7 +9,6 @@ const priceText = document.getElementById("priceText");
 const popupBonus = document.getElementById("popupBonus");
 const popupClose = document.getElementById("popupClose");
 
-// Liste des Noobs
 const noobs = [
   { title: "Noob", img:"noob.png", rarity:"Commun", price:"$250", bonus:"+1$/s"},
   { title: "Noob Boxeur", img:"noir fond.png", rarity:"Rare", price:"$2k", bonus:"+6$/s"},
@@ -21,8 +20,7 @@ const noobs = [
   { title: "God Noob", img:"noir fond.png", rarity:"Mythique", price:"$30k", bonus:"+20$/s"}
 ];
 
-// Génération des cartes
-function displayNoobs(list) {
+function displayNoobs(list){
   imagesContainer.innerHTML = '';
   list.forEach(noob => {
     const card = document.createElement('div');
@@ -52,18 +50,17 @@ function displayNoobs(list) {
 
 displayNoobs(noobs);
 
-// Popup close
-popupClose.addEventListener("click", () => { popup.style.display = "none"; });
+popupClose.addEventListener("click", ()=> popup.style.display = "none");
 
-// Filtre par recherche
-searchBar.addEventListener("input", function() {
+// Filtre recherche
+searchBar.addEventListener("input", function(){
   const value = searchBar.value.toLowerCase();
   const filtered = noobs.filter(noob => noob.title.toLowerCase().includes(value));
   displayNoobs(filtered);
 });
 
-// Filtre par rareté
-rarityFilter.addEventListener("change", function() {
+// Filtre rareté
+rarityFilter.addEventListener("change", function(){
   const value = rarityFilter.value;
   const filtered = value === 'all' ? noobs : noobs.filter(noob => noob.rarity === value);
   displayNoobs(filtered);
