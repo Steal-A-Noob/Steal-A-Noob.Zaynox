@@ -1,128 +1,117 @@
-// --------------------
-// Variables du popup
-// --------------------
-const popup = document.getElementById("popup");
-const popupImage = document.getElementById("popupImage");
-const popupTitle = document.getElementById("popupTitle");
-const popupRarity = document.getElementById("popupRarity");
-const priceText = document.getElementById("priceText");
-const popupBonus = document.getElementById("popupBonus");
-const popupClose = document.getElementById("popupClose");
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: white;
+  text-align: center;
+}
 
-const imageCards = document.querySelectorAll(".image-card");
+#mainTitle {
+  font-size: 3em;
+  text-shadow: 0 0 15px #ff0000, 0 0 25px #ff6600;
+  animation: float 3s ease-in-out infinite;
+}
 
-// --------------------
-// Lueur autour des cartes selon rareté
-// --------------------
-imageCards.forEach(card => {
-  const rarity = card.getAttribute("data-rarity").toLowerCase();
-  let glowColor;
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
 
-  switch (rarity) {
-    case "commun": glowColor = "#FFFFFF"; break;
-    case "uncommun": glowColor = "#006400"; break; // vert foncé
-    case "rare": glowColor = "#0000FF"; break; // bleu
-    case "légendaire": glowColor = "#FFA500"; break; // orange
-    case "mythique": glowColor = "#FF00FF"; break; // rose
-    default: glowColor = "#FFFFFF";
-  }
+.search-container {
+  margin: 20px;
+}
 
-  card.style.boxShadow = `0 0 15px ${glowColor}`;
-});
+#searchBar {
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: none;
+}
 
-// --------------------
-// Affichage du popup
-// --------------------
-imageCards.forEach(card => {
-  card.addEventListener("click", () => {
-    const imgSrc = card.querySelector("img").src;
-    const title = card.getAttribute("data-title");
-    const rarity = card.getAttribute("data-rarity");
-    const price = card.getAttribute("data-price");
-    const bonus = card.getAttribute("data-bonus");
+.sort-buttons {
+  margin: 20px;
+}
 
-    popupImage.src = imgSrc;
-    popupTitle.textContent = title;
+.sort-buttons button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-    // Couleur rareté
-    let rarityColor;
-    switch (rarity.toLowerCase()) {
-      case "commun": rarityColor = "#FFFFFF"; break;
-      case "uncommun": rarityColor = "#006400"; break;
-      case "rare": rarityColor = "#0000FF"; break;
-      case "légendaire": rarityColor = "#FFA500"; break;
-      case "mythique": rarityColor = "#FF00FF"; break;
-      default: rarityColor = "#FFFFFF";
-    }
-    popupRarity.innerHTML = `<span style="color:${rarityColor}">Rareté: ${rarity}</span>`;
+.images-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
 
-    // Prix couleur or
-    priceText.innerHTML = `<span style="color:#FFD700">Prix: ${price} $</span>`;
+.image-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
 
-    // Bonus sans le mot "Bonus"
-    popupBonus.innerHTML = `<span style="color:yellow">${bonus}</span>`;
+.image-card:hover {
+  transform: scale(1.05);
+}
 
-    popup.style.display = "flex";
-  });
-});
+.image-card img {
+  max-width: 150px;
+  border-radius: 5px;
+}
 
-// --------------------
-// Fermeture popup
-// --------------------
-popupClose.addEventListener("click", () => {
-  popup.style.display = "none";
-});
+.image-title {
+  margin-top: 5px;
+  font-weight: bold;
+}
 
-// --------------------
-// Barre de recherche
-// --------------------
-document.getElementById("searchBar").addEventListener("input", function () {
-  const searchValue = this.value.toLowerCase();
-  imageCards.forEach(card => {
-    const title = card.getAttribute("data-title").toLowerCase();
-    if (title.includes(searchValue)) {
-      card.style.display = "inline-block";
-    } else {
-      card.style.display = "none";
-    }
-  });
-});
+/* Popup */
+.popup {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #222;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 100;
+  box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
 
-// --------------------
-// Tri par rareté
-// --------------------
-document.getElementById("sortRarity").addEventListener("click", () => {
-  const order = ["mythique", "légendaire", "rare", "commun", "uncommun"];
-  const sorted = Array.from(imageCards).sort((a, b) => {
-    const rarityA = a.getAttribute("data-rarity").toLowerCase();
-    const rarityB = b.getAttribute("data-rarity").toLowerCase();
-    return order.indexOf(rarityA) - order.indexOf(rarityB);
-  });
+#popupClose {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 2em;
+  cursor: pointer;
+  color: red;
+}
 
-  const container = document.querySelector(".images-container");
-  sorted.forEach(card => container.appendChild(card));
-});
+#popupImage {
+  max-width: 200px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
 
-// --------------------
-// Tri par prix croissant
-// --------------------
-document.getElementById("sortPriceAsc").addEventListener("click", () => {
-  const sorted = Array.from(imageCards).sort((a, b) => {
-    return parseInt(a.getAttribute("data-price")) - parseInt(b.getAttribute("data-price"));
-  });
-
-  const container = document.querySelector(".images-container");
-  sorted.forEach(card => container.appendChild(card));
-});
-
-// --------------------
-// Tri par prix décroissant
-// --------------------
-document.getElementById("sortPriceDesc").addEventListener("click", () => {
-  const sorted = Array.from(imageCards).sort((a, b) => {
-    return parseInt(b.getAttribute("data-price")) - parseInt(a.getAttribute("data-price"));
-  });
-
-  const container = document.querySelector(".images-container");
-  sorted.forEach(card => container.appendChild(card));
-});
+/* Footer */
+.footer {
+  background-color: #1E90FF;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  margin-top: 50px;
+  border-radius: 8px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
