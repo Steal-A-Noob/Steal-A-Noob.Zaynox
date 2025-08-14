@@ -1,70 +1,32 @@
-const imagesData = [
-  { title: "Noob", rarity: "Commun", price: "$250", bonus: "+1$/s", img: "noob.png" },
-  { title: "Noob Boxeur", rarity: "Rare", price: "$2k", bonus: "+6$/s", img: "noir fond.png" },
-  { title: "Noob Ninja", rarity: "Rare", price: "$10k", bonus: "+20$/s", img: "noir fond.png" },
-  { title: "Agent Noob", rarity: "Commun", price: "$250", bonus: "+1$/s", img: "noir fond.png" },
-  { title: "Surf Noob", rarity: "Commun", price: "$550", bonus: "+2$/s", img: "noir fond.png" },
-  { title: "Hacker Noob", rarity: "Légendaire", price: "$30k", bonus: "+20$/s", img: "noir fond.png" },
-  { title: "Magic Noob", rarity: "UnCommun", price: "$250", bonus: "+1$/s", img: "noir fond.png" },
-  { title: "God Noob", rarity: "Mythique", price: "$30k", bonus: "+20$/s", img: "noir fond.png" }
-];
-
-const imagesContainer = document.getElementById("imagesContainer");
+const searchBar = document.getElementById("searchBar");
 const popup = document.getElementById("popup");
 const popupImage = document.getElementById("popupImage");
 const popupTitle = document.getElementById("popupTitle");
 const popupRarity = document.getElementById("popupRarity");
 const priceText = document.getElementById("priceText");
 const popupBonus = document.getElementById("popupBonus");
-const popupEffect = document.getElementById("popupEffect");
 const popupClose = document.getElementById("popupClose");
-const searchBar = document.getElementById("searchBar");
-const rarityFilter = document.getElementById("rarityFilter");
 
-function generateCards() {
-  imagesContainer.innerHTML = "";
-  const searchValue = searchBar.value.toLowerCase();
-  const rarityValue = rarityFilter.value;
+const imageCards = document.querySelectorAll(".image-card");
 
-  imagesData.forEach(item => {
-    if ((item.title.toLowerCase().includes(searchValue)) && (rarityValue === "all" || item.rarity === rarityValue)) {
-      const card = document.createElement("div");
-      card.className = "image-card";
-      card.dataset.title = item.title;
-      card.dataset.rarity = item.rarity;
-      card.dataset.price = item.price;
-      card.dataset.bonus = item.bonus;
-      card.dataset.img = item.img;
+imageCards.forEach(card => {
+  card.addEventListener("click", () => {
+    popupImage.src = card.getAttribute("data-img");
+    popupTitle.textContent = card.getAttribute("data-title");
+    
+    // Couleur selon rareté
+    let rarity = card.getAttribute("data-rarity");
+    if(rarity.toLowerCase() === "rare") popupRarity.innerHTML = `Rareté : <span style="color:deepskyblue">${rarity}</span>`;
+    else if(rarity.toLowerCase() === "mythique") popupRarity.innerHTML = `Rareté : <span style="color:#ff00ff">${rarity}</span>`;
+    else popupRarity.innerHTML = `Rareté : <span style="color:#ccc">${rarity}</span>`;
 
-      card.innerHTML = `
-        <img src="${item.img}" alt="${item.title}">
-        <div class="image-title">${item.title}</div>
-      `;
-
-      card.addEventListener("click", () => {
-        popup.style.display = "block";
-        popupImage.src = item.img;
-        popupTitle.textContent = item.title;
-        popupRarity.textContent = `Rareté: ${item.rarity}`;
-        popupRarity.className = item.rarity;
-        priceText.textContent = `Prix: ${item.price}`;
-        popupBonus.textContent = item.bonus;
-        popupEffect.textContent = item.bonus;
-      });
-
-      imagesContainer.appendChild(card);
-    }
+    // Prix en vert
+    priceText.innerHTML = `Prix : <span style="color:#0f0">${card.getAttribute("data-price")}</span>`;
+    // Bonus en jaune
+    popupBonus.innerHTML = `<span style="color:yellow">${card.getAttribute("data-bonus")}</span>`;
+    popup.style.display = "block";
   });
-}
-
-// Fermeture popup
-popupClose.addEventListener("click", () => {
-  popup.style.display = "none";
 });
 
-// Recherches et filtres
-searchBar.addEventListener("input", generateCards);
-rarityFilter.addEventListener("change", generateCards);
-
-// Initialisation
-generateCards();
+// Fermer popup
+popupClose.addEventListener("click", () => popup.style
