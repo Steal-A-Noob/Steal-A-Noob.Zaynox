@@ -1,28 +1,21 @@
 body {
-  margin:0;
+  margin: 0;
   font-family: 'Arial', sans-serif;
   background: #111;
-  color: white;
+  color: #fff;
   overflow-x: hidden;
 }
 
-#particles-js {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
-h1#mainTitle {
+#mainTitle {
   text-align: center;
-  margin-top: 30px;
-  color: #ff4500;
+  font-size: 3em;
+  margin-top: 20px;
   animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px);}
-  50% { transform: translateY(-15px);}
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
 .search-container {
@@ -30,12 +23,12 @@ h1#mainTitle {
   margin: 20px 0;
 }
 
-.search-container input {
+#searchBar {
   padding: 10px;
-  width: 250px;
+  width: 200px;
   border-radius: 10px;
   border: none;
-  font-size: 16px;
+  outline: none;
 }
 
 .sort-buttons {
@@ -44,91 +37,81 @@ h1#mainTitle {
 }
 
 .sort-buttons button {
-  padding: 10px 15px;
   margin: 0 5px;
-  border-radius: 10px;
+  padding: 10px 15px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.sort-buttons button:hover {
+  background-color: #222;
 }
 
 .images-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 20px;
+  padding: 0 10px;
 }
 
 .image-card {
-  width: 200px;
-  margin: 10px;
+  width: 150px;
+  background: #222;
   border-radius: 15px;
-  overflow: hidden;
-  cursor: pointer;
   text-align: center;
+  padding: 10px;
+  cursor: pointer;
   transition: transform 0.3s;
+  position: relative;
 }
 
 .image-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .image-card img {
   width: 100%;
-  display: block;
+  border-radius: 10px;
 }
 
-.image-title {
-  padding: 10px 0;
-  font-weight: bold;
-}
+/* Glow by rarity */
+.glow-Commun { box-shadow: 0 0 10px #00ffff; }
+.glow-Rare { box-shadow: 0 0 10px #1e90ff; }
+.glow-UnCommun { box-shadow: 0 0 10px #ff8c00; }
+.glow-Légendaire { box-shadow: 0 0 10px #9400d3; }
+.glow-Mythique { box-shadow: 0 0 10px #ff1493; }
 
-/* Glow selon rareté */
-.glow-Commun { box-shadow: 0 0 15px #00ffff; }
-.glow-Rare { box-shadow: 0 0 20px #00ffff; }
-.glow-UnCommun { box-shadow: 0 0 25px #8a2be2; }
-.glow-Légendaire { box-shadow: 0 0 25px #ffd700; }
-.glow-Mythique { box-shadow: 0 0 30px #ff1493; }
-
-/* Popup vertical */
+/* Popup */
 .popup {
   display: none;
   position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #111;
+  border: 2px solid #fff;
+  border-radius: 15px;
   padding: 20px;
-  box-sizing: border-box;
   z-index: 1000;
+  text-align: center;
 }
 
 .popup img {
-  width: 50%;
-  max-width: 400px;
-  border-radius: 15px;
-  margin-bottom: 20px;
-}
-
-#popupTitle {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-#popupRarity, #priceText, #popupBonus {
-  margin: 5px 0;
-  font-size: 18px;
+  width: 200px;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
 
 #popupClose {
   position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 30px;
+  top: 10px;
+  right: 15px;
+  font-size: 25px;
   cursor: pointer;
-  color: white;
 }
 
-#popupBonus { color: yellow; font-weight:bold; }
-.priceValue { color: #00ff00; font-weight:bold; }
+#popupBonus { color: yellow; }
+#popupPrice { color: lime; }
