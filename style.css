@@ -4,12 +4,20 @@ body {
   background: linear-gradient(to bottom, #7ec0ee, #1b263b, #0d1b2a);
   color: white;
   text-align: center;
+  overflow-x: hidden;
+}
+
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 #mainTitle {
   font-size: 4rem;
   margin-top: 20px;
-  text-shadow: 0 0 20px #fff, 0 0 40px #0ff;
+  text-shadow: 0 0 20px #fff;
   animation: float 2s ease-in-out infinite;
 }
 
@@ -18,9 +26,7 @@ body {
   50% { transform: translateY(-10px); }
 }
 
-.search-container {
-  margin: 20px 0;
-}
+.search-container { margin: 20px 0; }
 
 input[type="text"] {
   padding: 10px 20px;
@@ -41,40 +47,24 @@ input[type="text"] {
   position: relative;
   display: inline-block;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-  background: #1b263b;
-  border-radius: 15px;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-
-.image-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+  transition: transform 0.3s;
 }
 
 .image-card img {
   width: 150px;
+  border: 3px solid gray;
   border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.image-card::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  width: 170px;
-  height: 170px;
-  border-radius: 15px;
-  z-index: -1;
-  pointer-events: none;
-}
+/* Glow selon rareté */
+.image-card[data-rarity="Commun"] img { box-shadow: 0 0 10px gray; }
+.image-card[data-rarity="UnCommun"] img { box-shadow: 0 0 10px lightgreen; }
+.image-card[data-rarity="Rare"] img { box-shadow: 0 0 10px deepskyblue; }
+.image-card[data-rarity="Légendaire"] img { box-shadow: 0 0 15px orange; }
+.image-card[data-rarity="Mythique"] img { box-shadow: 0 0 15px deeppink; }
 
-.image-card[data-rarity="Commun"]::before { box-shadow: 0 0 15px #ccc, 0 0 25px #eee; }
-.image-card[data-rarity="Rare"]::before { box-shadow: 0 0 15px #00f, 0 0 25px #0ff; }
-.image-card[data-rarity="UnCommun"]::before { box-shadow: 0 0 15px #0ff, 0 0 25px #0ff; }
-.image-card[data-rarity="Légendaire"]::before { box-shadow: 0 0 15px gold, 0 0 25px yellow; }
-.image-card[data-rarity="Mythique"]::before { box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff69b4; }
+.image-card img:hover { transform: scale(1.1); }
 
 .image-title { margin-top: 10px; font-size: 1.2rem; }
 
@@ -85,15 +75,13 @@ input[type="text"] {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: linear-gradient(to bottom right, #0d1b2a, #1b263b);
+  background: #1b263b;
   border: 3px solid #415a77;
   padding: 20px;
-  border-radius: 15px;
+  border-radius: 10px;
   z-index: 100;
   text-align: center;
   color: white;
-  max-width: 300px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 #popupClose {
@@ -105,7 +93,8 @@ input[type="text"] {
   color: red;
 }
 
-#popup img { width: 200px; border-radius: 10px; margin-bottom: 10px; }
-#popupRarity { font-weight: bold; font-size: 1.2rem; }
-#priceText { color: #0f0; font-weight: bold; font-size: 1.1rem; }
-#popupBonus, #popupUp
+#popup img { width: 200px; margin-bottom: 10px; }
+
+#popupRarity span { font-weight: bold; }
+#priceText span { font-weight: bold; }
+#popupBonus { font-weight: bold; }
