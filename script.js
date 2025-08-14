@@ -1,5 +1,3 @@
-// Script principal
-
 // Popup
 const popup = document.getElementById("popup");
 const popupImage = document.getElementById("popupImage");
@@ -14,7 +12,7 @@ const imageCards = document.querySelectorAll(".image-card");
 // Affichage popup
 imageCards.forEach(card => {
   card.addEventListener("click", () => {
-    const imgSrc = card.getAttribute("data-img");
+    const imgSrc = card.querySelector("img").src; // ⚡ On prend l'image affichée
     const title = card.getAttribute("data-title");
     const rarity = card.getAttribute("data-rarity");
     const price = card.getAttribute("data-price");
@@ -23,7 +21,7 @@ imageCards.forEach(card => {
     popupImage.src = imgSrc; // Image au-dessus
     popupTitle.textContent = title;
 
-    // Couleurs rareté
+    // Couleur rareté
     let rarityColor;
     switch (rarity.toLowerCase()) {
       case "commun": rarityColor = "#FFFFFF"; break;
@@ -35,7 +33,6 @@ imageCards.forEach(card => {
     }
     popupRarity.innerHTML = `<span style="color:${rarityColor}">Rareté: ${rarity}</span>`;
 
-    // Couleur argent
     priceText.innerHTML = `<span style="color:#FFD700">Prix: ${price} $</span>`;
     popupBonus.textContent = `Bonus: ${bonus}`;
 
@@ -46,38 +43,4 @@ imageCards.forEach(card => {
 // Fermeture popup
 popupClose.addEventListener("click", () => {
   popup.style.display = "none";
-});
-
-// Tri
-const sortRarityBtn = document.getElementById("sortRarity");
-const sortPriceAscBtn = document.getElementById("sortPriceAsc");
-const sortPriceDescBtn = document.getElementById("sortPriceDesc");
-const imagesContainer = document.querySelector(".images-container");
-
-sortRarityBtn.addEventListener("click", () => {
-  let cards = Array.from(imageCards);
-  cards.sort((a,b) => a.getAttribute("data-rarity").localeCompare(b.getAttribute("data-rarity")));
-  cards.forEach(card => imagesContainer.appendChild(card));
-});
-
-sortPriceAscBtn.addEventListener("click", () => {
-  let cards = Array.from(imageCards);
-  cards.sort((a,b) => parseInt(a.getAttribute("data-price")) - parseInt(b.getAttribute("data-price")));
-  cards.forEach(card => imagesContainer.appendChild(card));
-});
-
-sortPriceDescBtn.addEventListener("click", () => {
-  let cards = Array.from(imageCards);
-  cards.sort((a,b) => parseInt(b.getAttribute("data-price")) - parseInt(a.getAttribute("data-price")));
-  cards.forEach(card => imagesContainer.appendChild(card));
-});
-
-// Recherche
-const searchBar = document.getElementById("searchBar");
-searchBar.addEventListener("input", () => {
-  const value = searchBar.value.toLowerCase();
-  imageCards.forEach(card => {
-    const title = card.getAttribute("data-title").toLowerCase();
-    card.style.display = title.includes(value) ? "block" : "none";
-  });
 });
