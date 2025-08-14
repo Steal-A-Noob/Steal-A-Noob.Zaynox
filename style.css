@@ -1,12 +1,23 @@
-/* Général */
-body {
+/* ========================
+   RESET & BASE
+======================== */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #111;
-  color: white;
-  overflow-x: hidden;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
 }
 
+body {
+  background-color: #1a1a1a;
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ========================
+   PARTICLES
+======================== */
 #particles-js {
   position: fixed;
   width: 100%;
@@ -14,130 +25,158 @@ body {
   z-index: -1;
 }
 
-h1#mainTitle {
+/* ========================
+   TITRE PRINCIPAL
+======================== */
+#mainTitle {
   text-align: center;
-  margin-top: 20px;
-  font-size: 2.5em;
-  text-shadow: 0 0 10px #ff4500;
+  font-size: 3rem;
+  margin: 2rem 0;
+  color: #ff4500;
+  text-shadow: 0 0 10px #ff4500, 0 0 20px #ff6347;
 }
 
-/* Recherche */
+/* ========================
+   BARRE DE RECHERCHE
+======================== */
 .search-container {
   text-align: center;
-  margin: 20px;
+  margin-bottom: 1rem;
 }
 
-.search-container input {
-  padding: 10px;
-  width: 50%;
-  border-radius: 5px;
+#searchBar {
+  padding: 0.5rem 1rem;
+  width: 250px;
+  border-radius: 20px;
   border: none;
+  outline: none;
+  font-size: 1rem;
 }
 
-/* Boutons */
+/* ========================
+   BOUTONS DE TRI
+======================== */
 .sort-buttons {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 
 .sort-buttons button {
-  padding: 10px 15px;
-  margin: 5px;
-  background-color: #222;
-  color: white;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+  background: #ff4500;
+  color: #fff;
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
 
 .sort-buttons button:hover {
-  background-color: #333;
+  background: #ff6347;
+  transform: scale(1.1);
 }
 
-/* Conteneur d'images */
+/* ========================
+   CONTENEUR D’IMAGES
+======================== */
 .images-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
-  padding: 20px;
+  gap: 1rem;
 }
 
 .image-card {
-  background: rgba(0,0,0,0.6);
-  border-radius: 10px;
-  padding: 10px;
   width: 150px;
+  background: #222;
+  border-radius: 15px;
+  padding: 0.5rem;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #ff4500;
 }
 
 .image-card img {
   width: 100%;
-  border-radius: 5px;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
 }
 
-/* Lueur selon rareté */
-.glow-Commun img { box-shadow: 0 0 15px green; }
-.glow-Uncommun img { box-shadow: 0 0 15px limegreen; }
-.glow-Rare img { box-shadow: 0 0 15px blue; }
-.glow-Legendaire img { box-shadow: 0 0 15px gold; }
-.glow-Mythique img { box-shadow: 0 0 15px purple; }
-.glow-Secret img { box-shadow: 0 0 15px red; }
-
-/* Nom + prix + bonus */
 .image-title {
   font-weight: bold;
-  margin-top: 5px;
 }
 
-.image-price {
-  font-size: 0.9em;
-  color: #ddd;
-}
+/* ========================
+   GLOW SELON RARETÉ
+======================== */
+.glow-Commun { box-shadow: 0 0 10px #00ff00; }
+.glow-Uncommun { box-shadow: 0 0 10px #00ffff; }
+.glow-Rare { box-shadow: 0 0 15px #0000ff; }
+.glow-Legendaire { box-shadow: 0 0 20px #ff00ff; }
+.glow-Mythique { box-shadow: 0 0 25px #ff9900; }
+.glow-Secret { box-shadow: 0 0 30px #ff0000; }
 
-.image-bonus {
-  font-size: 0.8em;
-  color: #aaa;
-}
-
-/* Popup */
+/* ========================
+   POPUP
+======================== */
 .popup {
   display: none;
   position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  align-items: center;
-  justify-content: center;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  max-width: 90%;
+  background: #111;
+  border-radius: 20px;
+  padding: 1rem;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  text-align: center;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.popup.inverted {
+  transform: translate(-50%, -50%) rotateY(180deg);
 }
 
 .popup img {
-  width: 200px;
-  border-radius: 10px;
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 0.5rem;
 }
 
-.popup h2, .popup p {
-  margin: 10px 0;
+.popup h2 {
+  margin-bottom: 0.5rem;
+}
+
+.popup p {
+  margin: 0.2rem 0;
 }
 
 #popupClose {
   position: absolute;
-  top: 15px;
-  right: 25px;
-  font-size: 30px;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
   cursor: pointer;
-  color: white;
+  color: #ff4500;
 }
 
+/* ========================
+   FOOTER
+======================== */
 .footer {
   text-align: center;
-  padding: 10px;
-  background: #004080;
-  position: relative;
-  margin-top: 20px;
+  padding: 1rem;
+  background: #0d0d0d;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #ccc;
 }
