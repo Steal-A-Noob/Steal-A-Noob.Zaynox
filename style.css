@@ -1,110 +1,141 @@
+/* Base */
+* { box-sizing: border-box; }
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(to bottom, #7ec0ee, #1b263b, #0d1b2a);
-  color: white;
+  color: #fff;
   text-align: center;
+  overflow-x: hidden;
 }
 
+/* Particules en fond */
+#particles-js {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+/* Titre flottant */
 #mainTitle {
-  font-size: 4rem;
-  margin-top: 20px;
-  text-shadow: 0 0 10px #fff;
-  animation: float 2s ease-in-out infinite;
+  font-size: 3.2rem;
+  margin: 20px 0 10px;
+  text-shadow: 0 0 14px #fff, 0 0 28px rgba(0,255,255,0.65);
+  animation: floatY 2.2s ease-in-out infinite;
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-.search-container {
-  margin: 20px 0;
-}
-
-input[type="text"] {
-  padding: 10px 20px;
-  font-size: 1.2rem;
+/* Recherche */
+.search-container { margin: 8px 0 22px; }
+#searchBar {
+  padding: 10px 18px;
+  font-size: 1.05rem;
   border-radius: 20px;
   border: none;
-  width: 300px;
+  width: min(90%, 360px);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
 }
+#searchBar::placeholder { color: #e6e6e6; }
 
+/* Grille d’images */
 .images-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px;
+  padding: 0 16px 40px;
+  max-width: 980px;
+  margin: 0 auto;
 }
 
+/* Carte image */
 .image-card {
   position: relative;
-  display: inline-block;
+  background: rgba(27,38,59,0.8);
+  border-radius: 14px;
+  padding: 12px 12px 10px;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.35);
 }
+
+/* Lueur fixe selon rareté (cadre ne bouge pas) */
+.image-card::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 16px;
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(6px);
+  opacity: 0.9;
+}
+/* Couleurs par rareté */
+.image-card[data-rarity="Commun"]::after { box-shadow: 0 0 14px #cfcfcf; }
+.image-card[data-rarity="UnCommun"]::after { box-shadow: 0 0 14px #7cff9d; }
+.image-card[data-rarity="Rare"]::after { box-shadow: 0 0 14px #25c3ff; }
+.image-card[data-rarity="Légendaire"]::after { box-shadow: 0 0 16px #ffc107; }
+.image-card[data-rarity="Mythique"]::after { box-shadow: 0 0 18px #ff3cff; }
 
 .image-card img {
   width: 150px;
-  border: 3px solid gray;
+  height: 150px;
+  object-fit: cover;
   border-radius: 10px;
-  transition: transform 0.3s, box-shadow 0.3s;
+  display: block;
+  margin: 0 auto;
+  border: 3px solid rgba(255,255,255,0.2);
+  transition: transform 0.15s ease;
 }
-
-.image-card img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px #fff;
-}
+.image-card:hover img { transform: scale(1.04); }
 
 .image-title {
-  margin-top: 10px;
-  font-size: 1.2rem;
+  margin-top: 8px;
+  font-size: 1.05rem;
+  letter-spacing: 0.2px;
 }
 
-.popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #1b263b;
-  border: 3px solid #415a77;
-  padding: 20px;
+/* Modal / Popup (solide et simple) */
+.modal.hidden { display: none; }
+.modal { position: fixed; inset: 0; z-index: 100; }
+.modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(2px);
+}
+.modal-content {
+  position: relative;
+  width: min(92%, 360px);
+  margin: 6vh auto 0;
+  background: linear-gradient(135deg, #0d1b2a, #1b263b);
+  border: 2px solid #415a77;
+  border-radius: 14px;
+  padding: 18px 16px 16px;
+  color: #fff;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  transform: translateY(10px);
+  animation: popIn 160ms ease-out forwards;
+}
+@keyframes popIn { to { transform: translateY(0); } }
+
+.modal-close {
+  position: absolute; top: 8px; right: 10px;
+  background: transparent; border: none; color: #ff4d4f;
+  font-size: 1.6rem; line-height: 1; cursor: pointer;
+}
+
+/* Contenu popup */
+#modalImage {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
   border-radius: 10px;
-  z-index: 100;
-  text-align: center;
-  color: white;
+  border: 3px solid rgba(255,255,255,0.2);
+  display: block; margin: 6px auto 10px;
 }
-
-#popupClose {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 1.5rem;
-  color: red;
-}
-
-#popup img {
-  width: 200px;
-  margin-bottom: 10px;
-}
-
-#popupRarity {
-  font-weight: bold;
-}
-
-#popupPrice {
-  color: white;
-}
-
-.price-value {
-  color: #0f0;
-  font-weight: bold;
-}
-
-.bonus-value {
-  color: yellow;
-  font-size: 1rem;
-  font-weight: bold;
-}
+#modalTitle { margin: 4px 0 6px;
