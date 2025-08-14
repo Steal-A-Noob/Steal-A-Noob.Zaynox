@@ -25,12 +25,14 @@ imageCards.forEach(card => {
     popupBonus.textContent = bonus;
 
     let rarityClass = "";
-    if (rarity.toLowerCase() === "rare") rarityClass = "rarity-rare";
-    else if (rarity.toLowerCase() === "uncommun") rarityClass = "rarity-uncommun";
-    else if (rarity.toLowerCase() === "mythique") rarityClass = "rarity-mythique";
+    switch(rarity.toLowerCase()){
+      case "rare": rarityClass = "rarity-rare"; break;
+      case "uncommun": rarityClass = "rarity-uncommun"; break;
+      case "mythique": rarityClass = "rarity-mythique"; break;
+      default: rarityClass = ""; break;
+    }
 
     popupRarity.innerHTML = `Rareté: <span class="${rarityClass}">${rarity}</span>`;
-
     popup.classList.add("show");
   });
 });
@@ -41,4 +43,19 @@ popupClose.addEventListener("click", () => {
 
 // Recherche
 searchBar.addEventListener("input", function() {
-  const value = searchBar.value.toLower
+  const value = searchBar.value.toLowerCase();
+  imageCards.forEach(card => {
+    const title = card.getAttribute("data-title").toLowerCase();
+    if(title.includes(value)){
+      card.style.display = "inline-block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});
+
+// Reset
+resetBtn.addEventListener("click", () => {
+  searchBar.value = "";
+  imageCards.forEach(card => card.style.display = "inline-block");
+});
