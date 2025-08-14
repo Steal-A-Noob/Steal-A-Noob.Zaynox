@@ -20,9 +20,15 @@ imageCards.forEach(card => {
     popup.style.display = "block";
     popupImage.src = img;
     popupTitle.textContent = title;
-    popupRarity.textContent = `Rareté: ${rarity}`;
-    priceText.textContent = `Prix: ${price}`;
-    popupBonus.textContent = bonus;
+
+    // Couleur rareté
+    let rarityColor = "#ccc";
+    if (rarity.toLowerCase() === "rare") rarityColor = "blue";
+    if (rarity.toLowerCase() === "légendaire") rarityColor = "gold";
+
+    popupRarity.innerHTML = `Rareté: <span style="color:${rarityColor}">${rarity}</span>`;
+    priceText.innerHTML = `Prix: <span style="color:lime">${price}</span>`;
+    popupBonus.innerHTML = `<span style="color:yellow">${bonus}</span>`;
   });
 });
 
