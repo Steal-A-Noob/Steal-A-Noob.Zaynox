@@ -6,24 +6,33 @@ body {
   background-color: #111;
   color: #fff;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Titre principal avec lueur */
+/* Titre principal flottant avec lueur */
 #mainTitle {
-  text-align: center;
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 3em;
-  margin: 20px 0;
+  text-align: center;
   text-shadow: 0 0 10px #ff0, 0 0 20px #ff0;
-  animation: glow 1.5s infinite alternate;
+  animation: floatGlow 2s infinite alternate;
+  z-index: 1000;
 }
 
-@keyframes glow {
-  0% { text-shadow: 0 0 10px #ff0, 0 0 20px #ff0; }
-  100% { text-shadow: 0 0 20px #fff, 0 0 30px #fff; }
+@keyframes floatGlow {
+  0% { transform: translate(-50%, 0) translateY(0px); text-shadow: 0 0 10px #ff0, 0 0 20px #ff0; }
+  50% { transform: translate(-50%, 0) translateY(-10px); text-shadow: 0 0 15px #fff, 0 0 25px #fff; }
+  100% { transform: translate(-50%, 0) translateY(0px); text-shadow: 0 0 10px #ff0, 0 0 20px #ff0; }
 }
 
 /* Search bar */
 .search-container {
+  margin-top: 100px; /* espace pour le titre flottant */
   text-align: center;
   margin-bottom: 20px;
 }
@@ -89,7 +98,7 @@ body {
 .popup {
   display: none;
   position: fixed;
-  top: 10%;
+  top: 120px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #222;
