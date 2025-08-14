@@ -1,84 +1,70 @@
-// Récupération des éléments
-const searchBar = document.getElementById("searchBar");
-const imageCards = document.querySelectorAll(".image-card");
-const popup = document.getElementById("popup");
-const popupClose = document.getElementById("popupClose");
-const popupImage = document.getElementById("popupImage");
-const popupTitle = document.getElementById("popupTitle");
-const popupRarity = document.getElementById("popupRarity");
-const priceText = document.getElementById("priceText");
-const popupBonus = document.getElementById("popupBonus");
+// Initialisation des cartes
+const cards = document.querySelectorAll('.image-card');
+const popup = document.getElementById('popup');
+const popupClose = document.getElementById('popupClose');
+const popupImage = document.getElementById('popupImage');
+const popupTitle = document.getElementById('popupTitle');
+const popupRarity = document.getElementById('popupRarity');
+const popupBonus = document.getElementById('popupBonus');
+const priceText = document.getElementById('priceText');
+const searchBar = document.getElementById('searchBar');
 
-// Couleurs par rareté
-const rarityColors = {
-  "Commun": "#9b9b9b",
-  "UnCommun": "#1e90ff",
-  "Rare": "#ff69b4",
-  "Legendaire": "#ffd700",
-  "Mythique": "#9400d3",
-  "Secret": "#ff4500"
-};
-
-// Affichage popup
-imageCards.forEach(card => {
-  card.addEventListener("click", () => {
-    popup.style.display = "block";
+cards.forEach(card => {
+  card.addEventListener('click', () => {
+    popup.style.display = 'block';
     popupImage.src = card.dataset.img;
     popupTitle.textContent = card.dataset.title;
-    popupRarity.textContent = "Rareté : " + card.dataset.rarity;
-    popupRarity.style.color = rarityColors[card.dataset.rarity] || "#ffffff";
-    priceText.textContent = "Prix : " + card.dataset.price;
-    popupBonus.textContent = "Bonus : " + card.dataset.bonus;
+    popupRarity.textContent = `Rareté : ${card.dataset.rarity}`;
+    popupBonus.textContent = `Bonus : ${card.dataset.bonus}`;
+    priceText.textContent = `Prix : ${card.dataset.price} 💰`;
   });
 });
 
-// Fermeture popup
-popupClose.addEventListener("click", () => {
-  popup.style.display = "none";
+popupClose.addEventListener('click', () => {
+  popup.style.display = 'none';
 });
 
-// Filtrage par recherche
-searchBar.addEventListener("input", () => {
-  const query = searchBar.value.toLowerCase();
-  imageCards.forEach(card => {
-    const title = card.dataset.title.toLowerCase();
-    if(title.includes(query)) {
-      card.style.display = "block";
+window.addEventListener('click', e => {
+  if (e.target == popup) {
+    popup.style.display = 'none';
+  }
+});
+
+// Recherche dynamique
+searchBar.addEventListener('input', () => {
+  const filter = searchBar.value.toLowerCase();
+  cards.forEach(card => {
+    if (card.dataset.title.toLowerCase().includes(filter)) {
+      card.style.display = 'block';
     } else {
-      card.style.display = "none";
+      card.style.display = 'none';
     }
   });
 });
 
-// Tri par rareté
-document.getElementById("sortRarity").addEventListener("click", () => {
-  const container = document.querySelector(".images-container");
-  const cardsArray = Array.from(imageCards);
-  const rarityOrder = ["Commun", "UnCommun", "Rare", "Legendaire", "Mythique", "Secret"];
-  
-  cardsArray.sort((a,b) => {
-    return rarityOrder.indexOf(a.dataset.rarity) - rarityOrder.indexOf(b.dataset.rarity);
-  });
+// Tri par prix ou rareté
+const sortRarityBtn = document.getElementById('sortRarity');
+const sortPriceAscBtn = document.getElementById('sortPriceAsc');
+const sortPriceDescBtn = document.getElementById('sortPriceDesc');
+const container = document.querySelector('.images-container');
 
-  cardsArray.forEach(card => container.appendChild(card));
-});
+const rarityOrder = ["Commun", "UnCommun", "Rare", "Legendaire", "Mythique", "Secret"];
 
-// Tri par prix croissant
-document.getElementById("sortPriceAsc").addEventListener("click", () => {
-  const container = document.querySelector(".images-container");
-  const cardsArray = Array.from(imageCards);
-  
-  cardsArray.sort((a,b) => Number(a.dataset.price) - Number(b.dataset.price));
-  
-  cardsArray.forEach(card => container.appendChild(card));
-});
+function sortCardsByRarity() {
+  const sorted = Array.from(cards).sort((a, b) => rarityOrder.indexOf(a.dataset.rarity) - rarityOrder.indexOf(b.dataset.rarity));
+  sorted.forEach(card => container.appendChild(card));
+}
 
-// Tri par prix décroissant
-document.getElementById("sortPriceDesc").addEventListener("click", () => {
-  const container = document.querySelector(".images-container");
-  const cardsArray = Array.from(imageCards);
-  
-  cardsArray.sort((a,b) => Number(b.dataset.price) - Number(a.dataset.price));
-  
-  cardsArray.forEach(card => container.appendChild(card));
-});
+function sortCardsByPriceAsc() {
+  const sorted = Array.from(cards).sort((a, b) => Number(a.dataset.price) - Number(b.dataset.price));
+  sorted.forEach(card => container.appendChild(card));
+}
+
+function sortCardsByPriceDesc() {
+  const sorted = Array.from(cards).sort((a, b) => Number(b.dataset.price) - Number(a.dataset.price));
+  sorted.forEach(card => container.appendChild(card));
+}
+
+sortRarityBtn.addEventListener('click', sortCardsByRarity);
+sortPriceAscBtn.addEventListener('click', sortCardsByPriceAsc);
+sortPriceDescBtn.addEventListener('click', sortCardsByPriceDesc);
