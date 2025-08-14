@@ -4,35 +4,32 @@ body {
   background: linear-gradient(to bottom, #7ec0ee, #1b263b, #0d1b2a);
   color: white;
   text-align: center;
+  overflow: hidden;
+  position: relative;
 }
 
 #mainTitle {
   font-size: 4rem;
   margin-top: 20px;
-  text-shadow: 0 0 20px #fff, 0 0 40px #00f, 0 0 60px #0ff;
+  text-shadow: 0 0 15px #fff, 0 0 30px #0ff;
   animation: float 2s ease-in-out infinite;
-  transition: text-shadow 0.3s;
-}
-
-#mainTitle:hover {
-  text-shadow: 0 0 20px #fff, 0 0 50px #0ff, 0 0 80px #0ff;
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-15px); }
 }
 
 .search-container {
   margin: 20px 0;
 }
 
-input[type="text"] {
+input[type="text"], select {
   padding: 10px 20px;
   font-size: 1.2rem;
   border-radius: 20px;
   border: none;
-  width: 300px;
+  margin: 5px;
 }
 
 .images-container {
@@ -41,6 +38,7 @@ input[type="text"] {
   flex-wrap: wrap;
   gap: 20px;
   position: relative;
+  z-index: 2;
 }
 
 .image-card {
@@ -48,46 +46,26 @@ input[type="text"] {
   display: inline-block;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 10px;
 }
 
 .image-card img {
-  width: 150px;
+  width: 120px;
   border: 3px solid gray;
   border-radius: 10px;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.image-card img:hover { transform: scale(1.1); }
-
-/* Glow dynamique avec pseudo-particules */
-.image-card::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  width: 170px;
-  height: 170px;
-  border-radius: 15px;
-  z-index: -1;
-  opacity: 0;
-  pointer-events: none;
-  animation: glowParticles 2s infinite alternate;
+.image-card img:hover {
+  transform: scale(1.1);
 }
 
-/* Couleur selon rareté */
-.image-card[data-rarity="Commun"]::before { box-shadow: 0 0 10px #ccc, 0 0 20px #eee; opacity: 0.5; }
-.image-card[data-rarity="Rare"]::before { box-shadow: 0 0 15px #00f, 0 0 25px #0ff; opacity: 0.6; }
-.image-card[data-rarity="UnCommun"]::before { box-shadow: 0 0 15px #0ff, 0 0 25px #0ff; opacity: 0.6; }
-.image-card[data-rarity="Légendaire"]::before { box-shadow: 0 0 15px gold, 0 0 25px yellow; opacity: 0.7; }
-.image-card[data-rarity="Mythique"]::before { box-shadow: 0 0 15px #ff00ff, 0 0 25px #ff69b4; opacity: 0.8; }
-
-@keyframes glowParticles {
-  0% { transform: scale(0.95) rotate(0deg); opacity: 0.5; }
-  50% { transform: scale(1.05) rotate(10deg); opacity: 0.8; }
-  100% { transform: scale(0.95) rotate(-10deg); opacity: 0.5; }
-}
-
-.image-title { margin-top: 10px; font-size: 1.2rem; }
+/* Glow par rareté */
+.glow-Commun { box-shadow: 0 0 10px #ccc; }
+.glow-UnCommun { box-shadow: 0 0 15px #ff9; }
+.glow-Rare { box-shadow: 0 0 20px #0ff; }
+.glow-Légendaire { box-shadow: 0 0 25px #ff0; }
+.glow-Mythique { box-shadow: 0 0 30px #ff1493; }
 
 /* Popup */
 .popup {
@@ -95,7 +73,7 @@ input[type="text"] {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0);
+  transform: translate(-50%, -50%);
   background: #1b263b;
   border: 3px solid #415a77;
   padding: 20px;
@@ -103,11 +81,7 @@ input[type="text"] {
   z-index: 100;
   text-align: center;
   color: white;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 0;
 }
-
-.popup.show { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 
 #popupClose {
   position: absolute;
@@ -118,8 +92,22 @@ input[type="text"] {
   color: red;
 }
 
-#popup img { width: 200px; margin-bottom: 10px; }
+#popup img {
+  width: 200px;
+  margin-bottom: 10px;
+}
 
-#popupRarity { font-weight: bold; }
-#priceText { color: #0f0; font-weight: bold; }
+#popupRarity { color: #ccc; }
+#priceText { color: #0f0; }
 #popupBonus { color: yellow; font-size: 0.9rem; }
+
+/* Canvas particules */
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
