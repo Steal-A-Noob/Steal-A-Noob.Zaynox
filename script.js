@@ -12,6 +12,25 @@ const popupClose = document.getElementById("popupClose");
 const imageCards = document.querySelectorAll(".image-card");
 
 // --------------------
+// Lueur autour des cartes selon rareté
+// --------------------
+imageCards.forEach(card => {
+  const rarity = card.getAttribute("data-rarity").toLowerCase();
+  let glowColor;
+
+  switch (rarity) {
+    case "commun": glowColor = "#FFFFFF"; break;
+    case "uncommun": glowColor = "#006400"; break; // vert foncé
+    case "rare": glowColor = "#0000FF"; break; // bleu
+    case "légendaire": glowColor = "#FFA500"; break; // orange
+    case "mythique": glowColor = "#FF00FF"; break; // rose
+    default: glowColor = "#FFFFFF";
+  }
+
+  card.style.boxShadow = `0 0 15px ${glowColor}`;
+});
+
+// --------------------
 // Affichage du popup
 // --------------------
 imageCards.forEach(card => {
@@ -25,11 +44,11 @@ imageCards.forEach(card => {
     popupImage.src = imgSrc;
     popupTitle.textContent = title;
 
-    // Couleur de rareté
+    // Couleur rareté
     let rarityColor;
     switch (rarity.toLowerCase()) {
       case "commun": rarityColor = "#FFFFFF"; break;
-      case "uncommun": rarityColor = "#00FF00"; break;
+      case "uncommun": rarityColor = "#006400"; break;
       case "rare": rarityColor = "#0000FF"; break;
       case "légendaire": rarityColor = "#FFA500"; break;
       case "mythique": rarityColor = "#FF00FF"; break;
@@ -37,10 +56,10 @@ imageCards.forEach(card => {
     }
     popupRarity.innerHTML = `<span style="color:${rarityColor}">Rareté: ${rarity}</span>`;
 
-    // Prix couleur vert foncé
-    priceText.innerHTML = `<span style="color:#006400">Prix: ${price} $</span>`;
+    // Prix couleur or
+    priceText.innerHTML = `<span style="color:#FFD700">Prix: ${price} $</span>`;
 
-    // Bonus uniquement en jaune, sans le texte "Bonus:"
+    // Bonus sans le mot "Bonus"
     popupBonus.innerHTML = `<span style="color:yellow">${bonus}</span>`;
 
     popup.style.display = "flex";
