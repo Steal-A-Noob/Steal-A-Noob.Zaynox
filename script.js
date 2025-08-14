@@ -1,8 +1,3 @@
-// Particles.js
-particlesJS.load('particles-js', 'particles.json', function() {
-  console.log('Particles loaded!');
-});
-
 // Variables
 const cards = document.querySelectorAll('.image-card');
 const popup = document.getElementById('popup');
@@ -12,6 +7,24 @@ const popupRarity = document.getElementById('popupRarity');
 const popupBonus = document.getElementById('popupBonus');
 const popupClose = document.getElementById('popupClose');
 const searchBar = document.getElementById('searchBar');
+
+// Dictionnaire couleurs rareté
+const rarityColors = {
+  'Commun': '#00ff00',
+  'Rare': '#1e90ff',
+  'UnCommun': '#ff1493',
+  'Legendaire': '#ffa500',
+  'Mythique': '#ff0000',
+  'Secret': '#9400d3'
+};
+
+// Appliquer couleur glow selon rareté
+cards.forEach(card => {
+  const rarity = card.dataset.rarity;
+  if(rarityColors[rarity]){
+    card.style.boxShadow = `0 0 15px ${rarityColors[rarity]}`;
+  }
+});
 
 // Afficher popup
 cards.forEach(card => {
@@ -41,18 +54,21 @@ searchBar.addEventListener('input', () => {
 // Tri boutons
 document.getElementById('sortRarity').addEventListener('click', () => {
   const container = document.querySelector('.images-container');
-  const sorted = [...cards].sort((a,b) => a.dataset.rarity.localeCompare(b.dataset.rarity));
+  const sorted = [...cards].sort((a,b) => {
+    const rarities = ['Commun','UnCommun','Rare','Legendaire','Mythique','Secret'];
+    return rarities.indexOf(a.dataset.rarity) - rarities.indexOf(b.dataset.rarity);
+  });
   sorted.forEach(c => container.appendChild(c));
 });
 
 document.getElementById('sortPriceAsc').addEventListener('click', () => {
   const container = document.querySelector('.images-container');
-  const sorted = [...cards].sort((a,b) => parseInt(a.dataset.price) - parseInt(b.dataset.price));
+  const sorted = [...cards].sort((a,b) => parseInt(a.dataset.price.replace(/\s/g,'')) - parseInt(b.dataset.price.replace(/\s/g,'')));
   sorted.forEach(c => container.appendChild(c));
 });
 
 document.getElementById('sortPriceDesc').addEventListener('click', () => {
   const container = document.querySelector('.images-container');
-  const sorted = [...cards].sort((a,b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
+  const sorted = [...cards].sort((a,b) => parseInt(b.dataset.price.replace(/\s/g,'')) - parseInt(a.dataset.price.replace(/\s/g,'')));
   sorted.forEach(c => container.appendChild(c));
 });
