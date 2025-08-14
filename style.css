@@ -37,6 +37,8 @@ input[type="text"] {
   border-radius: 20px;
   border: none;
   cursor: pointer;
+  background-color: #415a77;
+  color: white;
 }
 
 .images-container {
@@ -89,6 +91,7 @@ input[type="text"] {
 }
 
 .popup.show {
+  display: block;
   opacity: 1;
 }
 
@@ -110,11 +113,5 @@ input[type="text"] {
 #popupRarity span.rarity-uncommun { color: #ffa500; }
 #popupRarity span.rarity-mythique { color: #ff00ff; }
 
-#priceText {
-  color: #0f0;
-}
-
-#popupBonus {
-  color: yellow;
-  font-size: 0.9rem;
-}
+#priceText { color: #0f0; }
+#popupBonus { color: yellow; font-size: 0.9rem; }
