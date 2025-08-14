@@ -1,133 +1,142 @@
-/* Reset général */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-
-/* Background */
+/* Style général */
 body {
-  background-color: #111;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: #111;
   color: #fff;
+  text-align: center;
   overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+}
+
+/* Particules */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 /* Titre principal flottant avec lueur */
 #mainTitle {
-  position: fixed;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 20px 0;
   font-size: 3em;
-  text-align: center;
-  text-shadow: 0 0 10px #ff0, 0 0 20px #ff0;
-  animation: floatGlow 2s infinite alternate;
-  z-index: 1000;
+  color: #fff;
+  text-shadow: 0 0 10px #00f, 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff;
+  animation: float 3s ease-in-out infinite;
 }
 
-@keyframes floatGlow {
-  0% { transform: translate(-50%, 0) translateY(0px); text-shadow: 0 0 10px #ff0, 0 0 20px #ff0; }
-  50% { transform: translate(-50%, 0) translateY(-10px); text-shadow: 0 0 15px #fff, 0 0 25px #fff; }
-  100% { transform: translate(-50%, 0) translateY(0px); text-shadow: 0 0 10px #ff0, 0 0 20px #ff0; }
+/* Animation flottante */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
-/* Search bar */
-.search-container {
-  margin-top: 100px; /* espace pour le titre flottant */
-  text-align: center;
-  margin-bottom: 20px;
+/* Section en haut centrée */
+.top-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
 }
 
-#searchBar {
-  padding: 10px;
-  width: 50%;
-  border-radius: 8px;
-  border: none;
+/* Barre de recherche */
+.search-container input {
+  padding: 10px 15px;
   font-size: 1em;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 15px;
+  outline: none;
 }
 
 /* Boutons de tri */
 .sort-buttons {
-  text-align: center;
   margin-bottom: 20px;
 }
-
 .sort-buttons button {
-  padding: 10px 15px;
   margin: 0 5px;
+  padding: 8px 15px;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 10px;
+  background: #0ff;
+  color: #000;
   font-weight: bold;
-  background-color: #333;
-  color: #fff;
+  cursor: pointer;
   transition: 0.3s;
 }
+.sort-buttons button:hover {
+  background: #00f;
+  color: #fff;
+}
 
-.sort-buttons button:hover { background-color: #555; }
-
-/* Images container */
+/* Conteneur des cartes */
 .images-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  margin-bottom: 50px;
 }
 
-/* Carte Noob */
+/* Cartes Noob */
 .image-card {
-  width: 150px;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.2s;
-  position: relative;
-}
-
-.image-card:hover { transform: scale(1.1); }
-
-.image-card img { width: 100%; height: auto; display: block; }
-
-.image-title {
-  margin-top: 5px;
-  font-weight: bold;
-}
-
-/* Popup vertical */
-.popup {
-  display: none;
-  position: fixed;
-  top: 120px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #222;
-  padding: 20px;
+  background: #222;
   border-radius: 15px;
-  z-index: 9999;
+  padding: 10px;
+  width: 150px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+}
+.image-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 5px;
+}
+.image-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px #0ff;
+}
+
+/* Lueur selon rareté */
+.glow-Commun { box-shadow: 0 0 5px #0f0; }
+.glow-Rare { box-shadow: 0 0 10px #00f; }
+.glow-UnCommun { box-shadow: 0 0 15px #ff0; }
+.glow-Légendaire { box-shadow: 0 0 20px #f0f; }
+.glow-Mythique { box-shadow: 0 0 25px #f00; }
+
+/* Popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: none;
   flex-direction: column;
   align-items: center;
-  width: 300px;
-  text-align: center;
-  gap: 10px;
+  justify-content: center;
+  padding-top: 50px;
+  z-index: 1000;
 }
 
-/* Glow popup selon rareté */
-.popup-glow-Commun { box-shadow: 0 0 20px #00ff00; }
-.popup-glow-Rare { box-shadow: 0 0 20px #0000ff; }
-.popup-glow-UnCommun { box-shadow: 0 0 20px #ff00ff; }
-.popup-glow-Légendaire { box-shadow: 0 0 25px #ff9900; }
-.popup-glow-Mythique { box-shadow: 0 0 30px #ff0000; }
+#popup img {
+  width: 200px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+}
 
-/* Popup image */
-#popupImage { width: 80%; border-radius: 10px; }
-
-/* Croix rouge */
 #popupClose {
   position: absolute;
   top: 10px;
-  right: 10px;
-  font-size: 1.5em;
+  right: 20px;
+  font-size: 2em;
   color: red;
   cursor: pointer;
+}
+
+#popup h2, #popup p {
+  margin: 5px 0;
 }
