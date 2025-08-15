@@ -1,4 +1,4 @@
-/* === Reset global === */
+/* ===== Reset de base ===== */
 * {
   margin: 0;
   padding: 0;
@@ -14,7 +14,7 @@ body {
   overflow-x: hidden;
 }
 
-/* === Fond avec particules === */
+/* ===== Particles.js ===== */
 #particles-js {
   position: fixed;
   width: 100%;
@@ -22,7 +22,7 @@ body {
   z-index: -1;
 }
 
-/* === Titre principal === */
+/* ===== Titre principal ===== */
 h1#mainTitle {
   text-align: center;
   margin-top: 20px;
@@ -30,7 +30,7 @@ h1#mainTitle {
   color: #00ff99;
 }
 
-/* === Barre de recherche === */
+/* ===== Barre de recherche ===== */
 .search-container {
   text-align: center;
   margin: 20px 0;
@@ -43,16 +43,9 @@ h1#mainTitle {
   border: none;
   outline: none;
   font-size: 1em;
-  background: #222;
-  color: #fff;
-  transition: all 0.3s ease;
 }
 
-.search-container input:focus {
-  box-shadow: 0 0 10px #00ff99;
-}
-
-/* === Boutons de tri === */
+/* ===== Boutons de tri ===== */
 .sort-buttons {
   text-align: center;
   margin-bottom: 20px;
@@ -66,7 +59,7 @@ h1#mainTitle {
   cursor: pointer;
   background-color: #222;
   color: #fff;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 .sort-buttons button:hover {
@@ -74,7 +67,7 @@ h1#mainTitle {
   color: #000;
 }
 
-/* === Container des cartes === */
+/* ===== Conteneur des cartes ===== */
 .images-container {
   display: flex;
   flex-wrap: wrap;
@@ -82,6 +75,7 @@ h1#mainTitle {
   gap: 15px;
 }
 
+/* ===== Cartes ===== */
 .image-card {
   background-color: #222;
   border-radius: 15px;
@@ -89,7 +83,7 @@ h1#mainTitle {
   text-align: center;
   padding: 10px;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: 0.3s;
   border: 2px solid transparent;
 }
 
@@ -102,20 +96,21 @@ h1#mainTitle {
   transform: scale(1.05);
 }
 
-/* Glow par rareté */
-.glow-Commun { border-color: #fff; box-shadow: 0 0 15px #fff; }
+/* ===== Glow par rareté ===== */
+.glow-Commun { border-color: #ffffff; box-shadow: 0 0 15px #fff; }
 .glow-Rare { border-color: #3498db; box-shadow: 0 0 15px #3498db; }
-.glow-UnCommun { border-color: #9b59b6; box-shadow: 0 0 15px #9b59b6; }
+.glow-Uncommun { border-color: #9b59b6; box-shadow: 0 0 15px #9b59b6; }
 .glow-Legendaire { border-color: #e67e22; box-shadow: 0 0 15px #e67e22; }
 .glow-Mythique { border-color: #f1c40f; box-shadow: 0 0 15px #f1c40f; }
 .glow-Secret { border-color: #e74c3c; box-shadow: 0 0 15px #e74c3c; }
 
-/* === Popup === */
+/* ===== Popup ===== */
 .popup {
+  display: none;
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
+  transform: translate(-50%, -50%);
   background-color: #111;
   border: 2px solid #00ff99;
   border-radius: 15px;
@@ -123,15 +118,6 @@ h1#mainTitle {
   width: 300px;
   text-align: center;
   z-index: 9999;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
-
-.popup.visible {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-  pointer-events: auto;
 }
 
 .popup img {
@@ -147,24 +133,15 @@ h1#mainTitle {
   font-size: 1.5em;
   cursor: pointer;
   color: #00ff99;
-  transition: color 0.3s ease;
 }
 
-#popupClose:hover {
-  color: #fff;
-}
-
+/* ===== Texte des cartes ===== */
 .image-price {
   color: #00ff00;
   font-weight: bold;
 }
 
-/* === Carte masquée par la recherche === */
-.hidden {
-  display: none !important;
-}
-
-/* === Footer === */
+/* ===== Footer ===== */
 .footer {
   text-align: center;
   margin-top: 40px;
