@@ -6,9 +6,89 @@
   <title>NoobFinder 🔥</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <style>
+    /* Lévitation du titre principal */
+    #mainTitle {
+      font-size: 4rem;
+      color: #FFD700; /* doré pour briller */
+      text-align: center;
+      position: relative;
+      animation: floatTitle 3s ease-in-out infinite;
+      text-shadow: 0 0 20px #FFD700, 0 0 30px #FF8C00;
+      margin-top: 20px;
+    }
+
+    @keyframes floatTitle {
+      0%   { transform: translateY(0px); }
+      50%  { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Container particles */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      top: 0;
+      left: 0;
+    }
+
+    /* Lueur autour des images selon la rareté */
+    .image-card img {
+      transition: 0.3s;
+      border-radius: 10px;
+    }
+
+    .glow-Commun img {
+      box-shadow: 0 0 10px grey;
+    }
+    .glow-UnCommun img {
+      box-shadow: 0 0 15px darkgreen;
+    }
+    .glow-Rare img {
+      box-shadow: 0 0 20px blue;
+    }
+    .glow-Legendaire img {
+      box-shadow: 0 0 25px red;
+    }
+    .glow-Mythique img {
+      box-shadow: 0 0 30px purple;
+    }
+    .glow-Secret img {
+      box-shadow: 0 0 35px orange;
+    }
+
+    /* Popup styles */
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0,0,0,0.9);
+      padding: 20px;
+      border-radius: 15px;
+      z-index: 100;
+      text-align: center;
+      color: white;
+    }
+    #popup img {
+      max-width: 300px;
+      border-radius: 10px;
+    }
+    #popupClose {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      font-size: 2rem;
+    }
+  </style>
 </head>
 <body>
   <div id="particles-js"></div>
+
   <h1 id="mainTitle">NoobFinder 🔥</h1>
 
   <div class="search-container">
@@ -22,7 +102,7 @@
   </div>
 
   <div class="images-container">
-    <!-- Cartes ici -->
+    <!-- Toutes les cartes -->
     <div class="image-card glow-Commun" data-title="Noob" data-rarity="Commun" data-price="100" data-bonus="1$/s" data-img="noob.png">
       <img src="noob.png" alt="Noob">
       <div class="image-title">Noob</div>
@@ -59,7 +139,7 @@
       <div class="image-price">250 000 💰</div>
     </div>
 
-    <div class="image-card glow-Uncommun" data-title="Magic Noob" data-rarity="UnCommun" data-price="1 600" data-bonus="14$/s" data-img="magic noob.png">
+    <div class="image-card glow-UnCommun" data-title="Magic Noob" data-rarity="UnCommun" data-price="1 600" data-bonus="14$/s" data-img="magic noob.png">
       <img src="magic noob.png" alt="Magic Noob">
       <div class="image-title">Magic Noob</div>
       <div class="image-price">1 600 💰</div>
@@ -71,7 +151,7 @@
       <div class="image-price">2 500 000 💰</div>
     </div>
 
-    <div class="image-card glow-Uncommun" data-title="Swat Noob" data-rarity="UnCommun" data-price="3 200" data-bonus="28$/s" data-img="Swat.PNG">
+    <div class="image-card glow-UnCommun" data-title="Swat Noob" data-rarity="UnCommun" data-price="3 200" data-bonus="28$/s" data-img="Swat.PNG">
       <img src="Swat.PNG" alt="Swat Noob">
       <div class="image-title">Swat Noob</div>
       <div class="image-price">3 200 💰</div>
@@ -95,7 +175,7 @@
       <div class="image-price">500 000 💰</div>
     </div>
 
-    <div class="image-card glow-Uncommun" data-title="Buildeur Noob" data-rarity="UnCommun" data-price="6 000" data-bonus="50$/s" data-img="Buildeur.PNG">
+    <div class="image-card glow-UnCommun" data-title="Buildeur Noob" data-rarity="UnCommun" data-price="6 000" data-bonus="50$/s" data-img="Buildeur.PNG">
       <img src="Buildeur.PNG" alt="Buildeur Noob">
       <div class="image-title">Buildeur Noob</div>
       <div class="image-price">6 000 💰</div>
@@ -147,8 +227,11 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    // Particles.js
+    particlesJS.load('particles-js', 'particles.json', function() {
+      console.log('Particles loaded!');
+    });
+  </script>
 </body>
 </html>
-
-
-
