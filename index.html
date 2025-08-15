@@ -7,111 +7,62 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <style>
-    /* Titre flottant */
-    #mainTitle {
-      position: relative;
-      text-align: center;
-      font-size: 3em;
-      color: #FFD700;
-      animation: float 2s ease-in-out infinite;
-      z-index: 1;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-      100% { transform: translateY(0); }
-    }
-
-    /* Glow permanent pour toutes les cartes */
-    .image-card img {
-      transition: all 0.3s ease-in-out;
-      box-shadow: 0 0 15px 5px rgba(255,255,0,0.8);
-    }
-
-    .images-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      padding: 20px;
-      position: relative;
-      z-index: 1;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: white;
-    }
-
+    /* Fond particules */
     #particles-js {
       position: fixed;
-      width: 100%;
-      height: 100%;
       top: 0;
       left: 0;
-      z-index: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
 
-    .search-container {
+    /* Animation flottante du titre */
+    #mainTitle {
+      animation: float 3s ease-in-out infinite;
       text-align: center;
       margin-top: 20px;
-      position: relative;
-      z-index: 1;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
     }
 
-    .sort-buttons {
+    /* Lueurs selon rareté */
+    .glow-Commun { box-shadow: 0 0 20px grey; }
+    .glow-UnCommun { box-shadow: 0 0 20px darkgreen; }
+    .glow-Rare { box-shadow: 0 0 20px blue; }
+    .glow-Legendaire { box-shadow: 0 0 20px red; }
+    .glow-Mythique { box-shadow: 0 0 20px purple; }
+    .glow-Secret { box-shadow: 0 0 20px gold; }
+
+    .image-card {
+      display: inline-block;
+      margin: 10px;
+      padding: 5px;
+      border-radius: 10px;
+      transition: transform 0.2s;
+    }
+    .image-card img {
+      width: 150px;
+      height: 150px;
+      border-radius: 10px;
+    }
+    .image-title {
       text-align: center;
-      margin: 10px 0;
-      position: relative;
-      z-index: 1;
+      font-weight: bold;
+      margin-top: 5px;
     }
-
-    .sort-buttons button {
-      margin: 0 5px;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-
-    .popup {
-      display: none;
-      position: fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 2;
-    }
-
-    .popup img {
-      max-width: 300px;
-      margin-bottom: 10px;
-    }
-
-    .popup span {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 2em;
-      cursor: pointer;
-    }
-
-    .footer {
+    .image-price {
       text-align: center;
-      padding: 10px;
-      position: relative;
-      z-index: 1;
+      color: #00FF7F; /* vert clair */
     }
   </style>
 </head>
 <body>
   <div id="particles-js"></div>
+
   <h1 id="mainTitle">NoobFinder 🔥</h1>
 
   <div class="search-container">
@@ -125,109 +76,52 @@
   </div>
 
   <div class="images-container">
-    <!-- Toutes les cartes que tu m’as listées -->
+    <!-- Toutes les cartes -->
     <div class="image-card glow-Commun" data-title="Noob" data-rarity="Commun" data-price="100" data-bonus="1$/s" data-img="noob.png">
       <img src="noob.png" alt="Noob">
       <div class="image-title">Noob</div>
       <div class="image-price">100 💰</div>
     </div>
-
     <div class="image-card glow-Rare" data-title="Noob Boxeur" data-rarity="Rare" data-price="100000" data-bonus="700$/s" data-img="Boxeur.png">
       <img src="Boxeur.png" alt="Noob Boxeur">
       <div class="image-title">Noob Boxeur</div>
       <div class="image-price">100 000 💰</div>
     </div>
-
     <div class="image-card glow-Rare" data-title="Noob Ninja" data-rarity="Rare" data-price="12000" data-bonus="95$/s" data-img="Ninja.PNG">
       <img src="Ninja.PNG" alt="Noob Ninja">
       <div class="image-title">Noob Ninja</div>
       <div class="image-price">12 000 💰</div>
     </div>
-
     <div class="image-card glow-Commun" data-title="Agent Noob" data-rarity="Commun" data-price="?" data-bonus="?$/s" data-img="Agent.PNG">
       <img src="Agent.PNG" alt="Agent Noob">
       <div class="image-title">Agent Noob</div>
       <div class="image-price">? 💰</div>
     </div>
-
     <div class="image-card glow-Commun" data-title="Surf Noob" data-rarity="Commun" data-price="200" data-bonus="2$/s" data-img="Surf.PNG">
       <img src="Surf.PNG" alt="Surf Noob">
       <div class="image-title">Surf Noob</div>
       <div class="image-price">200 💰</div>
     </div>
-
     <div class="image-card glow-Legendaire" data-title="Hacker Noob" data-rarity="Legendaire" data-price="250000" data-bonus="1500$/s" data-img="hackeur.png">
       <img src="hackeur.png" alt="Hacker Noob">
       <div class="image-title">Hacker Noob</div>
       <div class="image-price">250 000 💰</div>
     </div>
-
     <div class="image-card glow-UnCommun" data-title="Magic Noob" data-rarity="UnCommun" data-price="1600" data-bonus="14$/s" data-img="magic noob.png">
       <img src="magic noob.png" alt="Magic Noob">
       <div class="image-title">Magic Noob</div>
       <div class="image-price">1 600 💰</div>
     </div>
-
     <div class="image-card glow-Mythique" data-title="God Noob" data-rarity="Mythique" data-price="2500000" data-bonus="13000$/s" data-img="God.PNG">
       <img src="God.PNG" alt="God Noob">
       <div class="image-title">God Noob</div>
       <div class="image-price">2 500 000 💰</div>
     </div>
-
     <div class="image-card glow-UnCommun" data-title="Swat Noob" data-rarity="UnCommun" data-price="3200" data-bonus="28$/s" data-img="Swat.PNG">
       <img src="Swat.PNG" alt="Swat Noob">
       <div class="image-title">Swat Noob</div>
       <div class="image-price">3 200 💰</div>
     </div>
-
-    <div class="image-card glow-Commun" data-title="Poor Noob" data-rarity="Commun" data-price="400" data-bonus="4$/s" data-img="Poor.PNG">
-      <img src="Poor.PNG" alt="Poor Noob">
-      <div class="image-title">Poor Noob</div>
-      <div class="image-price">400 💰</div>
-    </div>
-
-    <div class="image-card glow-Rare" data-title="Rich Noob" data-rarity="Rare" data-price="50000" data-bonus="350$/s" data-img="Rich.PNG">
-      <img src="Rich.PNG" alt="Rich Noob">
-      <div class="image-title">Rich Noob</div>
-      <div class="image-price">50 000 💰</div>
-    </div>
-
-    <div class="image-card glow-Legendaire" data-title="King Noob" data-rarity="Legendaire" data-price="500000" data-bonus="3000$/s" data-img="King.PNG">
-      <img src="King.PNG" alt="King Noob">
-      <div class="image-title">King Noob</div>
-      <div class="image-price">500 000 💰</div>
-    </div>
-
-    <div class="image-card glow-UnCommun" data-title="Buildeur Noob" data-rarity="UnCommun" data-price="6000" data-bonus="50$/s" data-img="Buildeur.PNG">
-      <img src="Buildeur.PNG" alt="Buildeur Noob">
-      <div class="image-title">Buildeur Noob</div>
-      <div class="image-price">6 000 💰</div>
-    </div>
-
-    <div class="image-card glow-Rare" data-title="Sleeping Noob" data-rarity="Rare" data-price="24000" data-bonus="190$/s" data-img="Sleeping.PNG">
-      <img src="Sleeping.PNG" alt="Sleeping Noob">
-      <div class="image-title">Sleeping Noob</div>
-      <div class="image-price">24 000 💰</div>
-    </div>
-
-    <div class="image-card glow-Legendaire" data-title="Demon Noob" data-rarity="Legendaire" data-price="1000000" data-bonus="6000$/s" data-img="Demon.PNG">
-      <img src="Demon.PNG" alt="Demon Noob">
-      <div class="image-title">Demon Noob</div>
-      <div class="image-price">1 000 000 💰</div>
-    </div>
-
-    <div class="image-card glow-Mythique" data-title="Sayan Noob" data-rarity="Mythique" data-price="5000000" data-bonus="26000$/s" data-img="Sayan.PNG">
-      <img src="Sayan.PNG" alt="Sayan Noob">
-      <div class="image-title">Sayan Noob</div>
-      <div class="image-price">5 000 000 💰</div>
-    </div>
-
-    <div class="image-card glow-UnCommun" data-title="Teacher Noob" data-rarity="UnCommun" data-price="800" data-bonus="7$/s" data-img="Teacher.PNG">
-      <img src="Teacher.PNG" alt="Teacher Noob">
-      <div class="image-title">Teacher Noob</div>
-      <div class="image-price">800 💰</div>
-    </div>
-
     <div class="image-card glow-Secret" data-title="Solider Noob" data-rarity="Secret" data-price="12000000" data-bonus="60000$/s" data-img="Solider.PNG">
       <img src="Solider.PNG" alt="Solider Noob">
       <div class="image-title">Solider Noob</div>
@@ -235,7 +129,7 @@
     </div>
   </div>
 
-  <!-- Popup vertical -->
+  <!-- Popup -->
   <div id="popup" class="popup">
     <span id="popupClose">&times;</span>
     <img id="popupImage" src="" alt="">
@@ -251,9 +145,15 @@
 
   <script src="script.js"></script>
   <script>
-    // Particles
-    particlesJS.load('particles-js', 'particles.json', function() {
-      console.log('Particles loaded!');
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 100 },
+        "color": { "value": "#ffffff" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.5 },
+        "size": { "value": 3 },
+        "move": { "enable": true, "speed": 2 }
+      }
     });
   </script>
 </body>
