@@ -1,173 +1,87 @@
-/* Reset général */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
+// Particles.js
+particlesJS.load('particles-js', 'particles.json', function() {
+  console.log('Particles loaded!');
+});
+
+// --- Variables ---
+const searchBar = document.getElementById('searchBar');
+const imageCards = document.querySelectorAll('.image-card');
+const sortRarity = document.getElementById('sortRarity');
+const sortPriceAsc = document.getElementById('sortPriceAsc');
+const sortPriceDesc = document.getElementById('sortPriceDesc');
+
+// Popup
+const popup = document.getElementById('popup');
+const popupClose = document.getElementById('popupClose');
+const popupImage = document.getElementById('popupImage');
+const popupTitle = document.getElementById('popupTitle');
+const popupRarity = document.getElementById('popupRarity');
+const priceText = document.getElementById('priceText');
+const popupBonus = document.getElementById('popupBonus');
+
+// --- Recherche ---
+searchBar.addEventListener('input', () => {
+  const filter = searchBar.value.toLowerCase();
+  imageCards.forEach(card => {
+    const title = card.dataset.title.toLowerCase();
+    if(title.includes(filter)){
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+});
+
+// --- Tri ---
+function sortCards(compareFn) {
+  const container = document.querySelector('.images-container');
+  Array.from(imageCards)
+       .sort(compareFn)
+       .forEach(card => container.appendChild(card));
 }
 
-body {
-  background: #111;
-  color: #fff;
-  overflow-x: hidden;
-  position: relative;
-  min-height: 100vh;
-}
+// Trier par rareté
+sortRarity.addEventListener('click', () => {
+  const rarityOrder = ['Commun', 'UnCommun', 'Rare', 'Legendaire', 'Mythique', 'Secret'];
+  sortCards((a, b) => rarityOrder.indexOf(a.dataset.rarity) - rarityOrder.indexOf(b.dataset.rarity));
+});
 
-/* Particles.js */
-#particles-js {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  top: 0;
-  left: 0;
-}
+// Trier par prix croissant
+sortPriceAsc.addEventListener('click', () => {
+  sortCards((a, b) => parseInt(a.dataset.price) - parseInt(b.dataset.price));
+});
 
-/* Titre principal */
-#mainTitle {
-  text-align: center;
-  font-size: 3rem;
-  margin: 20px 0;
-  color: #00BFFF;
-  text-shadow: 0 0 10px #f39c12;
-}
+// Trier par prix décroissant
+sortPriceDesc.addEventListener('click', () => {
+  sortCards((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
+});
 
-/* Barre de recherche */
-.search-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
+// --- Popup ---
+imageCards.forEach(card => {
+  // Afficher le prix sous l’image en bleu clair dès le départ
+  const priceElem = card.querySelector('.image-price');
+  if(priceElem) priceElem.style.color = '#00BFFF'; // bleu clair
 
-#searchBar {
-  width: 300px;
-  padding: 10px 15px;
-  border-radius: 25px;
-  border: none;
-  font-size: 16px;
-  outline: none;
-}
+  // Au clic sur la carte
+  card.addEventListener('click', () => {
+    popup.style.display = 'block';
+    popupImage.src = card.dataset.img;
+    popupTitle.textContent = card.dataset.title;
+    popupRarity.textContent = 'Rareté: ' + card.dataset.rarity;
+    priceText.textContent = 'Prix: ' + card.dataset.price + ' 💰';
+    popupBonus.textContent = 'Bonus: ' + card.dataset.bonus;
 
-/* Boutons de tri */
-.sort-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 20px;
-}
+    // Prix et bonus en jaune
+    priceText.style.color = '#FFFF00';
+    popupBonus.style.color = '#FFFF00';
+  });
+});
 
-.sort-buttons button {
-  padding: 8px 15px;
-  border: none;
-  border-radius: 20px;
-  background: #3498db;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.2s;
-}
+popupClose.addEventListener('click', () => {
+  popup.style.display = 'none';
+});
 
-.sort-buttons button:hover {
-  background: #2980b9;
-}
-
-/* Container images */
-.images-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  padding-bottom: 50px;
-}
-
-/* Cartes d'image */
-.image-card {
-  background: #222;
-  padding: 10px;
-  border-radius: 15px;
-  width: 150px;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.image-card img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.image-title {
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-.image-price {
-  margin-top: 3px;
-  color: #00BFFF; /* bleu clair pour le prix sous les images */
-}
-
-/* Glow selon rareté */
-.glow-Commun { box-shadow: 0 0 10px #95a5a6; }
-.glow-Rare { box-shadow: 0 0 15px #3498db; }
-.glow-Uncommun { box-shadow: 0 0 15px #8e44ad; }
-.glow-Legendaire { box-shadow: 0 0 20px #e74c3c; }
-.glow-Mythique { box-shadow: 0 0 25px #f39c12; }
-.glow-Secret { box-shadow: 0 0 30px #2ecc71; }
-
-/* Hover animation */
-.image-card:hover {
-  transform: scale(1.05);
-  transition: 0.3s;
-}
-
-/* Popup */
-.popup {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: #111;
-  padding: 20px;
-  border-radius: 15px;
-  border: 2px solid #3498db;
-  text-align: center;
-  width: 300px;
-}
-
-.popup img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-#popupClose {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 20px;
-  color: #e74c3c;
-}
-
-/* Texte descriptif de la popup */
-#popupRarity,
-#priceText,
-#popupBonus {
-  margin: 5px 0;
-}
-
-/* Prix et bonus dans la popup en jaune */
-#priceText, #popupBonus {
-  color: #FFFF00;
-}
-
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 10px;
-  margin-top: 20px;
-  color: #7f8c8d;
-}
+// Fermer popup en cliquant en dehors
+window.addEventListener('click', e => {
+  if(e.target === popup) popup.style.display = 'none';
+});
