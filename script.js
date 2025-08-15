@@ -1,6 +1,6 @@
 // --- Particles.js ---
 particlesJS.load('particles-js', 'particles.json', function() {
-  console.log('Particles loaded!');
+  console.log('Particles loaded ✅');
 });
 
 // --- Variables ---
@@ -19,6 +19,36 @@ const popupRarity = document.getElementById('popupRarity');
 const priceText = document.getElementById('priceText');
 const popupBonus = document.getElementById('popupBonus');
 
+// --- Glow dynamique & Hover ---
+function getGlow(rarity, hover=false) {
+  const glows = {
+    Commun: hover ? '0 0 15px #95a5a6, 0 0 30px #95a5a6' : '0 0 10px #95a5a6',
+    UnCommun: hover ? '0 0 20px #27ae60, 0 0 40px #27ae60' : '0 0 15px #27ae60',
+    Rare: hover ? '0 0 20px #3498db, 0 0 40px #3498db' : '0 0 15px #3498db',
+    Legendaire: hover ? '0 0 25px #e74c3c, 0 0 50px #e74c3c' : '0 0 20px #e74c3c',
+    Mythique: hover ? '0 0 30px #8e44ad, 0 0 60px #8e44ad' : '0 0 25px #8e44ad',
+    Secret: hover ? '0 0 35px #f1c40f, 0 0 70px #f1c40f' : '0 0 30px #f1c40f'
+  };
+  return glows[rarity] || '';
+}
+
+imageCards.forEach(card => {
+  const rarity = card.dataset.rarity;
+
+  // Glow par défaut
+  card.style.boxShadow = getGlow(rarity);
+
+  // Hover
+  card.addEventListener('mouseenter', () => {
+    card.style.boxShadow = getGlow(rarity, true);
+    card.style.transform = 'scale(1.05)';
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.boxShadow = getGlow(rarity, false);
+    card.style.transform = 'scale(1)';
+  });
+});
+
 // --- Recherche ---
 searchBar.addEventListener('input', () => {
   const filter = searchBar.value.toLowerCase();
@@ -36,18 +66,15 @@ function sortCards(compareFn) {
        .forEach(card => container.appendChild(card));
 }
 
-// Trier par rareté
 sortRarity.addEventListener('click', () => {
-  const rarityOrder = ['Commun', 'UnCommun', 'Rare', 'Legendaire', 'Mythique', 'Secret'];
+  const rarityOrder = ['Commun','UnCommun','Rare','Legendaire','Mythique','Secret'];
   sortCards((a, b) => rarityOrder.indexOf(a.dataset.rarity) - rarityOrder.indexOf(b.dataset.rarity));
 });
 
-// Trier par prix croissant
 sortPriceAsc.addEventListener('click', () => {
   sortCards((a, b) => parseInt(a.dataset.price) - parseInt(b.dataset.price));
 });
 
-// Trier par prix décroissant
 sortPriceDesc.addEventListener('click', () => {
   sortCards((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
 });
@@ -63,41 +90,23 @@ imageCards.forEach(card => {
     const rarity = card.dataset.rarity;
     popupRarity.textContent = 'Rareté: ' + rarity;
     switch(rarity) {
-      case 'Commun':
-        popupRarity.style.color = 'grey';
-        break;
-      case 'UnCommun':
-        popupRarity.style.color = 'darkgreen';
-        break;
-      case 'Rare':
-        popupRarity.style.color = 'blue';
-        break;
-      case 'Legendaire':
-        popupRarity.style.color = 'red';
-        break;
-      case 'Mythique':
-        popupRarity.style.color = 'purple';
-        break;
-      default:
-        popupRarity.style.color = 'black';
+      case 'Commun': popupRarity.style.color = 'grey'; break;
+      case 'UnCommun': popupRarity.style.color = 'darkgreen'; break;
+      case 'Rare': popupRarity.style.color = 'blue'; break;
+      case 'Legendaire': popupRarity.style.color = 'red'; break;
+      case 'Mythique': popupRarity.style.color = 'purple'; break;
+      case 'Secret': popupRarity.style.color = 'gold'; break;
+      default: popupRarity.style.color = 'black';
     }
 
-    // Prix en vert clair
+    // Prix et bonus
     priceText.textContent = 'Prix: ' + card.dataset.price + ' 💰';
     priceText.style.color = '#00FF7F';
-
-    // Bonus en jaune
     popupBonus.textContent = 'Bonus: ' + card.dataset.bonus;
     popupBonus.style.color = '#FFFF00';
   });
 });
 
 // Fermer popup
-popupClose.addEventListener('click', () => {
-  popup.style.display = 'none';
-});
-
-// Fermer popup en cliquant en dehors
-window.addEventListener('click', e => {
-  if(e.target === popup) popup.style.display = 'none';
-});
+popupClose.addEventListener('click', () => popup.style.display = 'none');
+window.addEventListener('click', e => { if(e.target === popup) popup.style.display = 'none'; });
