@@ -12,12 +12,13 @@ particlesJS("particles-js", {
 
 // --- Variables ---
 const searchBar = document.getElementById('searchBar');
-const imageCards = document.querySelectorAll('.image-card');
+const imageCards = Array.from(document.querySelectorAll('.image-card'));
 const sortRarity = document.getElementById('sortRarity');
 const sortPriceAsc = document.getElementById('sortPriceAsc');
 const sortPriceDesc = document.getElementById('sortPriceDesc');
+const container = document.querySelector('.images-container');
 
-// Popup
+// --- Popup ---
 const popup = document.getElementById('popup');
 const popupClose = document.getElementById('popupClose');
 const popupImage = document.getElementById('popupImage');
@@ -26,7 +27,7 @@ const popupRarity = document.getElementById('popupRarity');
 const priceText = document.getElementById('priceText');
 const popupBonus = document.getElementById('popupBonus');
 
-// Couleurs selon rareté
+// --- Couleurs selon rareté ---
 const rarityColors = {
   'Commun': 'grey',
   'UnCommun': 'darkgreen',
@@ -38,7 +39,7 @@ const rarityColors = {
 
 // --- Fonction pour parser le prix ---
 function parsePrice(price) {
-  const num = parseInt(price.replace(/\s/g, '').replace(/💰/, ''));
+  const num = parseInt(price.replace(/\s/g, '').replace(/💰/g, ''));
   return isNaN(num) ? Infinity : num;
 }
 
@@ -53,10 +54,8 @@ searchBar.addEventListener('input', () => {
 
 // --- Tri ---
 function sortCards(compareFn) {
-  const container = document.querySelector('.images-container');
-  Array.from(imageCards)
-       .sort(compareFn)
-       .forEach(card => container.appendChild(card));
+  const visibleCards = imageCards.filter(c => c.style.display !== 'none');
+  visibleCards.sort(compareFn).forEach(card => container.appendChild(card));
 }
 
 // Trier par rareté
@@ -75,14 +74,13 @@ sortPriceDesc.addEventListener('click', () => {
   sortCards((a, b) => parsePrice(b.dataset.price) - parsePrice(a.dataset.price));
 });
 
-// --- Lueur et hover animés ---
+// --- Glow et hover ---
 imageCards.forEach(card => {
   const rarity = card.dataset.rarity;
   const color = rarityColors[rarity] || 'white';
-  
   card.style.boxShadow = `0 0 20px 5px ${color}`;
   card.style.transition = 'transform 0.3s, box-shadow 0.3s';
-  
+
   card.addEventListener('mouseover', () => {
     card.style.transform = 'scale(1.05)';
     card.style.boxShadow = `0 0 30px 10px ${color}`;
@@ -92,27 +90,23 @@ imageCards.forEach(card => {
     card.style.transform = 'scale(1)';
     card.style.boxShadow = `0 0 20px 5px ${color}`;
   });
-});
 
-// --- Popup ---
-imageCards.forEach(card => {
+  // --- Popup ---
   card.addEventListener('click', () => {
     popup.style.display = 'block';
-    popupImage.src = card.dataset.img || 'default.png';
-    popupTitle.textContent = card.dataset.title || 'Unknown';
-    popupRarity.textContent = 'Rareté: ' + (card.dataset.rarity || 'Unknown');
+    popupImage.src = card.dataset.img || '';
+    popupTitle.textContent = card.dataset.title || '';
+    popupRarity.textContent = 'Rareté: ' + (card.dataset.rarity || '');
     popupRarity.style.color = rarityColors[card.dataset.rarity] || 'black';
-    priceText.textContent = 'Prix: ' + (card.dataset.price || '?') + ' 💰';
+    priceText.textContent = 'Prix: ' + (card.dataset.price || '') + ' 💰';
     priceText.style.color = '#00FF7F';
-    popupBonus.textContent = 'Bonus: ' + (card.dataset.bonus || '?');
+    popupBonus.textContent = 'Bonus: ' + (card.dataset.bonus || '');
     popupBonus.style.color = '#FFFF00';
   });
 });
 
 // Fermer popup
-popupClose.addEventListener('click', () => {
-  popup.style.display = 'none';
-});
+popupClose.addEventListener('click', () => popup.style.display = 'none');
 
 // Fermer popup en cliquant en dehors
 window.addEventListener('click', e => {
