@@ -27,18 +27,22 @@ function getRarityColor(rarity) {
     }
 }
 
+// Affichage du popup avec prix et rareté colorée
 cards.forEach(card => {
     card.addEventListener('click', () => {
         popup.style.display = 'block';
         popupImage.src = card.dataset.img;
         popupTitle.textContent = card.dataset.title;
 
+        // Rarété avec couleur spécifique
         popupRarity.textContent = `Rareté: ${card.dataset.rarity}`;
-        popupRarity.style.color = getRarityColor(card.dataset.rarity); // couleur rareté
+        popupRarity.style.color = getRarityColor(card.dataset.rarity);
 
+        // Prix en vert clair
         priceText.textContent = `Prix: ${card.dataset.price} 💰`;
-        priceText.style.color = '#00ffcc'; // vert clair
+        priceText.style.color = '#00ffcc';
 
+        // Description / bonus normale
         popupBonus.textContent = `Bonus: ${card.dataset.bonus}`;
     });
 });
