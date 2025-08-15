@@ -11,7 +11,7 @@
     #mainTitle {
       text-align: center;
       margin-top: 20px;
-      font-size: 3.5em; 
+      font-size: 3.5em;
       color: #00ff99;
       text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99, 0 0 20px #00ff99, 0 0 40px #00ff99;
       animation: glow 2s infinite alternate;
@@ -64,6 +64,18 @@
       font-size: 25px;
       cursor: pointer;
       color: #ff0000;
+    }
+
+    /* Glow animé pour rareté et prix dans le popup */
+    #popupRarity, #priceText {
+      font-weight: bold;
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99; }
+      50% { text-shadow: 0 0 15px #00ff99, 0 0 25px #00ff99, 0 0 35px #00ff99; }
+      100% { text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99; }
     }
 
     .search-container {
@@ -136,130 +148,132 @@
   </div>
 
   <div class="images-container">
+    <!-- Cartes -->
     <div class="image-card glow-Commun" data-title="Noob" data-rarity="Commun" data-price="100" data-bonus="1$/s" data-img="noob.png">
       <img src="noob.png" alt="Noob">
       <div class="image-title">Noob</div>
       <div class="image-price">100 💰</div>
     </div>
+
     <div class="image-card glow-Rare" data-title="Noob Boxeur" data-rarity="Rare" data-price="100000" data-bonus="6$/s" data-img="Boxeur.png">
       <img src="Boxeur.png" alt="Noob Boxeur">
       <div class="image-title">Noob Boxeur</div>
       <div class="image-price">100000 💰</div>
     </div>
+
     <div class="image-card glow-Rare" data-title="Noob Ninja" data-rarity="Rare" data-price="12000" data-bonus="95$/s" data-img="Ninja.PNG">
       <img src="Ninja.PNG" alt="Noob Ninja">
       <div class="image-title">Noob Ninja</div>
       <div class="image-price">12000 💰</div>
     </div>
+
     <div class="image-card glow-Commun" data-title="Agent Noob" data-rarity="Commun" data-price="250" data-bonus="1$/s" data-img="Agent.PNG">
       <img src="Agent.PNG" alt="Agent Noob">
       <div class="image-title">Agent Noob</div>
       <div class="image-price">250 💰</div>
     </div>
+
     <div class="image-card glow-Commun" data-title="Surf Noob" data-rarity="Commun" data-price="200" data-bonus="2$/s" data-img="Surf.PNG">
       <img src="Surf.PNG" alt="Surf Noob">
       <div class="image-title">Surf Noob</div>
       <div class="image-price">200 💰</div>
     </div>
+
     <div class="image-card glow-Legendaire" data-title="Hacker Noob" data-rarity="Legendaire" data-price="250000" data-bonus="1500$/s" data-img="hackeur.png">
       <img src="hackeur.png" alt="Hacker Noob">
       <div class="image-title">Hacker Noob</div>
       <div class="image-price">250000 💰</div>
     </div>
+
     <div class="image-card glow-Uncommun" data-title="Magic Noob" data-rarity="UnCommun" data-price="1600" data-bonus="14$/s" data-img="magic noob.png">
       <img src="magic noob.png" alt="Magic Noob">
       <div class="image-title">Magic Noob</div>
       <div class="image-price">1600 💰</div>
     </div>
+
     <div class="image-card glow-Mythique" data-title="God Noob" data-rarity="Mythique" data-price="2500000" data-bonus="13000$/s" data-img="God.PNG">
       <img src="God.PNG" alt="God Noob">
       <div class="image-title">God Noob</div>
       <div class="image-price">2500000 💰</div>
     </div>
+
     <div class="image-card glow-Uncommun" data-title="Swat Noob" data-rarity="UnCommun" data-price="3200" data-bonus="28$/s" data-img="Swat.PNG">
       <img src="Swat.PNG" alt="Swat Noob">
       <div class="image-title">Swat Noob</div>
       <div class="image-price">3200 💰</div>
     </div>
+
     <div class="image-card glow-Commun" data-title="Poor Noob" data-rarity="Commun" data-price="400" data-bonus="4$/s" data-img="Poor.PNG">
       <img src="Poor.PNG" alt="Poor Noob">
       <div class="image-title">Poor Noob</div>
       <div class="image-price">400 💰</div>
-    </div>
-    <div class="image-card glow-Rare" data-title="Rich Noob" data-rarity="Rare" data-price="50000" data-bonus="350$/s" data-img="Rich.PNG">
-      <img src="Rich.PNG" alt="Rich Noob">
-      <div class="image-title">Rich Noob</div>
-      <div class="image-price">50000 💰</div>
-    </div>
-    <div class="image-card glow-Legendaire" data-title="King Noob" data-rarity="Legendaire" data-price="500000" data-bonus="2500$/s" data-img="King.PNG">
-      <img src="King.PNG" alt="King Noob">
-      <div class="image-title">King Noob</div>
-      <div class="image-price">500000 💰</div>
     </div>
   </div>
 
   <!-- Popup -->
   <div class="popup" id="popup">
     <span id="popupClose">&times;</span>
-    <img id="popupImage" src="" alt="">
-    <h2 id="popupTitle">Titre</h2>
-    <p id="popupRarity">Rareté</p>
-    <p id="popupBonus">Bonus</p>
-    <p id="priceText">Prix</p>
+    <img id="popupImage" src="" alt="Image Popup">
+    <h2 id="popupTitle"></h2>
+    <p id="popupRarity"></p>
+    <p id="priceText"></p>
+    <p id="popupBonus"></p>
   </div>
 
   <div class="footer">
-    &copy; 2025 NoobFinder 🔥
+    © NoobFinder 2025
   </div>
 
   <script>
-    // Particles JS
+    // Particles
     particlesJS.load('particles-js', 'particles.json', function() {
-      console.log('Particles loaded');
+      console.log('callback - particles.js loaded');
     });
 
-    // Popup JS
     const popup = document.getElementById('popup');
+    const popupClose = document.getElementById('popupClose');
     const popupImage = document.getElementById('popupImage');
     const popupTitle = document.getElementById('popupTitle');
     const popupRarity = document.getElementById('popupRarity');
     const popupBonus = document.getElementById('popupBonus');
     const priceText = document.getElementById('priceText');
-    const popupClose = document.getElementById('popupClose');
 
     const cards = document.querySelectorAll('.image-card');
 
     function getRarityColor(rarity) {
-        switch(rarity.toLowerCase()) {
-            case 'commun': return '#00ff00';
-            case 'uncommun': return '#ff8c00';
-            case 'rare': return '#1e90ff';
-            case 'legendaire': return '#ff00ff';
-            case 'mythique': return '#ffd700';
-            case 'secret': return '#ff4500';
-            default: return '#ffffff';
-        }
+      switch(rarity.toLowerCase()) {
+          case 'commun': return '#00ff00';
+          case 'uncommun': return '#ff8c00';
+          case 'rare': return '#1e90ff';
+          case 'legendaire': return '#ff00ff';
+          case 'mythique': return '#ffd700';
+          case 'secret': return '#ff4500';
+          default: return '#ffffff';
+      }
     }
 
     cards.forEach(card => {
-        card.addEventListener('click', () => {
-            popup.style.display = 'block';
-            popupImage.src = card.dataset.img;
-            popupTitle.textContent = card.dataset.title;
-            popupRarity.textContent = `Rareté: ${card.dataset.rarity}`;
-            popupRarity.style.color = getRarityColor(card.dataset.rarity);
-            priceText.textContent = `Prix: ${card.dataset.price} 💰`;
-            priceText.style.color = '#00ffcc';
-            popupBonus.textContent = `Bonus: ${card.dataset.bonus}`;
-        });
+      card.addEventListener('click', () => {
+          popup.style.display = 'block';
+          popupImage.src = card.dataset.img;
+          popupTitle.textContent = card.dataset.title;
+
+          // Glow couleur dynamique selon rareté
+          const rarityColor = getRarityColor(card.dataset.rarity);
+          popupRarity.textContent = `Rareté: ${card.dataset.rarity}`;
+          popupRarity.style.color = rarityColor;
+          popupRarity.style.textShadow = `0 0 10px ${rarityColor}, 0 0 20px ${rarityColor}`;
+
+          priceText.textContent = `Prix: ${card.dataset.price} 💰`;
+          priceText.style.color = '#00ffcc';
+          priceText.style.textShadow = `0 0 10px #00ffcc, 0 0 20px #00ffcc`;
+
+          popupBonus.textContent = `Bonus: ${card.dataset.bonus}`;
+      });
     });
 
     popupClose.addEventListener('click', () => {
-        popup.style.display = 'none';
-    });
-
-    window.addEventListener('click', e => {
-        if(e.target === popup) popup.style.display = 'none';
+      popup.style.display = 'none';
     });
   </script>
 </body>
