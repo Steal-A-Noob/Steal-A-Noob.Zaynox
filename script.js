@@ -1,4 +1,4 @@
-// Particles.js
+ // Particles.js
 particlesJS.load('particles-js', 'particles.json', function() {
   console.log('Particles loaded!');
 });
@@ -64,6 +64,7 @@ imageCards.forEach(card => {
     popupTitle.textContent = card.dataset.title;
     popupRarity.textContent = 'Rareté: ' + card.dataset.rarity;
     priceText.textContent = 'Prix: ' + card.dataset.price + ' 💰';
+    priceText.style.color = '#7CFC00'; // <-- vert clair
     popupBonus.textContent = 'Bonus: ' + card.dataset.bonus;
   });
 });
