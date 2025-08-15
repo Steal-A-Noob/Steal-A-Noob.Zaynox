@@ -1,5 +1,4 @@
-// Initialisation des cartes
-const cards = document.querySelectorAll('.image-card');
+// --- Sélection des éléments ---
 const popup = document.getElementById('popup');
 const popupClose = document.getElementById('popupClose');
 const popupImage = document.getElementById('popupImage');
@@ -9,62 +8,60 @@ const popupBonus = document.getElementById('popupBonus');
 const priceText = document.getElementById('priceText');
 const searchBar = document.getElementById('searchBar');
 
-cards.forEach(card => {
-  card.addEventListener('click', () => {
-    popup.style.display = 'block';
-    popupImage.src = card.dataset.img;
-    popupTitle.textContent = card.dataset.title;
-    popupRarity.textContent = `Rareté : ${card.dataset.rarity}`;
-    popupBonus.textContent = `Bonus : ${card.dataset.bonus}`;
-    priceText.textContent = `Prix : ${card.dataset.price} 💰`;
-  });
+const sortRarityBtn = document.getElementById('sortRarity');
+const sortPriceAscBtn = document.getElementById('sortPriceAsc');
+const sortPriceDescBtn = document.getElementById('sortPriceDesc');
+const container = document.querySelector('.images-container');
+
+let cards = Array.from(document.querySelectorAll('.image-card'));
+const rarityOrder = ["Commun", "UnCommun", "Rare", "Legendaire", "Mythique", "Secret"];
+
+// --- Fonctions utilitaires ---
+function openPopup(card) {
+  popup.classList.add('visible');
+  popupImage.src = card.dataset.img;
+  popupTitle.textContent = card.dataset.title;
+  popupRarity.textContent = `Rareté : ${card.dataset.rarity}`;
+  popupBonus.textContent = `Bonus : ${card.dataset.bonus}`;
+  priceText.textContent = `Prix : ${card.dataset.price} 💰`;
+}
+
+function closePopup() {
+  popup.classList.remove('visible');
+}
+
+function sortCards(compareFn) {
+  cards.sort(compareFn).forEach(card => container.appendChild(card));
+}
+
+// --- Événements ---
+// Délégation de clic sur les cartes
+container.addEventListener('click', e => {
+  const card = e.target.closest('.image-card');
+  if (card) openPopup(card);
 });
 
-popupClose.addEventListener('click', () => {
-  popup.style.display = 'none';
-});
-
+// Fermer popup
+popupClose.addEventListener('click', closePopup);
 window.addEventListener('click', e => {
-  if (e.target == popup) {
-    popup.style.display = 'none';
-  }
+  if (e.target === popup) closePopup();
 });
 
 // Recherche dynamique
 searchBar.addEventListener('input', () => {
   const filter = searchBar.value.toLowerCase();
   cards.forEach(card => {
-    if (card.dataset.title.toLowerCase().includes(filter)) {
-      card.style.display = 'block';
-    } else {
-      card.style.display = 'none';
-    }
+    card.classList.toggle('hidden', !card.dataset.title.toLowerCase().includes(filter));
   });
 });
 
-// Tri par prix ou rareté
-const sortRarityBtn = document.getElementById('sortRarity');
-const sortPriceAscBtn = document.getElementById('sortPriceAsc');
-const sortPriceDescBtn = document.getElementById('sortPriceDesc');
-const container = document.querySelector('.images-container');
-
-const rarityOrder = ["Commun", "UnCommun", "Rare", "Legendaire", "Mythique", "Secret"];
-
-function sortCardsByRarity() {
-  const sorted = Array.from(cards).sort((a, b) => rarityOrder.indexOf(a.dataset.rarity) - rarityOrder.indexOf(b.dataset.rarity));
-  sorted.forEach(card => container.appendChild(card));
-}
-
-function sortCardsByPriceAsc() {
-  const sorted = Array.from(cards).sort((a, b) => Number(a.dataset.price) - Number(b.dataset.price));
-  sorted.forEach(card => container.appendChild(card));
-}
-
-function sortCardsByPriceDesc() {
-  const sorted = Array.from(cards).sort((a, b) => Number(b.dataset.price) - Number(a.dataset.price));
-  sorted.forEach(card => container.appendChild(card));
-}
-
-sortRarityBtn.addEventListener('click', sortCardsByRarity);
-sortPriceAscBtn.addEventListener('click', sortCardsByPriceAsc);
-sortPriceDescBtn.addEventListener('click', sortCardsByPriceDesc);
+// Tri
+sortRarityBtn.addEventListener('click', () =>
+  sortCards((a, b) => rarityOrder.indexOf(a.dataset.rarity) - rarityOrder.indexOf(b.dataset.rarity))
+);
+sortPriceAscBtn.addEventListener('click', () =>
+  sortCards((a, b) => Number(a.dataset.price) - Number(b.dataset.price))
+);
+sortPriceDescBtn.addEventListener('click', () =>
+  sortCards((a, b) => Number(b.dataset.price) - Number(a.dataset.price))
+);
