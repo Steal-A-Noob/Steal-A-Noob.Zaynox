@@ -1,6 +1,13 @@
 // --- Particles.js ---
-particlesJS.load('particles-js', 'particles.json', function() {
-  console.log('Particles loaded!');
+particlesJS("particles-js", {
+  "particles": {
+    "number": { "value": 100 },
+    "color": { "value": "#ffffff" },
+    "shape": { "type": "circle" },
+    "opacity": { "value": 0.5 },
+    "size": { "value": 3 },
+    "move": { "enable": true, "speed": 2 }
+  }
 });
 
 // --- Variables ---
@@ -34,7 +41,7 @@ searchBar.addEventListener('input', () => {
   const filter = searchBar.value.toLowerCase();
   imageCards.forEach(card => {
     const title = card.dataset.title.toLowerCase();
-    card.style.display = title.includes(filter) ? 'block' : 'none';
+    card.style.display = title.includes(filter) ? 'inline-block' : 'none';
   });
 });
 
@@ -66,10 +73,9 @@ sortPriceDesc.addEventListener('click', () => {
 imageCards.forEach(card => {
   const rarity = card.dataset.rarity;
   const color = rarityColors[rarity] || 'white';
-  card.style.boxShadow = `0 0 20px 5px ${color}`; // lumière permanente autour
+  card.style.boxShadow = `0 0 20px 5px ${color}`;
   card.style.transition = 'transform 0.3s';
   
-  // hover pour agrandir sans affecter la lueur
   card.addEventListener('mouseover', () => {
     card.style.transform = 'scale(1.05)';
   });
