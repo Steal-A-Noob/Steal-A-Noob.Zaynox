@@ -11,7 +11,7 @@
     #mainTitle {
       text-align: center;
       margin-top: 20px;
-      font-size: 3em;
+      font-size: 3.5em; /* un peu plus flottant */
       color: #00ff99;
       text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99, 0 0 20px #00ff99, 0 0 40px #00ff99;
       animation: glow 2s infinite alternate;
@@ -21,7 +21,7 @@
 
     @keyframes glow {
       0% { text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99, 0 0 20px #00ff99, 0 0 40px #00ff99; }
-      50% { text-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99, 0 0 30px #00ff99, 0 0 50px #00ff99; }
+      50% { text-shadow: 0 0 15px #00ff99, 0 0 30px #00ff99, 0 0 45px #00ff99, 0 0 70px #00ff99; }
       100% { text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99, 0 0 20px #00ff99, 0 0 40px #00ff99; }
     }
 
@@ -32,6 +32,92 @@
       z-index: -1;
       top: 0;
       left: 0;
+    }
+
+    /* Popup styling */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ff99;
+      color: white;
+      z-index: 100;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .popup img {
+      max-width: 300px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+
+    #popupClose {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 25px;
+      cursor: pointer;
+      color: #ff0000;
+    }
+
+    .search-container {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .sort-buttons {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .sort-buttons button {
+      margin: 0 5px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #00ff99;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .images-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .image-card {
+      background-color: #222;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      width: 150px;
+      transition: transform 0.2s;
+    }
+
+    .image-card:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #00ff99;
+    }
+
+    .image-card img {
+      max-width: 100%;
+      border-radius: 5px;
+    }
+
+    .footer {
+      text-align: center;
+      margin: 20px;
+      color: white;
     }
   </style>
 </head>
@@ -50,7 +136,7 @@
   </div>
 
   <div class="images-container">
-    <!-- Toutes les cartes -->
+    <!-- Toutes les cartes, on laisse toutes tes images telles quelles -->
     <div class="image-card glow-Commun" data-title="Noob" data-rarity="Commun" data-price="100" data-bonus="1$/s" data-img="noob.png">
       <img src="noob.png" alt="Noob">
       <div class="image-title">Noob</div>
@@ -88,7 +174,7 @@
     </div>
 
     <div class="image-card glow-Uncommun" data-title="Magic Noob" data-rarity="UnCommun" data-price="1600" data-bonus="14$/s" data-img="magic noob.png">
-      <img src="magic noob.png" alt="Magic Noob"> 
+      <img src="magic noob.png" alt="Magic Noob">
       <div class="image-title">Magic Noob</div>
       <div class="image-price">1600 💰</div>
     </div>
@@ -117,51 +203,14 @@
       <div class="image-price">50000 💰</div>
     </div>
 
-    <div class="image-card glow-Legendaire" data-title="King Noob" data-rarity="Legendaire" data-price="500000" data-bonus="3000$/s" data-img="King.PNG">
+    <div class="image-card glow-Legendaire" data-title="King Noob" data-rarity="Legendaire" data-price="500000" data-bonus="2500$/s" data-img="King.PNG">
       <img src="King.PNG" alt="King Noob">
       <div class="image-title">King Noob</div>
       <div class="image-price">500000 💰</div>
     </div>
-
-    <div class="image-card glow-Uncommun" data-title="Buildeur Noob" data-rarity="UnCommun" data-price="6000" data-bonus="50$/s" data-img="Buildeur.PNG">
-      <img src="Buildeur.PNG" alt="Buildeur Noob">
-      <div class="image-title">Buildeur Noob</div>
-      <div class="image-price">6000 💰</div>
-    </div>
-
-    <div class="image-card glow-Rare" data-title="Sleeping Noob" data-rarity="Rare" data-price="24000" data-bonus="190$/s" data-img="Sleeping.PNG">
-      <img src="Sleeping.PNG" alt="Sleeping Noob">
-      <div class="image-title">Sleeping Noob</div>
-      <div class="image-price">24000 💰</div>
-    </div>
-
-    <div class="image-card glow-Legendaire" data-title="Demon Noob" data-rarity="Legendaire" data-price="1000000" data-bonus="6000$/s" data-img="Demon.PNG">
-      <img src="Demon.PNG" alt="Demon Noob">
-      <div class="image-title">Demon Noob</div>
-      <div class="image-price">1000000 💰</div>
-    </div>
-
-    <div class="image-card glow-Mythique" data-title="Sayan Noob" data-rarity="Mythique" data-price="5000000" data-bonus="26000$/s" data-img="Sayan.PNG">
-      <img src="Sayan.PNG" alt="Sayan Noob">
-      <div class="image-title">Sayan Noob</div>
-      <div class="image-price">5000000 💰</div>
-    </div>
-
-    <div class="image-card glow-Legendaire" data-title="Teacher Noob" data-rarity="UnCommun" data-price="800" data-bonus="7$/s" data-img="Teacher.PNG">
-      <img src="Teacher.PNG" alt="Teacher Noob">
-      <div class="image-title">Teacher Noob</div>
-      <div class="image-price">800 💰</div>
-    </div>
-
-    <div class="image-card glow-Secret" data-title="Solider Noob" data-rarity="Secret" data-price="12000000" data-bonus="60000$/s" data-img="Solider.PNG">
-      <img src="Solider.PNG" alt="Solider Noob">
-      <div class="image-title">Solider Noob</div>
-      <div class="image-price">12000000 💰</div>
-    </div>
   </div>
 
-  <!-- Popup vertical -->
-  <div id="popup" class="popup">
+  <div class="popup" id="popup">
     <span id="popupClose">&times;</span>
     <img id="popupImage" src="" alt="">
     <h2 id="popupTitle"></h2>
@@ -171,33 +220,14 @@
   </div>
 
   <div class="footer">
-    Développé par Zaynox pour Steal a Noob de DarSya's Creations
+    © 2025 NoobFinder
   </div>
 
   <script src="script.js"></script>
-
-  <!-- Particules JS -->
   <script>
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": ["#00ff99", "#00ccff", "#ff00ff"] },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.7, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
-        "size": { "value": 4, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 0.5, "sync": false } },
-        "line_linked": { "enable": true, "distance": 150, "color": "#00ff99", "opacity": 0.4, "width": 1 },
-        "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
-      },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-        "modes": { "grab": { "distance": 200, "line_linked": { "opacity": 0.5 } }, "bubble": { "distance": 200, "size": 6, "duration": 2, "opacity": 0.8 }, "repulse": { "distance": 100 }, "push": { "particles_nb": 4 }, "remove": { "particles_nb": 2 } }
-      },
-      "retina_detect": true
+    particlesJS.load('particles-js', 'particles.json', function() {
+      console.log('Particles.js loaded 🎉');
     });
   </script>
 </body>
 </html>
-
-
-
