@@ -1,4 +1,4 @@
-// Particles.js
+// --- Particles.js ---
 particlesJS.load('particles-js', 'particles.json', function() {
   console.log('Particles loaded!');
 });
@@ -24,11 +24,7 @@ searchBar.addEventListener('input', () => {
   const filter = searchBar.value.toLowerCase();
   imageCards.forEach(card => {
     const title = card.dataset.title.toLowerCase();
-    if(title.includes(filter)){
-      card.style.display = 'block';
-    } else {
-      card.style.display = 'none';
-    }
+    card.style.display = title.includes(filter) ? 'block' : 'none';
   });
 });
 
@@ -56,24 +52,23 @@ sortPriceDesc.addEventListener('click', () => {
   sortCards((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
 });
 
-// --- Popup & affichage prix ---
+// --- Popup ---
 imageCards.forEach(card => {
-  const priceUnderImage = card.querySelector('.image-price'); // Prix sous l'image
   card.addEventListener('click', () => {
-    // Popup
     popup.style.display = 'block';
     popupImage.src = card.dataset.img;
     popupTitle.textContent = card.dataset.title;
     popupRarity.textContent = 'Rareté: ' + card.dataset.rarity;
+    
+    // Prix et bonus en jaune
     priceText.textContent = 'Prix: ' + card.dataset.price + ' 💰';
+    priceText.style.color = '#FFFF00';
+    
     popupBonus.textContent = 'Bonus: ' + card.dataset.bonus;
-
-    // Prix sous l'image reste bleu clair
-    if(priceUnderImage) priceUnderImage.style.color = '#00BFFF';
+    popupBonus.style.color = '#FFFF00';
   });
 });
 
-// Fermer popup
 popupClose.addEventListener('click', () => {
   popup.style.display = 'none';
 });
