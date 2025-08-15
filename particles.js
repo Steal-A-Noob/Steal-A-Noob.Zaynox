@@ -1,18 +1,17 @@
-/* Initialisation de Particles.js */
-particlesJS("particles-js", {
+{
   "particles": {
     "number": {
-      "value": 80, // Nombre de particules
+      "value": 80,
       "density": {
         "enable": true,
         "value_area": 800
       }
     },
     "color": {
-      "value": "#ff4500" // Couleur des particules (orange/rouge 🔥)
+      "value": "#ffffff"
     },
     "shape": {
-      "type": "circle", // Cercle, triangle, edge, polygon
+      "type": "circle",
       "stroke": {
         "width": 0,
         "color": "#000000"
@@ -24,35 +23,34 @@ particlesJS("particles-js", {
       "anim": {
         "enable": true,
         "speed": 1,
-        "opacity_min": 0.3,
+        "opacity_min": 0.2,
         "sync": false
       }
     },
     "size": {
-      "value": 4,
+      "value": 3,
       "random": true,
       "anim": {
         "enable": true,
-        "speed": 5,
+        "speed": 3,
         "size_min": 0.5,
         "sync": false
       }
     },
     "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#ff6347",
-      "opacity": 0.4,
-      "width": 1
+      "enable": false
     },
     "move": {
       "enable": true,
-      "speed": 2,
+      "speed": 1.5,
       "direction": "none",
       "random": true,
       "straight": false,
       "out_mode": "out",
-      "bounce": false
+      "bounce": false,
+      "attract": {
+        "enable": false
+      }
     }
   },
   "interactivity": {
@@ -60,23 +58,39 @@ particlesJS("particles-js", {
     "events": {
       "onhover": {
         "enable": true,
-        "mode": "repulse" // Les particules s'éloignent de la souris
+        "mode": "repulse"
       },
       "onclick": {
         "enable": true,
-        "mode": "push" // Clique pour ajouter des particules
+        "mode": "push"
       },
       "resize": true
     },
     "modes": {
+      "grab": {
+        "distance": 400,
+        "line_linked": {
+          "opacity": 1
+        }
+      },
+      "bubble": {
+        "distance": 250,
+        "size": 0,
+        "duration": 2,
+        "opacity": 0,
+        "speed": 3
+      },
       "repulse": {
         "distance": 100,
         "duration": 0.4
       },
       "push": {
         "particles_nb": 4
+      },
+      "remove": {
+        "particles_nb": 2
       }
     }
   },
   "retina_detect": true
-});
+}
