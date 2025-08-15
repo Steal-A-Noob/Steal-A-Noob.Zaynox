@@ -19,32 +19,15 @@ const popupRarity = document.getElementById('popupRarity');
 const priceText = document.getElementById('priceText');
 const popupBonus = document.getElementById('popupBonus');
 
-// Couleurs des raretés
+// Couleurs selon rareté
 const rarityColors = {
-  Commun: 'grey',
-  UnCommun: 'darkgreen',
-  Rare: 'blue',
-  Legendaire: 'red',
-  Mythique: 'purple',
-  Secret: 'orange'
+  'Commun': 'grey',
+  'UnCommun': 'darkgreen',
+  'Rare': 'blue',
+  'Legendaire': 'red',
+  'Mythique': 'purple',
+  'Secret': 'gold'
 };
-
-// --- Glow dynamique ---
-imageCards.forEach(card => {
-  const rarity = card.dataset.rarity;
-  const color = rarityColors[rarity] || 'white';
-  card.style.boxShadow = `0 0 15px ${color}`;
-  card.style.animation = `pulseGlow 2s infinite alternate`;
-  card.addEventListener('mouseover', () => {
-    card.style.animation = 'none';
-    card.style.transform = 'scale(1.05)';
-    card.style.boxShadow = `0 0 30px ${color}, 0 0 60px ${color}`;
-  });
-  card.addEventListener('mouseout', () => {
-    card.style.transform = 'scale(1)';
-    card.style.animation = 'pulseGlow 2s infinite alternate';
-  });
-});
 
 // --- Recherche ---
 searchBar.addEventListener('input', () => {
@@ -79,6 +62,21 @@ sortPriceDesc.addEventListener('click', () => {
   sortCards((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
 });
 
+// --- Glow constant et hover scale ---
+imageCards.forEach(card => {
+  const rarity = card.dataset.rarity;
+  const color = rarityColors[rarity] || 'white';
+  card.style.boxShadow = `0 0 20px ${color}`; // lueur constante
+  card.style.transition = 'transform 0.3s';
+
+  card.addEventListener('mouseover', () => {
+    card.style.transform = 'scale(1.05)';
+  });
+  card.addEventListener('mouseout', () => {
+    card.style.transform = 'scale(1)';
+  });
+});
+
 // --- Popup ---
 imageCards.forEach(card => {
   card.addEventListener('click', () => {
@@ -110,14 +108,3 @@ popupClose.addEventListener('click', () => {
 window.addEventListener('click', e => {
   if(e.target === popup) popup.style.display = 'none';
 });
-
-// --- Animation keyframes pour le glow pulsant ---
-const styleSheet = document.createElement("style");
-styleSheet.type = "text/css";
-styleSheet.innerText = `
-@keyframes pulseGlow {
-  0% { box-shadow: 0 0 10px rgba(255,255,255,0.3); }
-  50% { box-shadow: 0 0 20px rgba(255,255,255,0.7); }
-  100% { box-shadow: 0 0 10px rgba(255,255,255,0.3); }
-}`;
-document.head.appendChild(styleSheet);
