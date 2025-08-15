@@ -104,7 +104,7 @@ body {
 
 .image-price {
   margin-top: 3px;
-  color: #00BFFF; /* Prix sous les images en bleu clair */
+  color: #00BFFF; /* bleu clair pour le prix sous les images */
 }
 
 /* Glow selon rareté */
@@ -150,6 +150,18 @@ body {
   cursor: pointer;
   font-size: 20px;
   color: #e74c3c;
+}
+
+/* Texte descriptif de la popup */
+#popupRarity,
+#priceText,
+#popupBonus {
+  margin: 5px 0;
+}
+
+/* Prix et bonus dans la popup en jaune */
+#priceText, #popupBonus {
+  color: #FFFF00;
 }
 
 /* Footer */
