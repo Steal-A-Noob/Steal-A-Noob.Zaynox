@@ -56,22 +56,24 @@ sortPriceDesc.addEventListener('click', () => {
   sortCards((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
 });
 
-// --- Popup ---
+// --- Popup & affichage prix ---
 imageCards.forEach(card => {
+  const priceUnderImage = card.querySelector('.image-price'); // Prix sous l'image
   card.addEventListener('click', () => {
+    // Popup
     popup.style.display = 'block';
     popupImage.src = card.dataset.img;
     popupTitle.textContent = card.dataset.title;
     popupRarity.textContent = 'Rareté: ' + card.dataset.rarity;
-
-    // Prix en vert clair
     priceText.textContent = 'Prix: ' + card.dataset.price + ' 💰';
-    priceText.style.color = '#7CFC00'; // vert clair
-
     popupBonus.textContent = 'Bonus: ' + card.dataset.bonus;
+
+    // Prix sous l'image reste bleu clair
+    if(priceUnderImage) priceUnderImage.style.color = '#00BFFF';
   });
 });
 
+// Fermer popup
 popupClose.addEventListener('click', () => {
   popup.style.display = 'none';
 });
