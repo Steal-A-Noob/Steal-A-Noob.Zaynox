@@ -1,56 +1,46 @@
-{
+<!-- Particles.js -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<div id="particles-js"></div>
+
+<script>
+particlesJS("particles-js", {
   "particles": {
     "number": {
-      "value": 80,
+      "value": 120,
       "density": {
         "enable": true,
-        "value_area": 800
+        "value_area": 1500
       }
     },
     "color": {
-      "value": "#ffffff"
+      "value": ["#808080", "#006400", "#0000FF", "#FF0000", "#800080"] 
+      // gris, vert foncé, bleu, rouge, violet
     },
     "shape": {
-      "type": "circle",
-      "stroke": {
-        "width": 0,
-        "color": "#000000"
-      }
+      "type": "circle"
     },
     "opacity": {
       "value": 0.7,
-      "random": true,
-      "anim": {
-        "enable": true,
-        "speed": 1,
-        "opacity_min": 0.2,
-        "sync": false
-      }
+      "random": true
     },
     "size": {
-      "value": 3,
-      "random": true,
-      "anim": {
-        "enable": true,
-        "speed": 3,
-        "size_min": 0.5,
-        "sync": false
-      }
+      "value": 4,
+      "random": true
     },
     "line_linked": {
-      "enable": false
+      "enable": true,
+      "distance": 150,
+      "color": "#ffffff",
+      "opacity": 0.4,
+      "width": 1
     },
     "move": {
       "enable": true,
-      "speed": 1.5,
+      "speed": 2,
       "direction": "none",
-      "random": true,
+      "random": false,
       "straight": false,
-      "out_mode": "out",
-      "bounce": false,
-      "attract": {
-        "enable": false
-      }
+      "out_mode": "out"
     }
   },
   "interactivity": {
@@ -58,39 +48,33 @@
     "events": {
       "onhover": {
         "enable": true,
-        "mode": "repulse"
+        "mode": "grab"
       },
       "onclick": {
-        "enable": true,
-        "mode": "push"
-      },
-      "resize": true
+        "enable": false
+      }
     },
     "modes": {
       "grab": {
-        "distance": 400,
+        "distance": 200,
         "line_linked": {
-          "opacity": 1
+          "opacity": 0.8
         }
-      },
-      "bubble": {
-        "distance": 250,
-        "size": 0,
-        "duration": 2,
-        "opacity": 0,
-        "speed": 3
-      },
-      "repulse": {
-        "distance": 100,
-        "duration": 0.4
-      },
-      "push": {
-        "particles_nb": 4
-      },
-      "remove": {
-        "particles_nb": 2
       }
     }
   },
   "retina_detect": true
+});
+</script>
+
+<style>
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Met en fond */
+  background: #000; /* Couleur de fond derrière les particules */
 }
+</style>
