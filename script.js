@@ -36,6 +36,12 @@ const rarityColors = {
   'Secret': 'gold'
 };
 
+// --- Fonction pour parser le prix ---
+function parsePrice(price) {
+  const num = parseInt(price.replace(/\s/g, '').replace(/💰/, ''));
+  return isNaN(num) ? Infinity : num;
+}
+
 // --- Recherche ---
 searchBar.addEventListener('input', () => {
   const filter = searchBar.value.toLowerCase();
@@ -61,26 +67,30 @@ sortRarity.addEventListener('click', () => {
 
 // Trier par prix croissant
 sortPriceAsc.addEventListener('click', () => {
-  sortCards((a, b) => parseInt(a.dataset.price) - parseInt(b.dataset.price));
+  sortCards((a, b) => parsePrice(a.dataset.price) - parsePrice(b.dataset.price));
 });
 
 // Trier par prix décroissant
 sortPriceDesc.addEventListener('click', () => {
-  sortCards((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
+  sortCards((a, b) => parsePrice(b.dataset.price) - parsePrice(a.dataset.price));
 });
 
-// --- Lueur permanente ---
+// --- Lueur et hover animés ---
 imageCards.forEach(card => {
   const rarity = card.dataset.rarity;
   const color = rarityColors[rarity] || 'white';
+  
   card.style.boxShadow = `0 0 20px 5px ${color}`;
-  card.style.transition = 'transform 0.3s';
+  card.style.transition = 'transform 0.3s, box-shadow 0.3s';
   
   card.addEventListener('mouseover', () => {
     card.style.transform = 'scale(1.05)';
+    card.style.boxShadow = `0 0 30px 10px ${color}`;
   });
+  
   card.addEventListener('mouseout', () => {
     card.style.transform = 'scale(1)';
+    card.style.boxShadow = `0 0 20px 5px ${color}`;
   });
 });
 
@@ -88,17 +98,13 @@ imageCards.forEach(card => {
 imageCards.forEach(card => {
   card.addEventListener('click', () => {
     popup.style.display = 'block';
-    popupImage.src = card.dataset.img;
-    popupTitle.textContent = card.dataset.title;
-
-    const rarity = card.dataset.rarity;
-    popupRarity.textContent = 'Rareté: ' + rarity;
-    popupRarity.style.color = rarityColors[rarity] || 'black';
-
-    priceText.textContent = 'Prix: ' + card.dataset.price + ' 💰';
+    popupImage.src = card.dataset.img || 'default.png';
+    popupTitle.textContent = card.dataset.title || 'Unknown';
+    popupRarity.textContent = 'Rareté: ' + (card.dataset.rarity || 'Unknown');
+    popupRarity.style.color = rarityColors[card.dataset.rarity] || 'black';
+    priceText.textContent = 'Prix: ' + (card.dataset.price || '?') + ' 💰';
     priceText.style.color = '#00FF7F';
-
-    popupBonus.textContent = 'Bonus: ' + card.dataset.bonus;
+    popupBonus.textContent = 'Bonus: ' + (card.dataset.bonus || '?');
     popupBonus.style.color = '#FFFF00';
   });
 });
