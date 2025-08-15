@@ -14,13 +14,31 @@ const popupClose = document.getElementById('popupClose');
 
 const cards = document.querySelectorAll('.image-card');
 
+// Fonction pour colorer la rareté
+function getRarityColor(rarity) {
+    switch(rarity.toLowerCase()) {
+        case 'commun': return '#00ff00';       // vert
+        case 'uncommun': return '#ff8c00';     // orange
+        case 'rare': return '#1e90ff';         // bleu
+        case 'legendaire': return '#ff00ff';   // magenta
+        case 'mythique': return '#ffd700';     // doré
+        case 'secret': return '#ff4500';       // rouge/orange
+        default: return '#ffffff';             // blanc
+    }
+}
+
 cards.forEach(card => {
     card.addEventListener('click', () => {
         popup.style.display = 'block';
         popupImage.src = card.dataset.img;
         popupTitle.textContent = card.dataset.title;
+
         popupRarity.textContent = `Rareté: ${card.dataset.rarity}`;
+        popupRarity.style.color = getRarityColor(card.dataset.rarity); // couleur rareté
+
         priceText.textContent = `Prix: ${card.dataset.price} 💰`;
+        priceText.style.color = '#00ffcc'; // vert clair
+
         popupBonus.textContent = `Bonus: ${card.dataset.bonus}`;
     });
 });
