@@ -58,17 +58,41 @@ imageCards.forEach(card => {
     popup.style.display = 'block';
     popupImage.src = card.dataset.img;
     popupTitle.textContent = card.dataset.title;
-    popupRarity.textContent = 'Rareté: ' + card.dataset.rarity;
-    
-    // Prix en vert clair et bonus en jaune
+
+    // Rareté avec couleur
+    const rarity = card.dataset.rarity;
+    popupRarity.textContent = 'Rareté: ' + rarity;
+    switch(rarity) {
+      case 'Commun':
+        popupRarity.style.color = 'grey';
+        break;
+      case 'UnCommun':
+        popupRarity.style.color = 'darkgreen';
+        break;
+      case 'Rare':
+        popupRarity.style.color = 'blue';
+        break;
+      case 'Legendaire':
+        popupRarity.style.color = 'red';
+        break;
+      case 'Mythique':
+        popupRarity.style.color = 'purple';
+        break;
+      default:
+        popupRarity.style.color = 'black';
+    }
+
+    // Prix en vert clair
     priceText.textContent = 'Prix: ' + card.dataset.price + ' 💰';
     priceText.style.color = '#00FF7F';
-    
+
+    // Bonus en jaune
     popupBonus.textContent = 'Bonus: ' + card.dataset.bonus;
     popupBonus.style.color = '#FFFF00';
   });
 });
 
+// Fermer popup
 popupClose.addEventListener('click', () => {
   popup.style.display = 'none';
 });
@@ -77,4 +101,3 @@ popupClose.addEventListener('click', () => {
 window.addEventListener('click', e => {
   if(e.target === popup) popup.style.display = 'none';
 });
-
