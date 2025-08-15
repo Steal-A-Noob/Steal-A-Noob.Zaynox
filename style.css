@@ -24,34 +24,19 @@ body {
   left: 0;
 }
 
-/* Titre principal flottant et néon */
+/* Titre principal */
 #mainTitle {
-  position: absolute;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
+  text-align: center;
   font-size: 3rem;
+  margin: 20px 0;
   color: #00BFFF;
-  text-shadow: 
-    0 0 5px #00BFFF,
-    0 0 10px #00BFFF,
-    0 0 20px #00BFFF,
-    0 0 40px #3498db,
-    0 0 60px #3498db;
-  z-index: 1;
-  animation: floatTitle 3s ease-in-out infinite alternate;
-}
-
-@keyframes floatTitle {
-  0% { transform: translateX(-50%) translateY(0px); }
-  100% { transform: translateX(-50%) translateY(-15px); }
+  text-shadow: 0 0 10px #f39c12;
 }
 
 /* Barre de recherche */
 .search-container {
   display: flex;
   justify-content: center;
-  margin-top: 200px; /* pour que le titre ne chevauche pas la search */
   margin-bottom: 20px;
 }
 
@@ -104,7 +89,7 @@ body {
   width: 150px;
   text-align: center;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
 .image-card img {
@@ -119,27 +104,51 @@ body {
 
 .image-price {
   margin-top: 3px;
-  color: #00FF7F;
+  color: #00FF7F; /* Prix sous les images en bleu clair */
 }
 
-/* Glow selon rareté avec effet pulsé */
-.glow-Commun { box-shadow: 0 0 10px #95a5a6; animation: pulse 2s infinite; }
-.glow-Rare { box-shadow: 0 0 15px #3498db; animation: pulse 2s infinite; }
-.glow-Uncommun { box-shadow: 0 0 15px #8e44ad; animation: pulse 2s infinite; }
-.glow-Legendaire { box-shadow: 0 0 20px #e74c3c; animation: pulse 2s infinite; }
-.glow-Mythique { box-shadow: 0 0 25px #f39c12; animation: pulse 2s infinite; }
-.glow-Secret { box-shadow: 0 0 30px #2ecc71; animation: pulse 2s infinite; }
+/* Glow selon rareté */
+.glow-Commun { box-shadow: 0 0 10px #95a5a6; }
+.glow-Rare { box-shadow: 0 0 15px #3498db; }
+.glow-Uncommun { box-shadow: 0 0 15px #8e44ad; }
+.glow-Legendaire { box-shadow: 0 0 20px #e74c3c; }
+.glow-Mythique { box-shadow: 0 0 25px #f39c12; }
+.glow-Secret { box-shadow: 0 0 30px #2ecc71; }
 
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.8; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* Hover animation néon */
-.image-card:hover {
+/* Hover animation synchronisée avec la rareté */
+.image-card:hover.glow-Commun {
   transform: scale(1.08);
-  box-shadow: 0 0 20px #00BFFF, 0 0 40px #3498db;
+  box-shadow: 0 0 15px #95a5a6, 0 0 30px #95a5a6;
+  transition: 0.3s;
+}
+
+.image-card:hover.glow-Rare {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px #3498db, 0 0 40px #3498db;
+  transition: 0.3s;
+}
+
+.image-card:hover.glow-Uncommun {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px #8e44ad, 0 0 40px #8e44ad;
+  transition: 0.3s;
+}
+
+.image-card:hover.glow-Legendaire {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px #e74c3c, 0 0 50px #e74c3c;
+  transition: 0.3s;
+}
+
+.image-card:hover.glow-Mythique {
+  transform: scale(1.08);
+  box-shadow: 0 0 30px #f39c12, 0 0 60px #f39c12;
+  transition: 0.3s;
+}
+
+.image-card:hover.glow-Secret {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px #2ecc71, 0 0 70px #2ecc71;
   transition: 0.3s;
 }
 
