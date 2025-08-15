@@ -12,13 +12,12 @@ particlesJS("particles-js", {
 
 // --- Variables ---
 const searchBar = document.getElementById('searchBar');
-const imageCards = Array.from(document.querySelectorAll('.image-card'));
+const imageCards = document.querySelectorAll('.image-card');
 const sortRarity = document.getElementById('sortRarity');
 const sortPriceAsc = document.getElementById('sortPriceAsc');
 const sortPriceDesc = document.getElementById('sortPriceDesc');
-const container = document.querySelector('.images-container');
 
-// --- Popup ---
+// Popup
 const popup = document.getElementById('popup');
 const popupClose = document.getElementById('popupClose');
 const popupImage = document.getElementById('popupImage');
@@ -27,7 +26,7 @@ const popupRarity = document.getElementById('popupRarity');
 const priceText = document.getElementById('priceText');
 const popupBonus = document.getElementById('popupBonus');
 
-// --- Couleurs selon rareté ---
+// Couleurs selon rareté
 const rarityColors = {
   'Commun': 'grey',
   'UnCommun': 'darkgreen',
@@ -36,12 +35,6 @@ const rarityColors = {
   'Mythique': 'purple',
   'Secret': 'gold'
 };
-
-// --- Fonction pour parser le prix ---
-function parsePrice(price) {
-  const num = parseInt(price.replace(/\s/g, '').replace(/💰/g, ''));
-  return isNaN(num) ? Infinity : num;
-}
 
 // --- Recherche ---
 searchBar.addEventListener('input', () => {
@@ -54,8 +47,10 @@ searchBar.addEventListener('input', () => {
 
 // --- Tri ---
 function sortCards(compareFn) {
-  const visibleCards = imageCards.filter(c => c.style.display !== 'none');
-  visibleCards.sort(compareFn).forEach(card => container.appendChild(card));
+  const container = document.querySelector('.images-container');
+  Array.from(imageCards)
+       .sort(compareFn)
+       .forEach(card => container.appendChild(card));
 }
 
 // Trier par rareté
@@ -66,47 +61,52 @@ sortRarity.addEventListener('click', () => {
 
 // Trier par prix croissant
 sortPriceAsc.addEventListener('click', () => {
-  sortCards((a, b) => parsePrice(a.dataset.price) - parsePrice(b.dataset.price));
+  sortCards((a, b) => parseInt(a.dataset.price) - parseInt(b.dataset.price));
 });
 
 // Trier par prix décroissant
 sortPriceDesc.addEventListener('click', () => {
-  sortCards((a, b) => parsePrice(b.dataset.price) - parsePrice(a.dataset.price));
+  sortCards((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
 });
 
-// --- Glow et hover ---
+// --- Lueur permanente ---
 imageCards.forEach(card => {
   const rarity = card.dataset.rarity;
   const color = rarityColors[rarity] || 'white';
   card.style.boxShadow = `0 0 20px 5px ${color}`;
-  card.style.transition = 'transform 0.3s, box-shadow 0.3s';
-
+  card.style.transition = 'transform 0.3s';
+  
   card.addEventListener('mouseover', () => {
     card.style.transform = 'scale(1.05)';
-    card.style.boxShadow = `0 0 30px 10px ${color}`;
   });
-  
   card.addEventListener('mouseout', () => {
     card.style.transform = 'scale(1)';
-    card.style.boxShadow = `0 0 20px 5px ${color}`;
   });
+});
 
-  // --- Popup ---
+// --- Popup ---
+imageCards.forEach(card => {
   card.addEventListener('click', () => {
     popup.style.display = 'block';
-    popupImage.src = card.dataset.img || '';
-    popupTitle.textContent = card.dataset.title || '';
-    popupRarity.textContent = 'Rareté: ' + (card.dataset.rarity || '');
-    popupRarity.style.color = rarityColors[card.dataset.rarity] || 'black';
-    priceText.textContent = 'Prix: ' + (card.dataset.price || '') + ' 💰';
+    popupImage.src = card.dataset.img;
+    popupTitle.textContent = card.dataset.title;
+
+    const rarity = card.dataset.rarity;
+    popupRarity.textContent = 'Rareté: ' + rarity;
+    popupRarity.style.color = rarityColors[rarity] || 'black';
+
+    priceText.textContent = 'Prix: ' + card.dataset.price + ' 💰';
     priceText.style.color = '#00FF7F';
-    popupBonus.textContent = 'Bonus: ' + (card.dataset.bonus || '');
+
+    popupBonus.textContent = 'Bonus: ' + card.dataset.bonus;
     popupBonus.style.color = '#FFFF00';
   });
 });
 
 // Fermer popup
-popupClose.addEventListener('click', () => popup.style.display = 'none');
+popupClose.addEventListener('click', () => {
+  popup.style.display = 'none';
+});
 
 // Fermer popup en cliquant en dehors
 window.addEventListener('click', e => {
