@@ -62,13 +62,14 @@ sortPriceDesc.addEventListener('click', () => {
   sortCards((a, b) => parseInt(b.dataset.price) - parseInt(a.dataset.price));
 });
 
-// --- Glow constant et hover scale ---
+// --- Lueur permanente ---
 imageCards.forEach(card => {
   const rarity = card.dataset.rarity;
   const color = rarityColors[rarity] || 'white';
-  card.style.boxShadow = `0 0 20px ${color}`; // lueur constante
+  card.style.boxShadow = `0 0 20px 5px ${color}`; // lumière permanente autour
   card.style.transition = 'transform 0.3s';
-
+  
+  // hover pour agrandir sans affecter la lueur
   card.addEventListener('mouseover', () => {
     card.style.transform = 'scale(1.05)';
   });
@@ -84,16 +85,13 @@ imageCards.forEach(card => {
     popupImage.src = card.dataset.img;
     popupTitle.textContent = card.dataset.title;
 
-    // Rareté avec couleur
     const rarity = card.dataset.rarity;
     popupRarity.textContent = 'Rareté: ' + rarity;
     popupRarity.style.color = rarityColors[rarity] || 'black';
 
-    // Prix en vert clair
     priceText.textContent = 'Prix: ' + card.dataset.price + ' 💰';
     priceText.style.color = '#00FF7F';
 
-    // Bonus en jaune
     popupBonus.textContent = 'Bonus: ' + card.dataset.bonus;
     popupBonus.style.color = '#FFFF00';
   });
