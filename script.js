@@ -60,9 +60,9 @@ imageCards.forEach(card => {
     popupTitle.textContent = card.dataset.title;
     popupRarity.textContent = 'Rareté: ' + card.dataset.rarity;
     
-    // Prix et bonus en jaune
+    // Prix en vert clair et bonus en jaune
     priceText.textContent = 'Prix: ' + card.dataset.price + ' 💰';
-    priceText.style.color = '#FFFF00';
+    priceText.style.color = '#00FF7F';
     
     popupBonus.textContent = 'Bonus: ' + card.dataset.bonus;
     popupBonus.style.color = '#FFFF00';
@@ -77,3 +77,4 @@ popupClose.addEventListener('click', () => {
 window.addEventListener('click', e => {
   if(e.target === popup) popup.style.display = 'none';
 });
+
